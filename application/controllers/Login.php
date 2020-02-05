@@ -35,11 +35,13 @@ class Login extends CI_Controller
         
         if(!isset($isLoggedIn) || $isLoggedIn != TRUE)
         {
-            $this->load->view('login');
+            // $this->load->view('login');
+            redirect('/events');
         }
         else
         {
-            redirect('/dashboard');
+            // redirect('/dashboard');
+            redirect('/events');
         }
     }
     
