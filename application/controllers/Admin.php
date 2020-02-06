@@ -19,7 +19,8 @@ class Admin extends BaseController
         parent::__construct();
         $this->load->model('user_model');
         $this->load->model('login_model');
-        // $this->isLoggedInAsAdmin();   
+        var_dump("Admin construct");
+        
     }
     
     /**
@@ -27,8 +28,8 @@ class Admin extends BaseController
      */
     public function index()
     {
-        if ($this->isAdmin()){
-            redirect('admin/users');
+        if ($this->isLoggedInAsAdmin()){
+            redirect('admin/dashboard');
         }
         else {
             // show admin login page
@@ -73,9 +74,10 @@ class Admin extends BaseController
                                         'lastLogin'=> $lastLogin->createdDtm,
                                         'isLoggedIn' => TRUE
                                 );
+               
 
                 $this->session->set_userdata($sessionArray);
-
+                
                 unset($sessionArray['userId'], $sessionArray['isLoggedIn'], $sessionArray['lastLogin']);
 
                 $loginInfo = array("userId"=>$result->userId, "sessionData" => json_encode($sessionArray), "machineIp"=>$_SERVER['REMOTE_ADDR'], "userAgent"=>getBrowserAgent(), "agentString"=>$this->agent->agent_string(), "platform"=>$this->agent->platform());
@@ -85,8 +87,7 @@ class Admin extends BaseController
                 redirect('/admin/dashboard');
             }
             else
-            {   var_dump("2234324");
-                die();
+            {   
                 $this->session->set_flashdata('error', 'Email or password mismatch');
                 
                 $this->index();
@@ -95,25 +96,40 @@ class Admin extends BaseController
     }
 
     /**
+     * This function used to load the first screen of the user
+     */
+    public function dashboard()
+    {
+        if (!$this->isLoggedInAsAdmin()) {
+            redirect('/admin');
+        }
+        $this->global['pageTitle'] = 'Admin : Dashboard';
+        
+        $this->loadViews("dashboard", $this->global, NULL , NULL);
+    }
+
+    /**
 	 * This function used to check the user is logged in or not
 	 */
 	function isLoggedInAsAdmin() {
 		$isLoggedIn = $this->session->userdata ( 'isLoggedIn' );
-		
-		if (! isset ( $isLoggedIn ) || $isLoggedIn != TRUE) {
-			redirect ( 'admin' );
-		} else {
-			$this->role = $this->session->userdata ( 'role' );
+        $this->role = $this->session->userdata ( 'role' );
+        if ($isLoggedIn == true && $this->role == ROLE_ADMIN) {
+            
+            $this->role = $this->session->userdata ( 'role' );
 			$this->vendorId = $this->session->userdata ( 'userId' );
 			$this->name = $this->session->userdata ( 'name' );
 			$this->roleText = $this->session->userdata ( 'roleText' );
-			$this->lastLogin = $this->session->userdata ( 'lastLogin' );
-			
-			$this->global ['name'] = $this->name;
-			$this->global ['role'] = $this->role;
-			$this->global ['role_text'] = $this->roleText;
-			$this->global ['last_login'] = $this->lastLogin;
-		}
+            $this->lastLogin = $this->session->userdata ( 'lastLogin' );
+
+            $this->global ['name'] = $this->name;
+            $this->global ['role'] = $this->role;
+            $this->global ['role_text'] = $this->roleText;
+            $this->global ['last_login'] = $this->lastLogin;
+
+            return true;
+        }
+        return false;
 	}
     
     /**
