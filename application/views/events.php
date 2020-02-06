@@ -1,9 +1,26 @@
 <div class="container-fluid">
     <!-- Content Page -->
     <section class="content">
-        <div class="row">
+        <div class="row event">
             <div class="col-md-2 col-sm-6 col-12">
-                Nunn, S
+                <div class="row">
+                    <div class="col-1 d-flex number">0</div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-12 d-flex justify-content-center">Nunn, S</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">Age: 18</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">Team: QUFST</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">Seed: 52.4</div>
+                        </div>
+                    </div>
+                </div>
+                
             </div>
             <div class="col-md-2 col-sm-6 col-12">
                 r:+0.77

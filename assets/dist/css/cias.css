@@ -1,0 +1,8 @@
+.event .number {
+  height: 100px;
+  align-items: center;
+  justify-content: center;
+  background-color: #fcbf02;
+  color: white;
+  font-size: 36px;
+}
