@@ -27,11 +27,11 @@
                 <div class="pl-5 pr-5 pt-3 pb-3 font-size-24 font-weight-bold text-white bg-color-333333 r-cell">r:+0.77</div>
             </div>
             <div class="col-md-2 col-sm-6 col-12 d-flex flex-column">
-                <div class="row">
+                <div class="">
                     <div class="col-12 d-flex text-white justify-content-center distance-cell align-items-center font-size-18" style="height: 30px;">50m</div>
                 </div>
-                <div class="row flex-grow-1">
-                    <div class="col-12 bg-white d-flex font-size-24 color-dark align-items-center justify-content-center">(27.44)</div>
+                <div class="flex-grow-1">
+                    <div class="col-12 h-100 bg-white d-flex font-size-30 color-dark align-items-center justify-content-center">(27.44)</div>
                 </div>
             </div>
             <div class="col-md-2 col-sm-6 col-12 d-flex flex-column">
@@ -42,14 +42,30 @@
                     <div class="col-12 h-100 bg-white d-flex font-size-24 color-dark align-items-center justify-content-center font-weight-bold">52.78</div>
                 </div>
                 <div class="flex-grow-1">
-                    <div class="col-12 h-100 bg-white d-flex font-size-24 color-dark align-items-center justify-content-center">(27.44)</div>
+                    <div class="col-12 h-100 bg-white d-flex font-size-30 color-dark align-items-center justify-content-center">(27.44)</div>
                 </div>
             </div>
-            <div class="col-md-2 col-sm-6 col-12">
-                150m <br/> 52.78 (27.44)
+            <div class="col-md-2 col-sm-6 col-12 d-flex flex-column">
+                <div class="">
+                    <div class="col-12 d-flex text-white justify-content-center distance-cell align-items-center font-size-18" style="height: 30px;">150m</div>
+                </div>
+                <div class="flex-grow-1">
+                    <div class="col-12 h-100 bg-white d-flex font-size-24 color-dark align-items-center justify-content-center font-weight-bold">52.78</div>
+                </div>
+                <div class="flex-grow-1">
+                    <div class="col-12 h-100 bg-white d-flex font-size-30 color-dark align-items-center justify-content-center">(27.44)</div>
+                </div>
             </div>
-            <div class="col-md-2 col-sm-6 col-12">
-                200m <br/> 52.78 (27.44)
+            <div class="col-md-2 col-sm-6 col-12 d-flex flex-column">
+                <div class="">
+                    <div class="col-12 d-flex text-white justify-content-center distance-cell align-items-center font-size-18" style="height: 30px;">200m</div>
+                </div>
+                <div class="flex-grow-1">
+                    <div class="col-12 h-100 bg-white d-flex font-size-24 color-dark align-items-center justify-content-center font-weight-bold">52.78</div>
+                </div>
+                <div class="flex-grow-1">
+                    <div class="col-12 h-100 bg-white d-flex font-size-30 color-dark align-items-center justify-content-center">(27.44)</div>
+                </div>
             </div>
         </div>
     </section>
