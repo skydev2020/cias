@@ -1,8 +1,22 @@
 .event .number {
-  height: 100px;
-  align-items: center;
-  justify-content: center;
+  height: 120px;
   background-color: #fcbf02;
   color: white;
+}
+
+/* Font Size Class */
+.font-size-30 {
+  font-size: 30px;
+}
+
+.font-size-24 {
+  font-size: 24px;
+}
+
+.font-size-18 {
+  font-size: 18px;
+}
+
+.font-size-36 {
   font-size: 36px;
 }
