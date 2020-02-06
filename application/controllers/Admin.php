@@ -3,13 +3,13 @@
 require APPPATH . '/libraries/BaseController.php';
 
 /**
- * Class : Event (EventController)
- * Event Class to control all event related operations.
+ * Class : Admin (AdminController)
+ * Admin Class to control all Admin related operations.
  * @author : Sky Dev
  * @version : 1.0
- * @since : 5 Feb 2020
+ * @since : 2 Feb 2020
  */
-class Event extends BaseController
+class Admin extends BaseController
 {
     /**
      * This is default constructor of the class
@@ -17,8 +17,8 @@ class Event extends BaseController
     public function __construct()
     {
         parent::__construct();
-        // $this->load->model('user_model');
-        // $this->isLoggedIn();   
+        $this->load->model('user_model');
+        // $this->isLoggedInAsAdmin();   
     }
     
     /**
@@ -26,10 +26,39 @@ class Event extends BaseController
      */
     public function index()
     {
-        $this->global['pageTitle'] = 'Event List';
+        if ($this->isAdmin()){
+            redirect('admin/users');
+        }
+        else {
+            // show admin login page
+            $this->loadViews("admin\login", $this->global, NULL , NULL);    
+        }
+        // $this->global['pageTitle'] = 'Event List';
         
-        $this->loadViews("events", $this->global, NULL , NULL);
+        // $this->loadViews("events", $this->global, NULL , NULL);
     }
+
+    /**
+	 * This function used to check the user is logged in or not
+	 */
+	function isLoggedInAsAdmin() {
+		$isLoggedIn = $this->session->userdata ( 'isLoggedIn' );
+		
+		if (! isset ( $isLoggedIn ) || $isLoggedIn != TRUE) {
+			redirect ( 'admin' );
+		} else {
+			$this->role = $this->session->userdata ( 'role' );
+			$this->vendorId = $this->session->userdata ( 'userId' );
+			$this->name = $this->session->userdata ( 'name' );
+			$this->roleText = $this->session->userdata ( 'roleText' );
+			$this->lastLogin = $this->session->userdata ( 'lastLogin' );
+			
+			$this->global ['name'] = $this->name;
+			$this->global ['role'] = $this->role;
+			$this->global ['role_text'] = $this->roleText;
+			$this->global ['last_login'] = $this->lastLogin;
+		}
+	}
     
     /**
      * This function is used to load the user list
