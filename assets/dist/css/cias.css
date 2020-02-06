@@ -1,5 +1,5 @@
 .event {
-  background-color: #f4f7fc;
+  /* background-color: #f4f7fc; */
 }
 
 .event .number {
@@ -41,4 +41,8 @@
 
 .font-size-36 {
   font-size: 36px;
+}
+
+body {
+  background-color: #f4f7fc;
 }
