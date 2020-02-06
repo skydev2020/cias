@@ -1,7 +1,21 @@
 .event .number {
   height: 120px;
   background-color: #fcbf02;
-  color: white;
+}
+
+/* Color Class */
+.bg-color-333333 {
+  background-color: #333333;
+}
+
+.event .color-dark {
+  color: #1a1a1a;
+}
+
+/* Class */
+
+.event .r-cell {
+  border-radius: 20px;
 }
 
 /* Font Size Class */

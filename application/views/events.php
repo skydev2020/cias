@@ -4,27 +4,27 @@
         <div class="row event">
             <div class="col-md-2 col-sm-6 col-12">
                 <div class="row">
-                    <div class="col-1 d-flex number font-size-36 justify-content-center align-items-center">0</div>
+                    <div class="col-1 d-flex number font-size-36 justify-content-center align-items-center text-white">0</div>
                     <div class="col-1">
                     </div>
                     <div class="col">
                         <div class="row">
-                            <div class="col-12 d-flex font-size-24 font-weight-bold">Nunn, S</div>
+                            <div class="col-12 d-flex font-size-24 font-weight-bold color-dark">Nunn, S</div>
                         </div>
                         <div class="row">
-                            <div class="col-12 d-flex align-items-center"><span class="font-weight-bold font-size-18">Age:&nbsp;</span>18</div>
+                            <div class="col-12 d-flex align-items-center"><span class="font-weight-bold font-size-18 color-dark">Age:&nbsp;</span>18</div>
                         </div>
                         <div class="row">
-                            <div class="col-12 d-flex align-items-center"><span class="font-weight-bold font-size-18">TEAM:&nbsp;</span>QUEST</div>                            
+                            <div class="col-12 d-flex align-items-center"><span class="font-weight-bold font-size-18 color-dark">TEAM:&nbsp;</span>QUEST</div>                            
                         </div>
                         <div class="row">
-                            <div class="col-12 d-flex align-items-center"><span class="font-weight-bold font-size-18">Seed:&nbsp;</span>01:52.4</div>                            
+                            <div class="col-12 d-flex align-items-center"><span class="font-weight-bold font-size-18 color-dark">Seed:&nbsp;</span>01:52.4</div>                            
                         </div>
                     </div>
                 </div>                
             </div>
-            <div class="col-md-2 col-sm-6 col-12 d-flex justify-content-center align-items-center">
-                <div>r:+0.77</div>
+            <div class="col-md-2 col-sm-6 col-12 d-flex justify-content-center align-items-center">                
+                <div class="pl-5 pr-5 pt-3 pb-3 font-size-24 font-weight-bold text-white bg-color-333333 r-cell">r:+0.77</div>
             </div>
             <div class="col-md-2 col-sm-6 col-12">
                 50m <br/> (27.44)
