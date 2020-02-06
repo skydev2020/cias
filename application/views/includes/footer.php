@@ -1,6 +1,6 @@
 
 
-    <footer class="main-footer">
+    <footer class="container-fluid">
         <div class="pull-right hidden-xs">
           <b>CodeInsect</b> Admin System | Version 1.5
         </div>

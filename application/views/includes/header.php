@@ -15,7 +15,7 @@
     <link href="<?php echo base_url(); ?>assets/dist/css/AdminLTE.css" rel="stylesheet" type="text/css" />
     <!-- AdminLTE Skins. Choose a skin from the css/skins 
          folder instead of downloading all of them to reduce the load. -->
-    <link href="<?php echo base_url(); ?>assets/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url(); ?>assets/dist/css/skins/_all-skins.css" rel="stylesheet" type="text/css" />
     <style>
     	.error{
     		color:red;
@@ -37,7 +37,7 @@
   </head>
   <body class="hold-transition">
     <div class="wrapper">
-      <header class="main-header">
+      <header class="container-fluid">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
           <div class="navbar-brand">
             <p>Event#1</p><p>WOMEN SENIOR 200 FREE</p>
@@ -61,10 +61,7 @@
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="#">Water 3</a>
                 </div>
-              </li>
-              <li class="nav-item">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-              </li>
+              </li>             
             </ul>            
           </div>
         </nav>
