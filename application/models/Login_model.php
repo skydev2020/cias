@@ -15,12 +15,18 @@ class Login_model extends CI_Model
      * @param string $email : This is email of the user
      * @param string $password : This is encrypted password of the user
      */
-    function loginMe($email, $password)
+    function loginMe($email, $password, $isAdmin)
     {
         $this->db->select('BaseTbl.userId, BaseTbl.password, BaseTbl.name, BaseTbl.roleId, Roles.role');
         $this->db->from('tbl_users as BaseTbl');
         $this->db->join('tbl_roles as Roles','Roles.roleId = BaseTbl.roleId');
         $this->db->where('BaseTbl.email', $email);
+
+        //if Admin Login then allow only addmin
+        if ($isAdmin == true) {
+            $this->db->where('BaseTbl.roleId', 1);
+        }
+
         $this->db->where('BaseTbl.isDeleted', 0);
         $query = $this->db->get();
         

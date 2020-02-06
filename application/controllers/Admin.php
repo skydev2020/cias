@@ -18,6 +18,7 @@ class Admin extends BaseController
     {
         parent::__construct();
         $this->load->model('user_model');
+        $this->load->model('login_model');
         // $this->isLoggedInAsAdmin();   
     }
     
@@ -31,11 +32,66 @@ class Admin extends BaseController
         }
         else {
             // show admin login page
-            $this->loadViews("admin\login", $this->global, NULL , NULL);    
+            $this->load->view('admin/login');
+            // $this->load->view("admin\login", $this->global);                
         }
         // $this->global['pageTitle'] = 'Event List';
         
         // $this->loadViews("events", $this->global, NULL , NULL);
+    }
+
+
+    /**
+     * This function used to logged in user
+     */
+    public function login()
+    {
+        $this->load->library('form_validation');
+        
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|max_length[128]|trim');
+        $this->form_validation->set_rules('password', 'Password', 'required|max_length[32]');
+       
+        if($this->form_validation->run() == FALSE)
+        {
+            $this->index();
+        }
+        else
+        {
+            $email = strtolower($this->security->xss_clean($this->input->post('email')));
+            $password = $this->input->post('password');
+            
+            $result = $this->login_model->loginMe($email, $password, true);
+            
+            if(!empty($result))
+            {
+                $lastLogin = $this->login_model->lastLoginInfo($result->userId);
+
+                $sessionArray = array('userId'=>$result->userId,                    
+                                        'role'=>$result->roleId,
+                                        'roleText'=>$result->role,
+                                        'name'=>$result->name,
+                                        'lastLogin'=> $lastLogin->createdDtm,
+                                        'isLoggedIn' => TRUE
+                                );
+
+                $this->session->set_userdata($sessionArray);
+
+                unset($sessionArray['userId'], $sessionArray['isLoggedIn'], $sessionArray['lastLogin']);
+
+                $loginInfo = array("userId"=>$result->userId, "sessionData" => json_encode($sessionArray), "machineIp"=>$_SERVER['REMOTE_ADDR'], "userAgent"=>getBrowserAgent(), "agentString"=>$this->agent->agent_string(), "platform"=>$this->agent->platform());
+
+                $this->login_model->lastLogin($loginInfo);
+                
+                redirect('/admin/dashboard');
+            }
+            else
+            {   var_dump("2234324");
+                die();
+                $this->session->set_flashdata('error', 'Email or password mismatch');
+                
+                $this->index();
+            }
+        }
     }
 
     /**
