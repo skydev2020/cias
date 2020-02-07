@@ -98,26 +98,34 @@ class Admin extends BaseController
     /**
      * This function used to load the first screen of the user
      */
-    public function users()
+    public function users($userId = null)
     {
         if (!$this->isLoggedInAsAdmin()) {
             redirect('/admin');
         }
 
-        $searchText = $this->security->xss_clean($this->input->post('searchText'));
-        $data['searchText'] = $searchText;
+        if ($userId==null) {
+            $searchText = $this->security->xss_clean($this->input->post('searchText'));
+            $data['searchText'] = $searchText;
+            
+            $this->load->library('pagination');
+            
+            $count = $this->user_model->userListingCount($searchText);
+            $returns = $this->paginationCompress ( "userListing/", $count, 10 );            
+            $data['userRecords'] = $this->user_model->userListing($searchText, $returns["page"], $returns["segment"]);
+            
+            $this->global['pageTitle'] = 'CodeInsect : User Listing';            
+            $this->loadViews("admin/users", $this->global, $data, NULL);
+        }
+        else {
+            $data['roles'] = $this->user_model->getUserRoles();
+            $data['userInfo'] = $this->user_model->getUserInfo($userId);
+            
+            $this->global['pageTitle'] = 'CodeInsect : Edit User';
+            
+            $this->loadViews("editOld", $this->global, $data, NULL);
+        }
         
-        $this->load->library('pagination');
-        
-        $count = $this->user_model->userListingCount($searchText);
-
-        $returns = $this->paginationCompress ( "userListing/", $count, 10 );
-        
-        $data['userRecords'] = $this->user_model->userListing($searchText, $returns["page"], $returns["segment"]);
-        
-        $this->global['pageTitle'] = 'CodeInsect : User Listing';
-        
-        $this->loadViews("admin/users", $this->global, $data, NULL);
         
     }
 
@@ -263,34 +271,6 @@ class Admin extends BaseController
         }
     }
 
-    
-    /**
-     * This function is used load user edit information
-     * @param number $userId : Optional : This is user id
-     */
-    function editOld($userId = NULL)
-    {
-        if($this->isAdmin() == TRUE || $userId == 1)
-        {
-            $this->loadThis();
-        }
-        else
-        {
-            if($userId == null)
-            {
-                redirect('userListing');
-            }
-            
-            $data['roles'] = $this->user_model->getUserRoles();
-            $data['userInfo'] = $this->user_model->getUserInfo($userId);
-            
-            $this->global['pageTitle'] = 'CodeInsect : Edit User';
-            
-            $this->loadViews("editOld", $this->global, $data, NULL);
-        }
-    }
-    
-    
     /**
      * This function is used to edit the user information
      */
