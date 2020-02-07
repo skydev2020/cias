@@ -100,11 +100,11 @@ class Admin extends BaseController
      */
     public function users($userId = null)
     {
+
         if (!$this->isLoggedInAsAdmin()) {
             redirect('/admin');
         }
-
-        
+     
         if ($userId==null) {
             $searchText = $this->security->xss_clean($this->input->post('searchText'));
             $data['searchText'] = $searchText;
@@ -122,7 +122,7 @@ class Admin extends BaseController
         
             $this->loadViews("admin/tmpl", $this->global, $data, NULL);
         }
-        else {
+        else if ($this->input->server('REQUEST_METHOD') =='GET') {
             $data['roles'] = $this->user_model->getUserRoles();
             $data['userInfo'] = $this->user_model->getUserInfo($userId);
             
@@ -133,22 +133,12 @@ class Admin extends BaseController
         
             $this->loadViews("admin/tmpl", $this->global, $data, NULL);
         }
+        else {
+            var_dump('Update Admin');
+            die();
+        }
     }
 
-    /**
-     * This function used to load admin views
-     * @param {string} $viewName : This is view name
-     * @param {mixed} $headerInfo : This is array of header information
-     * @param {mixed} $pageInfo : This is array of page information
-     * @param {mixed} $footerInfo : This is array of footer information
-     * @return {null} $result : null
-     */
-    function loadViews($viewName = "", $headerInfo = NULL, $pageInfo = NULL, $footerInfo = NULL){
-
-        $this->load->view('includes/header', $headerInfo);
-        $this->load->view($viewName, $pageInfo);
-        $this->load->view('includes/footer', $footerInfo);
-    }
 
     /**
 	 * This function used to check the user is logged in or not
