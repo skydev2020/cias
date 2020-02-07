@@ -103,10 +103,11 @@ class Admin extends BaseController
 
         if (!$this->isLoggedInAsAdmin()) {
             redirect('/admin');
+            return;
         }
      
-        if ($userId==null) {
-            $searchText = $this->security->xss_clean($this->input->post('searchText'));
+        if ($userId==null && $this->input->server('REQUEST_METHOD') =='GET') {
+            $searchText = $this->security->xss_clean($this->input->get_post('searchText'));
             $data['searchText'] = $searchText;
             
             $this->load->library('pagination');
@@ -122,6 +123,14 @@ class Admin extends BaseController
         
             $this->loadViews("admin/tmpl", $this->global, $data, NULL);
         }
+        else if ($userId==null && $this->input->server('REQUEST_METHOD') =='POST') {
+            $this->load->model('user_model');
+            // $data['roles'] = $this->user_model->getUserRoles();
+            
+            $this->global['pageTitle'] = 'CodeInsect : Add New User';
+
+            $this->loadViews("addNew", $this->global, $data, NULL);
+        }
         else if ($this->input->server('REQUEST_METHOD') =='GET') {
             $data['roles'] = $this->user_model->getUserRoles();
             $data['userInfo'] = $this->user_model->getUserInfo($userId);
@@ -132,45 +141,6 @@ class Admin extends BaseController
             $data['module'] = $this->load->view('admin/user_edit', $data, true);
         
             $this->loadViews("admin/tmpl", $this->global, $data, NULL);
-        }
-        else {
-            $name = ucwords(strtolower($this->security->xss_clean($this->input->post('fname'))));
-            $email = strtolower($this->security->xss_clean($this->input->post('email')));
-            $password = $this->input->post('password');
-            // $roleId = $this->input->post('role');
-            $mobile = $this->security->xss_clean($this->input->post('mobile'));
-            
-            $userInfo = array();
-            
-            if(empty($password))
-            {
-                $userInfo = array('email'=>$email, 'name'=>$name,
-                                'mobile'=>$mobile, 'updatedBy'=>$this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
-            }
-            else
-            {
-                //Don't update password if it is not specified
-                $userInfo = array('email'=>$email, 
-                    'name'=>ucwords($name), 'mobile'=>$mobile, 'updatedBy'=>$this->vendorId, 
-                    'updatedDtm'=>date('Y-m-d H:i:s'));
-                if ($password) {
-                    $userInfo['password'] = getHashedPassword($password);
-                }
-            }
-            
-            $result = $this->user_model->editUser($userInfo, $userId);
-            
-            if($result == true)
-            {
-                $this->session->set_flashdata('success', 'User updated successfully');
-            }
-            else
-            {
-                $this->session->set_flashdata('error', 'User updation failed');
-            }
-            
-            redirect('admin/users');
-            die();
         }
     }
 
@@ -240,13 +210,77 @@ class Admin extends BaseController
     }
     
     /**
+     * This function is used to edit the user information
+     */
+    function editUser($userId = NULL)
+    {
+        if (!$this->isLoggedInAsAdmin()) {
+            redirect('/admin');
+            return;
+        }
+        else
+        {
+            $this->load->library('form_validation');
+
+            $this->form_validation->set_rules('fname','Full Name','trim|required|max_length[128]');
+            $this->form_validation->set_rules('email','Email','trim|required|valid_email|max_length[128]');
+            $this->form_validation->set_rules('password','Password','matches[cpassword]|max_length[20]');
+            $this->form_validation->set_rules('cpassword','Confirm Password','matches[password]|max_length[20]');
+            // $this->form_validation->set_rules('role','Role','trim|required|numeric');
+            $this->form_validation->set_rules('mobile','Mobile Number','required|min_length[10]');
+            
+            if($this->form_validation->run() == FALSE)
+            {
+                redirect('/admin');
+                return;
+            }
+            else
+            {
+                $name = ucwords(strtolower($this->security->xss_clean($this->input->post('fname'))));
+                $email = strtolower($this->security->xss_clean($this->input->post('email')));
+                $password = $this->input->post('password');
+                // $roleId = $this->input->post('role');
+                $mobile = $this->security->xss_clean($this->input->post('mobile'));
+                
+                $userInfo = array();
+                
+                if(empty($password))
+                {
+                    $userInfo = array('email'=>$email, 'name'=>$name,
+                                    'mobile'=>$mobile, 'updatedBy'=>$this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
+                }
+                else
+                {
+                    $userInfo = array('email'=>$email, 'password'=>getHashedPassword($password), 
+                        'name'=>ucwords($name), 'mobile'=>$mobile, 'updatedBy'=>$this->vendorId, 
+                        'updatedDtm'=>date('Y-m-d H:i:s'));
+                }
+                
+                $result = $this->user_model->editUser($userInfo, $userId);
+
+                if($result == true)
+                {
+                    $this->session->set_flashdata('success', 'User updated successfully');
+                }
+                else
+                {
+                    $this->session->set_flashdata('error', 'User updation failed');
+                }
+                
+                redirect('/admin');
+                return;
+            }
+        }
+    }
+
+    /**
      * This function is used to add new user to the system
      */
     function addNewUser()
     {
-        if($this->isAdmin() == TRUE)
-        {
-            $this->loadThis();
+        if (!$this->isLoggedInAsAdmin()) {
+            redirect('/admin');
+            return;
         }
         else
         {
@@ -324,95 +358,7 @@ class Admin extends BaseController
         $this->loadViews("404", $this->global, NULL, NULL);
     }
 
-    /**
-     * This function used to show login history
-     * @param number $userId : This is user id
-     */
-    function loginHistoy($userId = NULL)
-    {
-        if($this->isAdmin() == TRUE)
-        {
-            $this->loadThis();
-        }
-        else
-        {
-            $userId = ($userId == NULL ? 0 : $userId);
-
-            $searchText = $this->input->post('searchText');
-            $fromDate = $this->input->post('fromDate');
-            $toDate = $this->input->post('toDate');
-
-            $data["userInfo"] = $this->user_model->getUserInfoById($userId);
-
-            $data['searchText'] = $searchText;
-            $data['fromDate'] = $fromDate;
-            $data['toDate'] = $toDate;
-            
-            $this->load->library('pagination');
-            
-            $count = $this->user_model->loginHistoryCount($userId, $searchText, $fromDate, $toDate);
-
-            $returns = $this->paginationCompress ( "login-history/".$userId."/", $count, 10, 3);
-
-            $data['userRecords'] = $this->user_model->loginHistory($userId, $searchText, $fromDate, $toDate, $returns["page"], $returns["segment"]);
-            
-            $this->global['pageTitle'] = 'CodeInsect : User Login History';
-            
-            $this->loadViews("loginHistory", $this->global, $data, NULL);
-        }        
-    }
-
-    /**
-     * This function is used to show users profile
-     */
-    function profile($active = "details")
-    {
-        $data["userInfo"] = $this->user_model->getUserInfoWithRole($this->vendorId);
-        $data["active"] = $active;
-        
-        $this->global['pageTitle'] = $active == "details" ? 'CodeInsect : My Profile' : 'CodeInsect : Change Password';
-        $this->loadViews("profile", $this->global, $data, NULL);
-    }
-
-    /**
-     * This function is used to update the user details
-     * @param text $active : This is flag to set the active tab
-     */
-    function profileUpdate($active = "details")
-    {
-        $this->load->library('form_validation');
-            
-        $this->form_validation->set_rules('fname','Full Name','trim|required|max_length[128]');
-        $this->form_validation->set_rules('mobile','Mobile Number','required|min_length[10]');
-        $this->form_validation->set_rules('email','Email','trim|required|valid_email|max_length[128]|callback_emailExists');        
-        
-        if($this->form_validation->run() == FALSE)
-        {
-            $this->profile($active);
-        }
-        else
-        {
-            $name = ucwords(strtolower($this->security->xss_clean($this->input->post('fname'))));
-            $mobile = $this->security->xss_clean($this->input->post('mobile'));
-            $email = strtolower($this->security->xss_clean($this->input->post('email')));
-            
-            $userInfo = array('name'=>$name, 'email'=>$email, 'mobile'=>$mobile, 'updatedBy'=>$this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
-            
-            $result = $this->user_model->editUser($userInfo, $this->vendorId);
-            
-            if($result == true)
-            {
-                $this->session->set_userdata('name', $name);
-                $this->session->set_flashdata('success', 'Profile updated successfully');
-            }
-            else
-            {
-                $this->session->set_flashdata('error', 'Profile updation failed');
-            }
-
-            redirect('profile/'.$active);
-        }
-    }
+   
 
     /**
      * This function is used to change the password of the user

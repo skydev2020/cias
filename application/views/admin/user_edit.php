@@ -26,7 +26,7 @@
                     </div><!-- /.box-header -->
 
                     <!-- form start -->                    
-                    <form role="form" action="<?php echo base_url() ?>admin/users/<?php echo $userId; ?>" method="post" id="editUser" role="form">
+                    <form role="form" action="<?php echo base_url() ?>admin/editUser/<?php echo $userId; ?>" method="post" id="editUser" role="form">
                         <div class="box-body">
                             <div class="row">
                                 <div class="col-md-6">                                

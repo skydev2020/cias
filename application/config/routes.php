@@ -58,7 +58,7 @@ $route['translate_uri_dashes'] = FALSE;
 /*********** USER DEFINED ROUTES *******************/
 $route['events'] = 'event';
 $route['admin'] = 'admin'; //admin page
-
+// $route['admin/editUser/(:num)'] = "user/editUser/$1";
 $route['loginMe'] = 'login/loginMe';
 $route['dashboard'] = 'user';
 $route['logout'] = 'user/logout';
