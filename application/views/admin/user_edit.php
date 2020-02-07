@@ -64,7 +64,7 @@
                                         <input type="text" class="form-control" id="mobile" placeholder="Mobile Number" name="mobile" value="<?php echo $mobile; ?>" maxlength="10">
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <!-- <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="role">Role</label>
                                         <select class="form-control" id="role" name="role">
@@ -82,7 +82,7 @@
                                             ?>
                                         </select>
                                     </div>
-                                </div>    
+                                </div>     -->
                             </div>
                         </div><!-- /.box-body -->
     
