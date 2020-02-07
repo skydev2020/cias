@@ -117,7 +117,7 @@ class Admin extends BaseController
             
             $this->global['pageTitle'] = 'CodeInsect : User Listing'; 
             
-            //Prepare the Navigation Bar
+            //Prepare the User search
             $data['module'] = $this->load->view('admin/user_list', $data, true);
         
             $this->loadViews("admin/tmpl", $this->global, $data, NULL);
@@ -127,8 +127,11 @@ class Admin extends BaseController
             $data['userInfo'] = $this->user_model->getUserInfo($userId);
             
             $this->global['pageTitle'] = 'CodeInsect : Edit User';
-            
-            $this->loadViews("admin/user_edit", $this->global, $data, NULL);
+        
+            //Prepare the User Edit
+            $data['module'] = $this->load->view('admin/user_edit', $data, true);
+        
+            $this->loadViews("admin/tmpl", $this->global, $data, NULL);
         }
     }
 
