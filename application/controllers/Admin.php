@@ -29,7 +29,7 @@ class Admin extends BaseController
     public function index()
     {
         if ($this->isLoggedInAsAdmin()){
-            redirect('admin/dashboard');
+            redirect('admin/users');
         }
         else {
             // show admin login page
@@ -84,7 +84,7 @@ class Admin extends BaseController
 
                 $this->login_model->lastLogin($loginInfo);
                 
-                redirect('/admin/dashboard');
+                redirect('/admin/users');
             }
             else
             {   
@@ -98,14 +98,27 @@ class Admin extends BaseController
     /**
      * This function used to load the first screen of the user
      */
-    public function dashboard()
+    public function users()
     {
         if (!$this->isLoggedInAsAdmin()) {
             redirect('/admin');
         }
-        $this->global['pageTitle'] = 'Admin : Dashboard';
+
+        $searchText = $this->security->xss_clean($this->input->post('searchText'));
+        $data['searchText'] = $searchText;
         
-        $this->loadViews("admin/dashboard", $this->global, NULL , NULL);
+        $this->load->library('pagination');
+        
+        $count = $this->user_model->userListingCount($searchText);
+
+        $returns = $this->paginationCompress ( "userListing/", $count, 10 );
+        
+        $data['userRecords'] = $this->user_model->userListing($searchText, $returns["page"], $returns["segment"]);
+        
+        $this->global['pageTitle'] = 'CodeInsect : User Listing';
+        
+        $this->loadViews("admin/users", $this->global, $data, NULL);
+        
     }
 
     /**
