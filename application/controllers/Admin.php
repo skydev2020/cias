@@ -19,8 +19,7 @@ class Admin extends BaseController
         parent::__construct();
         $this->load->model('user_model');
         $this->load->model('login_model');
-        var_dump("Admin construct");
-        
+   
     }
     
     /**
@@ -326,11 +325,11 @@ class Admin extends BaseController
      * This function is used to delete the user using userId
      * @return boolean $result : TRUE / FALSE
      */
-    function deleteUser()
+    function user_del()
     {
-        if($this->isAdmin() == TRUE)
-        {
+        if (!$this->isLoggedInAsAdmin()) {
             echo(json_encode(array('status'=>'access')));
+            return;
         }
         else
         {
