@@ -105,7 +105,7 @@ class Admin extends BaseController
         }
         $this->global['pageTitle'] = 'Admin : Dashboard';
         
-        $this->loadViews("dashboard", $this->global, NULL , NULL);
+        $this->loadViews("admin/dashboard", $this->global, NULL , NULL);
     }
 
     /**
