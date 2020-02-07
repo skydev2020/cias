@@ -1,4 +1,4 @@
-<div class="container-fluid d-flex">
+<div class="container-fluid d-flex align-items-stretch">
   <nav id="sidebar">
     <div class="sidebar-header">
       <h3>Bootstrap Sidebar</h3>
@@ -6,34 +6,32 @@
 
     <ul class="list-unstyled components">      
       <li>
-        <a href="#">Users</a>
+        <a href="#" class="text-white">Users</a>
       </li>     
       <li>
-          <a href="#">Portfolio</a>
+        <a href="#" class="text-white">Contact</a>
       </li>
-      <li>
-            <a href="#">Contact</a>
-        </li>
     </ul>
   </nav>
-  <div class="content-wrapper">
+  <div class="dashboard-content">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        <i class="fa fa-users"></i> User Management
-        <small>Add, Edit, Delete</small>
-      </h1>
-    </section>
     <section class="content">
-        <div class="row">
-            <div class="col-xs-12 text-right">
-                <div class="form-group">
-                    <a class="btn btn-primary" href="<?php echo base_url(); ?>addNew"><i class="fa fa-plus"></i> Add New</a>
-                </div>
-            </div>
+      <div class="row">
+        <div class="col-12">
+          <h3>
+            <i class="fa fa-users"></i> User Management
+          </h3>
         </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group">
+              <a class="btn btn-primary" href="<?php echo base_url(); ?>addNew"><i class="fa fa-plus"></i> Add New</a>
+          </div>
+        </div>
+      </div>
         <div class="row">
-            <div class="col-xs-12">
+            <div class="col-12">
               <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">Users List</h3>
