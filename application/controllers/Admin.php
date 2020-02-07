@@ -104,6 +104,7 @@ class Admin extends BaseController
             redirect('/admin');
         }
 
+        
         if ($userId==null) {
             $searchText = $this->security->xss_clean($this->input->post('searchText'));
             $data['searchText'] = $searchText;
@@ -114,8 +115,12 @@ class Admin extends BaseController
             $returns = $this->paginationCompress ( "userListing/", $count, 10 );            
             $data['userRecords'] = $this->user_model->userListing($searchText, $returns["page"], $returns["segment"]);
             
-            $this->global['pageTitle'] = 'CodeInsect : User Listing';            
-            $this->loadViews("admin/users", $this->global, $data, NULL);
+            $this->global['pageTitle'] = 'CodeInsect : User Listing'; 
+            
+            //Prepare the Navigation Bar
+            $data['module'] = $this->load->view('admin/user_list', $data, true);
+        
+            $this->loadViews("admin/tmpl", $this->global, $data, NULL);
         }
         else {
             $data['roles'] = $this->user_model->getUserRoles();
@@ -123,10 +128,23 @@ class Admin extends BaseController
             
             $this->global['pageTitle'] = 'CodeInsect : Edit User';
             
-            $this->loadViews("editOld", $this->global, $data, NULL);
+            $this->loadViews("admin/user_edit", $this->global, $data, NULL);
         }
-        
-        
+    }
+
+    /**
+     * This function used to load admin views
+     * @param {string} $viewName : This is view name
+     * @param {mixed} $headerInfo : This is array of header information
+     * @param {mixed} $pageInfo : This is array of page information
+     * @param {mixed} $footerInfo : This is array of footer information
+     * @return {null} $result : null
+     */
+    function loadViews($viewName = "", $headerInfo = NULL, $pageInfo = NULL, $footerInfo = NULL){
+
+        $this->load->view('includes/header', $headerInfo);
+        $this->load->view($viewName, $pageInfo);
+        $this->load->view('includes/footer', $footerInfo);
     }
 
     /**
@@ -153,33 +171,7 @@ class Admin extends BaseController
         return false;
 	}
     
-    /**
-     * This function is used to load the user list
-     */
-    function userListing()
-    {
-        if($this->isAdmin() == TRUE)
-        {
-            $this->loadThis();
-        }
-        else
-        {        
-            $searchText = $this->security->xss_clean($this->input->post('searchText'));
-            $data['searchText'] = $searchText;
-            
-            $this->load->library('pagination');
-            
-            $count = $this->user_model->userListingCount($searchText);
-
-			$returns = $this->paginationCompress ( "userListing/", $count, 10 );
-            
-            $data['userRecords'] = $this->user_model->userListing($searchText, $returns["page"], $returns["segment"]);
-            
-            $this->global['pageTitle'] = 'CodeInsect : User Listing';
-            
-            $this->loadViews("users", $this->global, $data, NULL);
-        }
-    }
+   
 
     /**
      * This function is used to load the add new form
