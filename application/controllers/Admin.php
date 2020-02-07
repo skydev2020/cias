@@ -123,16 +123,8 @@ class Admin extends BaseController
         
             $this->loadViews("admin/tmpl", $this->global, $data, NULL);
         }
-        else if ($userId==null && $this->input->server('REQUEST_METHOD') =='POST') {
-            $this->load->model('user_model');
+        else if ($userId!=null && $this->input->server('REQUEST_METHOD') =='GET') {
             // $data['roles'] = $this->user_model->getUserRoles();
-            
-            $this->global['pageTitle'] = 'CodeInsect : Add New User';
-
-            $this->loadViews("addNew", $this->global, $data, NULL);
-        }
-        else if ($this->input->server('REQUEST_METHOD') =='GET') {
-            $data['roles'] = $this->user_model->getUserRoles();
             $data['userInfo'] = $this->user_model->getUserInfo($userId);
             
             $this->global['pageTitle'] = 'CodeInsect : Edit User';
@@ -176,19 +168,23 @@ class Admin extends BaseController
      */
     function addNew()
     {
-        if($this->isAdmin() == TRUE)
-        {
-            $this->loadThis();
+        if (!$this->isLoggedInAsAdmin()) {
+            redirect('/admin');
+            return;
         }
-        else
-        {
-            $this->load->model('user_model');
-            $data['roles'] = $this->user_model->getUserRoles();
-            
-            $this->global['pageTitle'] = 'CodeInsect : Add New User';
 
-            $this->loadViews("addNew", $this->global, $data, NULL);
-        }
+    
+        $this->load->model('user_model');
+        $data = [];
+        // $data['roles'] = $this->user_model->getUserRoles();
+        
+        $this->global['pageTitle'] = 'CodeInsect : Add New User';
+
+        //Prepare the User Edit
+        $data['module'] = $this->load->view('admin/user_new', $data, true);
+    
+        $this->loadViews("admin/tmpl", $this->global, $data, NULL);
+        
     }
 
     /**
@@ -276,7 +272,7 @@ class Admin extends BaseController
     /**
      * This function is used to add new user to the system
      */
-    function addNewUser()
+    function newUser()
     {
         if (!$this->isLoggedInAsAdmin()) {
             redirect('/admin');
@@ -290,7 +286,7 @@ class Admin extends BaseController
             $this->form_validation->set_rules('email','Email','trim|required|valid_email|max_length[128]');
             $this->form_validation->set_rules('password','Password','required|max_length[20]');
             $this->form_validation->set_rules('cpassword','Confirm Password','trim|required|matches[password]|max_length[20]');
-            $this->form_validation->set_rules('role','Role','trim|required|numeric');
+            // $this->form_validation->set_rules('role','Role','trim|required|numeric');
             $this->form_validation->set_rules('mobile','Mobile Number','required|min_length[10]');
             
             if($this->form_validation->run() == FALSE)
@@ -302,10 +298,10 @@ class Admin extends BaseController
                 $name = ucwords(strtolower($this->security->xss_clean($this->input->post('fname'))));
                 $email = strtolower($this->security->xss_clean($this->input->post('email')));
                 $password = $this->input->post('password');
-                $roleId = $this->input->post('role');
+                // $roleId = $this->input->post('role');
                 $mobile = $this->security->xss_clean($this->input->post('mobile'));
                 
-                $userInfo = array('email'=>$email, 'password'=>getHashedPassword($password), 'roleId'=>$roleId, 'name'=> $name,
+                $userInfo = array('email'=>$email, 'password'=>getHashedPassword($password), 'name'=> $name,
                                     'mobile'=>$mobile, 'createdBy'=>$this->vendorId, 'createdDtm'=>date('Y-m-d H:i:s'));
                 
                 $this->load->model('user_model');
@@ -320,7 +316,7 @@ class Admin extends BaseController
                     $this->session->set_flashdata('error', 'User creation failed');
                 }
                 
-                redirect('addNew');
+                redirect('admin/');
             }
         }
     }

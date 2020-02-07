@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="form-group">
-                    <a class="btn btn-primary" href="<?php echo base_url(); ?>admin/users"><i class="fa fa-plus"></i> Add New</a>
+                    <a class="btn btn-primary" href="<?php echo base_url(); ?>admin/addNew"><i class="fa fa-plus"></i> Add New</a>
                 </div>
             </div>
         </div>
