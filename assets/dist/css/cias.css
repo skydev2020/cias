@@ -98,9 +98,16 @@ a[aria-expanded="true"] {
   background: #6d7fcc;
 }
 
+/*Admin Dashbaord*/
 .dashboard-content {
   width: 100%;
   padding: 0px 20px;
   min-height: 100vh;
   transition: all 0.3s;
+}
+
+/* Search Page*/
+.search-page input.search {
+  width: 50%;
+  border-radius: 20px;
 }

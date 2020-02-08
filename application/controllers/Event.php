@@ -18,8 +18,10 @@ class Event extends BaseController
     {
         parent::__construct();
         $this->load->model('login_model');
+        $this->load->model('event_model');
         // $this->isLoggedIn();
-        
+        var_dump($this->uri->uri_string());
+
         if ($this->uri->uri_string() == 'event/login') {
             redirect('login');
             return;
@@ -50,9 +52,7 @@ class Event extends BaseController
      */
     public function index()
     {
-        $this->global['pageTitle'] = 'Event List';
-        
-        $this->loadViews("events/search", $this->global, NULL , NULL);
+        $this->search();        
     }
     
     /**
@@ -60,7 +60,11 @@ class Event extends BaseController
      */
     function search()
     {
+        $this->global['pageTitle'] = 'Event List';
         
+        $q = $this->security->xss_clean($this->input->get_post('q'));          
+        $data['eventRecords'] = $this->event_model->eventListing($q);
+        $this->loadViews("events/search", $this->global, $data , NULL);
     }
 
     /**

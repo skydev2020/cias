@@ -37,9 +37,7 @@ class Admin extends BaseController
         else {
             redirect('login');
         }
-        // $this->global['pageTitle'] = 'Event List';
-        
-        // $this->loadViews("events", $this->global, NULL , NULL);
+       
     }
 
 
