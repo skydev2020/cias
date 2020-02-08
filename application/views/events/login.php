@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>CodeInsect | Admin System Log in</title>
+    <title>CodeInsect | User Log in</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <link href="<?php echo base_url(); ?>assets/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>assets/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
@@ -20,7 +20,7 @@
   <body class="hold-transition login-page">
     <div class="login-box">      
       <div class="login-box-body">
-        <p class="login-box-msg">Admin Sign In</p>
+        <p class="login-box-msg">Sign In</p>
         <?php $this->load->helper('form'); ?>
         <div class="row">
             <div class="col-md-12">
@@ -47,7 +47,7 @@
                 <?php echo $success; ?>                    
             </div>
         <?php } ?>
-        <form action="<?php echo base_url(); ?>admin/login" method="post">
+        <form action="<?php echo base_url(); ?>/login" method="post">
           <div class="form-group has-feedback">
             <input type="email" class="form-control" placeholder="Email" name="email" required />
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>

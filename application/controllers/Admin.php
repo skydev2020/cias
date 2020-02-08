@@ -29,7 +29,7 @@ class Admin extends BaseController
         if ($this->isLoggedInAsAdmin()){
             redirect('admin/users');
         }
-        else {
+        else {           
             // show admin login page
             $this->load->view('admin/login');
             // $this->load->view("admin\login", $this->global);                
@@ -45,6 +45,7 @@ class Admin extends BaseController
      */
     public function login()
     {
+        
         $this->load->library('form_validation');
         
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email|max_length[128]|trim');
