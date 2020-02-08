@@ -18,7 +18,25 @@ class Event extends BaseController
     {
         parent::__construct();
         // $this->load->model('user_model');
-        // $this->isLoggedIn();   
+        // $this->isLoggedIn();
+        var_dump($this->session->userdata ( 'name' ));
+        var_dump($this->isLoggedIn());
+        if ($this->uri->uri_string() == 'event/login') {
+            redirect('/login');
+            return;
+        }
+        
+        if ($this->uri->uri_string() == 'event/search') {
+            redirect('/search');
+            return;
+        }
+
+        if ($this->uri->uri_string() != 'search' && $this->uri->uri_string() != 'login' && $this->isLoggedIn() == false) {
+            redirect('/login');
+            var_dump('redirect');
+            return;
+        }  
+        
     }
     
     /**
@@ -34,67 +52,13 @@ class Event extends BaseController
     /**
      * This function is used to load the user list
      */
-    function userListing()
+    function search()
     {
-        if($this->isAdmin() == TRUE)
-        {
-            $this->loadThis();
-        }
-        else
-        {        
-            $searchText = $this->security->xss_clean($this->input->post('searchText'));
-            $data['searchText'] = $searchText;
-            
-            $this->load->library('pagination');
-            
-            $count = $this->user_model->userListingCount($searchText);
-
-			$returns = $this->paginationCompress ( "userListing/", $count, 10 );
-            
-            $data['userRecords'] = $this->user_model->userListing($searchText, $returns["page"], $returns["segment"]);
-            
-            $this->global['pageTitle'] = 'CodeInsect : User Listing';
-            
-            $this->loadViews("users", $this->global, $data, NULL);
-        }
+        
     }
 
-    /**
-     * This function is used to load the add new form
-     */
-    function addNew()
-    {
-        if($this->isAdmin() == TRUE)
-        {
-            $this->loadThis();
-        }
-        else
-        {
-            $this->load->model('user_model');
-            $data['roles'] = $this->user_model->getUserRoles();
-            
-            $this->global['pageTitle'] = 'CodeInsect : Add New User';
+    function login(){
 
-            $this->loadViews("addNew", $this->global, $data, NULL);
-        }
-    }
-
-    /**
-     * This function is used to check whether email already exist or not
-     */
-    function checkEmailExists()
-    {
-        $userId = $this->input->post("userId");
-        $email = $this->input->post("email");
-
-        if(empty($userId)){
-            $result = $this->user_model->checkEmailExists($email);
-        } else {
-            $result = $this->user_model->checkEmailExists($email, $userId);
-        }
-
-        if(empty($result)){ echo("true"); }
-        else { echo("false"); }
     }
     
     /**

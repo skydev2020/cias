@@ -50,15 +50,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 
-$route['default_controller'] = "search";
+$route['default_controller'] = "event";
 $route['404_override'] = 'error_404';
 $route['translate_uri_dashes'] = FALSE;
 
 
 /*********** USER DEFINED ROUTES *******************/
-$route['events'] = 'event';
+
 $route['admin'] = 'admin'; //admin page
 // $route['admin/editUser/(:num)'] = "user/editUser/$1";
+$route['search'] = 'event/search';
+$route['login'] = 'event/login';
 $route['loginMe'] = 'login/loginMe';
 $route['dashboard'] = 'user';
 $route['logout'] = 'user/logout';
