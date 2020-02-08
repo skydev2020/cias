@@ -4,17 +4,17 @@
         <div class="row event">
             <div class="col-md-4 col-sm-6 col-12">
                 <div class="row">
-                    <div class="col-12 d-flex font-size-24 font-weight-bold color-dark font-italic">
+                    <div class="col-12 d-flex font-size-22 font-weight-bold name font-italic">
                         EVENT #<?php echo $swimmingData->EventNumber; ?>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12 d-flex font-size-24 font-weight-bold color-dark font-italic">
+                    <div class="col-12 d-flex font-size-24 font-weight-bold color-dark">
                         <?php echo $swimmingData->EventName; ?>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12 d-flex font-size-24 font-weight-bold color-dark font-italic">
+                    <div class="col-12 d-flex font-size-22 color-dark">
                         <?php echo $event->name; ?>
                     </div>
                 </div>                                                 
@@ -40,21 +40,35 @@
                 </select>                                                       
             </div>
         </div>
-        <div class="row event">
+        <?php
+        if(!empty($swimmingData->LaneAthleteTeam)){
+            foreach($swimmingData->LaneAthleteTeam as $lane)
+            {
+        ?>
+        <div class="row lane">
             <div class="col-md-2 col-sm-6 col-12">
                 <div class="row">
-                    <div class="col-1 d-flex number font-size-36 justify-content-center align-items-center text-white">0</div>
+                    <div class="col-1 d-flex number font-size-36 justify-content-center align-items-center text-white">
+                        <?php echo $lane->LaneNumber ?>
+                    </div>
                     <div class="col-1 bg-white">
                     </div>
                     <div class="col bg-white">
                         <div class="row">
-                            <div class="col-12 d-flex font-size-24 font-weight-bold color-dark">Nunn, S</div>
+                            <div class="col-12 d-flex font-size-24 font-weight-bold color-dark">
+                                <?php echo $lane->AthleteName ?>&nbsp;
+                            </div>
                         </div>
                         <div class="row">
-                            <div class="col-12 d-flex align-items-center"><span class="font-weight-bold font-size-18 color-dark">Age:&nbsp;</span>18</div>
+                            <div class="col-12 d-flex align-items-center">
+                                <span class="font-weight-bold font-size-18 color-dark">Age:&nbsp;</span>18
+                            </div>
                         </div>
                         <div class="row">
-                            <div class="col-12 d-flex align-items-center"><span class="font-weight-bold font-size-18 color-dark">TEAM:&nbsp;</span>QUEST</div>                            
+                            <div class="col-12 d-flex align-items-center">
+                                <span class="font-weight-bold font-size-18 color-dark">TEAM:&nbsp;</span>
+                                <?php echo $lane->Team ?>
+                            </div>                            
                         </div>
                         <div class="row">
                             <div class="col-12 d-flex align-items-center"><span class="font-weight-bold font-size-18 color-dark">Seed:&nbsp;</span>01:52.4</div>                            
@@ -63,7 +77,9 @@
                 </div>                
             </div>
             <div class="col-md-2 col-sm-6 col-12 d-flex justify-content-center align-items-center">                
-                <div class="pl-5 pr-5 pt-3 pb-3 font-size-24 font-weight-bold text-white bg-color-333333 r-cell">r:+0.77</div>
+                <div class="pl-4 pr-4 pt-2 pb-2 font-size-24 font-weight-bold text-white bg-color-333333 r-cell">
+                    &nbsp;<?php echo $lane->FinalTime ?>&nbsp;
+                </div>
             </div>
             <div class="col-md-2 col-sm-6 col-12 d-flex flex-column">
                 <div class="">
@@ -107,6 +123,10 @@
                 </div>
             </div>
         </div>
+        <?php
+            } 
+        }
+        ?>
     </section>
 </div>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/common.js" charset="utf-8"></script>

@@ -1,28 +1,35 @@
-.event {
-  /* background-color: #f4f7fc; */
-}
 
-.event .number {
-  height: 120px;
-  background-color: #fcbf02;
-}
 
 /* Color Class */
 .bg-color-333333 {
   background-color: #333333;
 }
 
-.event .color-dark {
+
+
+/* Class Score->Event & ->Athlete (Lane) */
+.event .name {
+  color: #4d4d4d;
+}
+
+
+.lane .number {
+  height: 120px;
+  background-color: #fcbf02;
+}
+
+.lane .color-dark {
   color: #1a1a1a;
 }
 
-/* Class */
-
-.event .r-cell {
+.lane {
+  padding-top: 15px;
+}
+.lane .r-cell {
   border-radius: 20px;
 }
 
-.event .distance-cell{
+.lane .distance-cell{
   background-color: #4B7AF0;
 }
 
@@ -33,6 +40,10 @@
 
 .font-size-24 {
   font-size: 24px;
+}
+
+.font-size-22 {
+  font-size: 22px;
 }
 
 .font-size-18 {

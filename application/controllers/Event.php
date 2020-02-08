@@ -19,8 +19,7 @@ class Event extends BaseController
         parent::__construct();
         $this->load->model('login_model');
         $this->load->model('event_model');
-        // $this->isLoggedIn();
-        var_dump($this->uri->uri_string());
+        // $this->isLoggedIn();   
 
         if ($this->uri->uri_string() == 'event/login') {
             redirect('login');
@@ -85,7 +84,7 @@ class Event extends BaseController
         $data['swimmingData'] = json_decode($data['event']->swimming);
 
         $this->global['pageTitle'] = 'Score Page';
-        // var_dump($data['event']->swimming);
+        // var_dump($data['swimmingData']->LaneAthleteTeam);
         $this->loadViews("events/score", $this->global, $data , NULL);
     }
 
