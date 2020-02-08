@@ -62,7 +62,8 @@ class Event extends BaseController
     {
         $this->global['pageTitle'] = 'Event List';
         
-        $q = $this->security->xss_clean($this->input->get_post('q'));          
+        $q = $this->security->xss_clean($this->input->get_post('q'));         
+        $data['q'] = $q; 
         $data['eventRecords'] = $this->event_model->eventListing($q);
         $this->loadViews("events/search", $this->global, $data , NULL);
     }

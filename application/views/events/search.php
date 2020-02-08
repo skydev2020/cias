@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-12">
                 <form action="<?php echo base_url() ?>search?"  id="searchList" class="justify-content-center d-flex">
-                    <input class="form-control search" type="text" name="q" value="<?php echo $query; ?>" placeholder="Start typing...">
+                    <input class="form-control search" type="text" name="q" value="<?php echo $q; ?>" placeholder="Start typing...">
                 </form>                               
             </div>            
         </div>

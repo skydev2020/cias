@@ -25,7 +25,6 @@ class Event_model extends CI_Model
         $this->db->order_by('BaseTbl.id', 'DESC');
         
         $query = $this->db->get();
-        
         $result = $query->result();        
         return $result;
     }
