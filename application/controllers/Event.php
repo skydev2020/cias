@@ -42,8 +42,7 @@ class Event extends BaseController
             else {
                 redirect('');
             }
-        }
-        
+        }        
     }
     
     /**
@@ -57,11 +56,26 @@ class Event extends BaseController
     }
     
     /**
-     * This function is used to load the user list
+     * This function is used to search the event
      */
     function search()
     {
         
+    }
+
+    /**
+     * This function is used to show the scores of specific event
+     */
+    function score()
+    {
+        if ($this->isLoggedIn() != true) {           
+            // show admin login page
+            redirect('login');
+            return;                
+        }
+
+        $this->global['pageTitle'] = 'Event List';
+        $this->loadViews("events/score", $this->global, NULL , NULL);
     }
 
     function login(){
