@@ -18,8 +18,7 @@ class Admin extends BaseController
     {
         parent::__construct();
         $this->load->model('user_model');
-        $this->load->model('login_model');
-   
+        $this->load->model('login_model');  
     }
     
     /**
@@ -123,15 +122,24 @@ class Admin extends BaseController
             $this->loadViews("admin/tmpl", $this->global, $data, NULL);
         }
         else if ($userId!=null && $this->input->server('REQUEST_METHOD') =='GET') {
-            // $data['roles'] = $this->user_model->getUserRoles();
+                        
             $data['userInfo'] = $this->user_model->getUserInfo($userId);
+
+            if ($data['userInfo'] == null) {
+                
+                $this->global['pageTitle'] = '404 Error';
+                $data['module'] = $this->load->view('admin/404', null, true);            
+                $this->loadViews("admin/tmpl", $this->global, $data, NULL);
+            }
+            else {
+
+                $this->global['pageTitle'] = 'CodeInsect : Edit User';        
+                //Prepare the User Edit
+                $data['module'] = $this->load->view('admin/user_edit', $data, true);
             
-            $this->global['pageTitle'] = 'CodeInsect : Edit User';
-        
-            //Prepare the User Edit
-            $data['module'] = $this->load->view('admin/user_edit', $data, true);
-        
-            $this->loadViews("admin/tmpl", $this->global, $data, NULL);
+                $this->loadViews("admin/tmpl", $this->global, $data, NULL);
+            }
+            
         }
     }
 
