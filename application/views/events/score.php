@@ -2,6 +2,45 @@
     <!-- Content Page -->
     <section class="content">
         <div class="row event">
+            <div class="col-md-4 col-sm-6 col-12">
+                <div class="row">
+                    <div class="col-12 d-flex font-size-24 font-weight-bold color-dark font-italic">
+                        EVENT #<?php echo $swimmingData->EventNumber; ?>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 d-flex font-size-24 font-weight-bold color-dark font-italic">
+                        <?php echo $swimmingData->EventName; ?>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 d-flex font-size-24 font-weight-bold color-dark font-italic">
+                        <?php echo $event->name; ?>
+                    </div>
+                </div>                                                 
+            </div>
+            <div class="col-md-4 col-sm-6 col-12">
+                <div class="row">
+                    <div class="col-12 d-flex font-size-24 font-weight-bold color-dark font-italic">
+                        LIVE MEET CLOCK
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 d-flex font-size-24 font-weight-bold color-dark font-italic">
+                        <?php echo $swimmingData->RunningTime; ?>
+                    </div>
+                </div>                                                            
+            </div>
+            <div class="col-md-4 col-sm-6 col-12">
+                <select id="In the Water">
+                    <option value="volvo">Volvo</option>
+                    <option value="saab">Saab</option>
+                    <option value="opel">Opel</option>
+                    <option value="audi">Audi</option>
+                </select>                                                       
+            </div>
+        </div>
+        <div class="row event">
             <div class="col-md-2 col-sm-6 col-12">
                 <div class="row">
                     <div class="col-1 d-flex number font-size-36 justify-content-center align-items-center text-white">0</div>

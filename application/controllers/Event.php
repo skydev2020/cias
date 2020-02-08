@@ -82,9 +82,11 @@ class Event extends BaseController
         $id = $this->security->xss_clean($this->input->get_post('id'));         
         
         $data['event'] = $this->event_model->getEvent($id);
-       
+        $data['swimmingData'] = json_decode($data['event']->swimming);
+
         $this->global['pageTitle'] = 'Score Page';
-        $this->loadViews("events/score", $this->$data, NULL , NULL);
+        // var_dump($data['event']->swimming);
+        $this->loadViews("events/score", $this->global, $data , NULL);
     }
 
     function login(){
