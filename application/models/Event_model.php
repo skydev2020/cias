@@ -28,6 +28,20 @@ class Event_model extends CI_Model
         $result = $query->result();        
         return $result;
     }
+
+
+    /**
+     * 
+     * Get Event Info
+     */
+    function getEvent($id) {
+        $this->db->select('*');
+        $this->db->from('tbl_events');
+        $this->db->where('id', $id);
+        $query = $this->db->get();
+        
+        return $query->row();
+    }
 }
 
   

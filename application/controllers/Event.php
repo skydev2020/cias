@@ -76,11 +76,15 @@ class Event extends BaseController
         if ($this->isLoggedIn() != true) {           
             // show admin login page
             redirect('login');
-            return;                
+            return;
         }
 
-        $this->global['pageTitle'] = 'Event List';
-        $this->loadViews("events/score", $this->global, NULL , NULL);
+        $id = $this->security->xss_clean($this->input->get_post('id'));         
+        
+        $data['event'] = $this->event_model->getEvent($id);
+       
+        $this->global['pageTitle'] = 'Score Page';
+        $this->loadViews("events/score", $this->$data, NULL , NULL);
     }
 
     function login(){
