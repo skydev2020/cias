@@ -12,6 +12,10 @@
   color: #4d4d4d;
 }
 
+.event .clock-cell{
+  background-color: #4B7AF0;  
+  width: 300px;
+}
 
 .lane .number {
   height: 120px;
@@ -27,6 +31,7 @@
 }
 .lane .r-cell {
   border-radius: 20px;
+  min-width: 120px;
 }
 
 .lane .distance-cell{
@@ -34,24 +39,33 @@
 }
 
 /* Font Size Class */
-.font-size-30 {
-  font-size: 30px;
-}
 
-.font-size-24 {
-  font-size: 24px;
-}
-
-.font-size-22 {
-  font-size: 22px;
+.font-size-10 {
+  font-size: 10px;
 }
 
 .font-size-18 {
   font-size: 18px;
 }
 
+.font-size-22 {
+  font-size: 22px;
+}
+
+.font-size-24 {
+  font-size: 24px;
+}
+
+.font-size-30 {
+  font-size: 30px;
+}
+
 .font-size-36 {
   font-size: 36px;
+}
+
+.font-size-60 {
+  font-size: 60px;
 }
 
 body {

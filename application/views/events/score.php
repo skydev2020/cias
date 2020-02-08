@@ -19,25 +19,28 @@
                     </div>
                 </div>                                                 
             </div>
-            <div class="col-md-4 col-sm-6 col-12">
-                <div class="row">
-                    <div class="col-12 d-flex font-size-24 font-weight-bold color-dark font-italic">
+            <div class="col-md-4 col-sm-6 col-12 d-flex flex-column align-items-center justify-content-center">
+                <div class="clock-cell">
+                    <div class="col-12 d-flex font-size-10 text-white align-items-center justify-content-center">
                         LIVE MEET CLOCK
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-12 d-flex font-size-24 font-weight-bold color-dark font-italic">
+                <div class="flex-grow-1 clock-cell">
+                    <div class="col-12 h-100 d-flex font-size-60 text-white align-items-center justify-content-center">
                         <?php echo $swimmingData->RunningTime; ?>
                     </div>
                 </div>                                                            
             </div>
-            <div class="col-md-4 col-sm-6 col-12">
-                <select id="In the Water">
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="opel">Opel</option>
-                    <option value="audi">Audi</option>
-                </select>                                                       
+           
+            <div class="col-md-4 col-sm-6 col-12 d-flex align-items-center justify-content-center">
+                <div>
+                    <select id="In the Water">
+                        <option value="volvo">Volvo</option>
+                        <option value="saab">Saab</option>
+                        <option value="opel">Opel</option>
+                        <option value="audi">Audi</option>
+                    </select>
+                </div>                                                       
             </div>
         </div>
         <?php
