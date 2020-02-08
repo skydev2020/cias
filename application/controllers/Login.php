@@ -23,6 +23,8 @@ class Login extends CI_Controller
      */
     public function index()
     {
+        var_dump("login/index");
+        die();
         $this->isLoggedIn();
     }
     
