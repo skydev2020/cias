@@ -29,10 +29,13 @@ class Admin extends BaseController
         if ($this->isLoggedInAsAdmin()){
             redirect('admin/users');
         }
-        else {           
+        else if ($this->isLoggedIn() == true) {           
             // show admin login page
-            $this->load->view('admin/login');
+            redirect('');
             // $this->load->view("admin\login", $this->global);                
+        }
+        else {
+            redirect('login');
         }
         // $this->global['pageTitle'] = 'Event List';
         

@@ -17,9 +17,9 @@ class Login_model extends CI_Model
      */
     function loginMe($email, $password, $isAdmin)
     {
-        $this->db->select('BaseTbl.userId, BaseTbl.password, BaseTbl.name, BaseTbl.roleId, Roles.role');
+        $this->db->select('BaseTbl.userId, BaseTbl.password, BaseTbl.name, BaseTbl.roleId');
         $this->db->from('tbl_users as BaseTbl');
-        $this->db->join('tbl_roles as Roles','Roles.roleId = BaseTbl.roleId');
+        // $this->db->join('tbl_roles as Roles','Roles.roleId = BaseTbl.roleId');
         $this->db->where('BaseTbl.email', $email);
 
         //if Admin Login then allow only addmin
@@ -29,9 +29,8 @@ class Login_model extends CI_Model
 
         $this->db->where('BaseTbl.isDeleted', 0);
         $query = $this->db->get();
-        
         $user = $query->row();
-        
+    
         if(!empty($user)){
             if(verifyHashedPassword($password, $user->password)){
                 return $user;
