@@ -50,8 +50,11 @@
             <span class="navbar-toggler-icon"></span>
           </button>
 
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">         
-            <ul class="navbar-nav ml-auto">
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <?php
+              $hidden_str = ($uri == "register" || $uri == "login") ? "d-none" : ""; 
+            ?>         
+            <ul class="navbar-nav ml-auto <?php echo $hidden_str; ?>">
               <?php
                 $active_str = ($uri == "" || $uri == "search") ? "active" : ""; 
               ?>
@@ -82,6 +85,9 @@
           </div>
         </nav>          
       </header>
-      <div class="container-fluid d-flex ">
+      <?php
+        $hidden_str = ($uri == "register" || $uri == "login") ? "d-none" : "d-flex"; 
+      ?>
+      <div class="container-fluid <?php echo $hidden_str; ?>">
           <img src="<?php echo base_url(); ?>assets/images/ad.jpg" height="40" class="d-inline-block align-top" alt="Advertisement Image">
       </div>
