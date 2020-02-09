@@ -108,6 +108,8 @@
                         <div class="box-footer">
                             <input type="submit" class="btn btn-primary" value="Submit" />
                             <input type="reset" class="btn btn-default" value="Reset" />
+                            <br/><br/>
+                            &nbsp;<a href="<?php echo base_url() ?>login">Login Page</a>
                         </div>
                     </form>
                 </div>

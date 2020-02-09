@@ -26,8 +26,7 @@
                                     <div class="form-group">
                                         <label for="fname">Full Name</label>
                                         <input type="text" class="form-control required" value="<?php echo set_value('fname'); ?>" id="fname" name="fname" maxlength="128">
-                                    </div>
-                                    
+                                    </div>                                    
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -61,8 +60,8 @@
                         </div><!-- /.box-body -->
     
                         <div class="box-footer">
-                            <input type="submit" class="btn btn-primary" value="Submit" />
-                            <input type="reset" class="btn btn-default" value="Reset" />
+                            <input type="submit" class="btn btn-primary" value="Save" />
+                            &nbsp;&nbsp;<a href="<?php echo base_url() ?>admin/users">Reset</a>
                         </div>
                     </form>
                 </div>
