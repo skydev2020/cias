@@ -328,7 +328,8 @@ class Admin extends BaseController
                 $mobile = $this->security->xss_clean($this->input->post('mobile'));
                 
                 $userInfo = array('email'=>$email, 'password'=>getHashedPassword($password), 'fname'=> $fname, 'lname'=> $lname,
-                                    'mobile'=>$mobile, 'createdBy'=>$this->vendorId, 'createdDtm'=>date('Y-m-d H:i:s'));
+                                    'mobile'=>$mobile, 'createdBy'=> 1, 'isVerified'=> 1, 
+                                    'createdDtm'=>date('Y-m-d H:i:s'));
                 
                 $this->load->model('user_model');
                 $result = $this->user_model->addNewUser($userInfo);
