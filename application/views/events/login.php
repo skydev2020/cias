@@ -13,7 +13,7 @@
     $error = $this->session->flashdata('error');
     if($error)
     {
-        ?>
+    ?>
         <div class="alert alert-danger alert-dismissable">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
             <?php echo $error; ?>                    
@@ -38,8 +38,8 @@
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
-        <div class="col-6">    
-          <input type="button" class="btn btn-primary btn-block btn-flat" value="Register"  onclick="window.location.href='<?php echo base_url(); ?>register'" />
+        <div class="col-6 d-flex align-items-center">    
+          <a href="<?php echo base_url() ?>register">Sign up</a>
         </div><!-- /.col -->
         <div class="col-6">
           <input type="submit" class="btn btn-primary btn-block btn-flat" value="Sign In" />
