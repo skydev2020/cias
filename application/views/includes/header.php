@@ -60,15 +60,17 @@
               </li>
               <?php
                 $active_str = ($uri == "login") ? "active" : ""; 
+                $hidden_str = ($logged_in == true) ? "d-none" : "";
               ?>
               <li class="nav-item">
-                <a class="nav-link <?php echo $active_str; ?>" href="<?php echo base_url(); ?>login">Log in</a>
+                <a class="nav-link <?php echo $active_str; ?> <?php echo $hidden_str; ?>" href="<?php echo base_url(); ?>login">Log in</a>
               </li>
               <?php
                 $active_str = ($uri == "register") ? "active" : ""; 
+                $hidden_str = ($logged_in == true) ? "d-none" : "";
               ?>
               <li class="nav-item">
-                <a class="nav-link <?php echo $active_str; ?>" href="<?php echo base_url(); ?>register">Register</a>
+                <a class="nav-link <?php echo $active_str; ?> <?php echo $hidden_str; ?>" href="<?php echo base_url(); ?>register">Register</a>
               </li>
               <?php
                 $hidden_str = ($logged_in != true) ? "d-none" : ""; 

@@ -19,6 +19,14 @@ class Admin extends BaseController
         parent::__construct();
         $this->load->model('user_model');
         $this->load->model('login_model');  
+
+        if ($this->isLoggedIn() == true) {
+            $this->global['logged_in'] = true; 
+        }
+        else {
+            $this->global['logged_in'] = false;
+        }
+        $this->global['uri'] = $this->uri->uri_string();
     }
     
     /**
