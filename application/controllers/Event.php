@@ -160,7 +160,10 @@ class Event extends BaseController
         }
     }
 
-
+    /**
+     * Show Register User Page
+     * Register User into DB
+     */
     function register(){
         // if Get Request, Load Login Page, if Post Request, Check Login
         if ($this->input->server('REQUEST_METHOD') =='GET') {

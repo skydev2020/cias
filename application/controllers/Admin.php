@@ -325,7 +325,7 @@ class Admin extends BaseController
                     $this->session->set_flashdata('error', 'User creation failed');
                 }
                 
-                redirect('admin/');
+                redirect('admin');
             }
         }
     }
