@@ -123,13 +123,19 @@ a[aria-expanded="true"] {
   background: #6d7fcc;
 }
 
-/*Admin Dashbaord*/
+/*Dashbaord*/
 .dashboard-content {
   width: 100%;
   padding: 0px 20px;
   min-height: 100vh;
   transition: all 0.3s;
 }
+
+.dashboard-content .register-form {
+  min-height: 250px;
+  min-width: 450px;
+}
+
 
 /* Search Page*/
 .search-page input.search {

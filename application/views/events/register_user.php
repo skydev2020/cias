@@ -1,5 +1,5 @@
-<div class="dashboard-content d-flex">
-    <section class="content">    
+<div class="dashboard-content d-flex d-flex align-items-center justify-content-center">
+    <section class="register-form">
         <div class="row">
             <!-- left column -->
             <div class="col-12">
@@ -13,7 +13,7 @@
                     <form role="form" id="addUser" action="<?php echo base_url() ?>admin/newUser" method="post" role="form">
                         <div class="box-body">
                             <div class="row">
-                                <div class="col-12 col-md-6">                                
+                                <div class="col-12 col-md-6 d-flex align-items-center ">                                
                                     <div class="form-group">
                                         <label for="fname">Full Name</label>                                       
                                     </div>                                    
@@ -25,7 +25,7 @@
                                 </div>
                             </div>    
                             <div class="row">
-                                <div class="col-12 col-md-6">
+                                <div class="col-12 col-md-6 d-flex align-items-center">
                                     <div class="form-group">
                                         <label for="email">Email address</label>                                        
                                     </div>
@@ -37,7 +37,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-12 col-md-6">
+                                <div class="col-12 col-md-6 d-flex align-items-center">
                                     <div class="form-group">
                                         <label for="password">Password</label>                                        
                                     </div>
@@ -49,7 +49,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-12 col-md-6">
+                                <div class="col-12 col-md-6 d-flex align-items-center">
                                     <div class="form-group">
                                         <label for="cpassword">Confirm Password</label>                                        
                                     </div>
@@ -61,7 +61,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-12 col-md-6">
+                                <div class="col-12 col-md-6 d-flex align-items-center">
                                     <div class="form-group">
                                         <label for="mobile">Mobile Number</label>                                        
                                     </div>
