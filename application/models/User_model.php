@@ -16,12 +16,13 @@ class User_model extends CI_Model
      */
     function userListingCount($searchText = '')
     {
-        $this->db->select('BaseTbl.userId, BaseTbl.email, BaseTbl.name, BaseTbl.mobile, BaseTbl.createdDtm, Role.role');
+        $this->db->select('BaseTbl.*');
         $this->db->from('tbl_users as BaseTbl');
-        $this->db->join('tbl_roles as Role', 'Role.roleId = BaseTbl.roleId','left');
+        // $this->db->join('tbl_roles as Role', 'Role.roleId = BaseTbl.roleId','left');
         if(!empty($searchText)) {
             $likeCriteria = "(BaseTbl.email  LIKE '%".$searchText."%'
-                            OR  BaseTbl.name  LIKE '%".$searchText."%'
+                            OR  BaseTbl.fname  LIKE '%".$searchText."%'
+                            OR  BaseTbl.lname  LIKE '%".$searchText."%'
                             OR  BaseTbl.mobile  LIKE '%".$searchText."%')";
             $this->db->where($likeCriteria);
         }
@@ -41,12 +42,13 @@ class User_model extends CI_Model
      */
     function userListing($searchText = '', $page, $segment)
     {
-        $this->db->select('BaseTbl.userId, BaseTbl.email, BaseTbl.name, BaseTbl.mobile, BaseTbl.createdDtm, Role.role');
+        $this->db->select('BaseTbl.*');
         $this->db->from('tbl_users as BaseTbl');
-        $this->db->join('tbl_roles as Role', 'Role.roleId = BaseTbl.roleId','left');
+        // $this->db->join('tbl_roles as Role', 'Role.roleId = BaseTbl.roleId','left');
         if(!empty($searchText)) {
             $likeCriteria = "(BaseTbl.email  LIKE '%".$searchText."%'
-                            OR  BaseTbl.name  LIKE '%".$searchText."%'
+                            OR  BaseTbl.fname  LIKE '%".$searchText."%'
+                            OR  BaseTbl.lname  LIKE '%".$searchText."%'
                             OR  BaseTbl.mobile  LIKE '%".$searchText."%')";
             $this->db->where($likeCriteria);
         }
@@ -265,7 +267,7 @@ class User_model extends CI_Model
      */
     function getUserInfoById($userId)
     {
-        $this->db->select('userId, name, email, mobile, roleId');
+        $this->db->select('*');
         $this->db->from('tbl_users');
         $this->db->where('isDeleted', 0);
         $this->db->where('userId', $userId);
@@ -281,7 +283,7 @@ class User_model extends CI_Model
      */
     function getUserInfoWithRole($userId)
     {
-        $this->db->select('BaseTbl.userId, BaseTbl.email, BaseTbl.name, BaseTbl.mobile, BaseTbl.roleId, Roles.role');
+        $this->db->select('BaseTbl.userId, BaseTbl.email, BaseTbl.fname, BaseTbl.lname, BaseTbl.mobile, BaseTbl.roleId, Roles.role');
         $this->db->from('tbl_users as BaseTbl');
         $this->db->join('tbl_roles as Roles','Roles.roleId = BaseTbl.roleId');
         $this->db->where('BaseTbl.userId', $userId);
@@ -297,7 +299,7 @@ class User_model extends CI_Model
      * @return aray $result : This is user information
      */
     function get_by_email_code($email, $code) {
-        $this->db->select('BaseTbl.userId, BaseTbl.email, BaseTbl.name, BaseTbl.mobile, BaseTbl.roleId');
+        $this->db->select('BaseTbl.userId, BaseTbl.email, BaseTbl.fname, BaseTbl.lname, BaseTbl.mobile, BaseTbl.roleId');
         $this->db->from('tbl_users as BaseTbl');
         $this->db->where('BaseTbl.email', $email);
         $this->db->where('BaseTbl.isDeleted', 0);
