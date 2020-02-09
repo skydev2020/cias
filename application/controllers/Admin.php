@@ -92,7 +92,7 @@ class Admin extends BaseController
 
                 $this->login_model->lastLogin($loginInfo);
                 
-                redirect('/admin/users');
+                redirect('admin/users');
             }
             else
             {   
@@ -110,7 +110,7 @@ class Admin extends BaseController
     {
 
         if (!$this->isLoggedInAsAdmin()) {
-            redirect('/admin');
+            redirect('admin');
             return;
         }
      
@@ -158,6 +158,43 @@ class Admin extends BaseController
         }
     }
 
+     /**
+     * This function used to activate/deactivate user
+     */
+    public function activate($userId = null) {
+
+        if (!$this->isLoggedInAsAdmin()) {
+            redirect('admin');
+            return;
+        }
+       
+        if ($userId==null || $this->input->server('REQUEST_METHOD') =='POST') {
+            redirect("admin/users");
+            return;
+        }
+        
+        $user = $this->user_model->getUserInfo($userId);
+
+        if ($user == null) {
+            $this->session->set_flashdata('error', 'User Object does not exist');
+            redirect("admin/users");
+            return;
+        }
+
+        $userInfo = array();
+        
+        if ($user->isVerified == 1) {
+            $userInfo['isVerified'] = 0;
+        }
+        else {
+            $userInfo['isVerified'] = 1;
+        }
+        
+        $result = $this->user_model->editUser($userInfo, $userId);
+        $this->session->set_flashdata('success', 'User details successfully updated');
+        redirect("admin/users");
+    
+    }
 
     /**
 	 * This function used to check the user is logged in or not
@@ -191,7 +228,7 @@ class Admin extends BaseController
     function addNew()
     {
         if (!$this->isLoggedInAsAdmin()) {
-            redirect('/admin');
+            redirect('admin');
             return;
         }
 
@@ -233,7 +270,7 @@ class Admin extends BaseController
     function editUser($userId = NULL)
     {
         if (!$this->isLoggedInAsAdmin()) {
-            redirect('/admin');
+            redirect('admin');
             return;
         }
         else
@@ -250,7 +287,7 @@ class Admin extends BaseController
             
             if($this->form_validation->run() == FALSE)
             {
-                redirect('/admin');
+                redirect('admin');
                 return;
             }
             else
@@ -287,7 +324,7 @@ class Admin extends BaseController
                     $this->session->set_flashdata('error', 'User updation failed');
                 }
                 
-                redirect('/admin');
+                redirect('admin');
                 return;
             }
         }
@@ -299,7 +336,7 @@ class Admin extends BaseController
     function newUser()
     {
         if (!$this->isLoggedInAsAdmin()) {
-            redirect('/admin');
+            redirect('admin');
             return;
         }
         else
