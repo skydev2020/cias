@@ -297,7 +297,7 @@ class Event extends BaseController
      */
     function pageNotFound()
     {
-        $this->global['pageTitle'] = 'CodeInsect : 404 - Page Not Found';
+        $this->global['pageTitle'] = 'Swimmeetcast : 404 - Page Not Found';
         
         $this->loadViews("404", $this->global, NULL, NULL);
     }

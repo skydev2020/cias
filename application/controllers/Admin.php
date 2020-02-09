@@ -124,7 +124,7 @@ class Admin extends BaseController
             $returns = $this->paginationCompress ( "userListing/", $count, 10 );            
             $data['userRecords'] = $this->user_model->userListing($searchText, $returns["page"], $returns["segment"]);
             
-            $this->global['pageTitle'] = 'CodeInsect : User Listing'; 
+            $this->global['pageTitle'] = 'Swimmeetcast : User Listing'; 
             
             //Prepare the User search
             $data['module'] = $this->load->view('admin/user_list', $data, true);
@@ -143,7 +143,7 @@ class Admin extends BaseController
             }
             else {
 
-                $this->global['pageTitle'] = 'CodeInsect : Edit User';        
+                $this->global['pageTitle'] = 'Swimmeetcast : Edit User';        
                 //Prepare the User Edit
                 $data['module'] = $this->load->view('admin/user_edit', $data, true);
             
@@ -195,7 +195,7 @@ class Admin extends BaseController
         $data = [];
         // $data['roles'] = $this->user_model->getUserRoles();
         
-        $this->global['pageTitle'] = 'CodeInsect : Add New User';
+        $this->global['pageTitle'] = 'Swimmeetcast : Add New User';
 
         //Prepare the User Edit
         $data['module'] = $this->load->view('admin/user_new', $data, true);
@@ -366,7 +366,7 @@ class Admin extends BaseController
      */
     function pageNotFound()
     {
-        $this->global['pageTitle'] = 'CodeInsect : 404 - Page Not Found';
+        $this->global['pageTitle'] = 'Swimmeetcast : 404 - Page Not Found';
         
         $this->loadViews("404", $this->global, NULL, NULL);
     }
