@@ -279,7 +279,7 @@ class Admin extends BaseController
     }
 
     /**
-     * This function is used to add new user to the system
+     * This function is used to add new user to the system in Admin Panel
      */
     function newUser()
     {

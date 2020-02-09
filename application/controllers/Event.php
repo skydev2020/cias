@@ -160,6 +160,7 @@ class Event extends BaseController
         }
     }
 
+
     function register(){
         // if Get Request, Load Login Page, if Post Request, Check Login
         if ($this->input->server('REQUEST_METHOD') =='GET') {
@@ -168,55 +169,45 @@ class Event extends BaseController
         }
         else {
             $this->load->library('form_validation');
-        
-            $this->form_validation->set_rules('email', 'Email', 'required|valid_email|max_length[128]|trim');
-            $this->form_validation->set_rules('password', 'Password', 'required|max_length[32]');
-        
+            
+            $this->form_validation->set_rules('fname','Full Name','trim|required|max_length[128]');
+            $this->form_validation->set_rules('email','Email','trim|required|valid_email|max_length[128]');
+            $this->form_validation->set_rules('password','Password','required|max_length[20]');
+            $this->form_validation->set_rules('cpassword','Confirm Password','trim|required|matches[password]|max_length[20]');
+            // $this->form_validation->set_rules('role','Role','trim|required|numeric');
+            $this->form_validation->set_rules('mobile','Mobile Number','required|min_length[10]');
+            
             if($this->form_validation->run() == FALSE)
             {
-                redirect('register');
+                $this->global['pageTitle'] = 'Register User Page';
+                $this->loadViews("events/register_user", $this->global, null , NULL);
             }
             else
             {
+                $name = ucwords(strtolower($this->security->xss_clean($this->input->post('fname'))));
                 $email = strtolower($this->security->xss_clean($this->input->post('email')));
                 $password = $this->input->post('password');
+                // $roleId = $this->input->post('role');
+                $mobile = $this->security->xss_clean($this->input->post('mobile'));
                 
-                $result = $this->login_model->loginMe($email, $password, false);
-               
-                if(!empty($result))
-                {
-                    $lastLogin = $this->login_model->lastLoginInfo($result->userId);
-
-                    $sessionArray = array('userId'=>$result->userId,                    
-                                            'role'=>$result->roleId,
-                                            'roleText'=>$result->role,
-                                            'name'=>$result->name,
-                                            'lastLogin'=> $lastLogin->createdDtm,
-                                            'isLoggedIn' => TRUE
-                                        );
+                $userInfo = array('email'=>$email, 'password'=>getHashedPassword($password), 'name'=> $name,
+                                    'mobile'=>$mobile, 'createdBy'=>$this->vendorId, 'createdDtm'=>date('Y-m-d H:i:s'));
                 
-
-                    $this->session->set_userdata($sessionArray);
-                    
-                    unset($sessionArray['userId'], $sessionArray['isLoggedIn'], $sessionArray['lastLogin']);
-
-                    $loginInfo = array("userId"=>$result->userId, "sessionData" => json_encode($sessionArray), "machineIp"=>$_SERVER['REMOTE_ADDR'], "userAgent"=>getBrowserAgent(), "agentString"=>$this->agent->agent_string(), "platform"=>$this->agent->platform());
-
-                    $this->login_model->lastLogin($loginInfo);
-                    
-                    if ($result->roleId == ROLE_ADMIN) {
-                        redirect('admin/users');
-                    }
-                    else {
-                        redirect('');
-                    }
+                $this->load->model('user_model');
+                $result = $this->user_model->addNewUser($userInfo);
+                
+                if($result > 0){
+                    $this->session->set_flashdata('success', 'Email Verification Code Sent');
+                    $this->global['pageTitle'] = 'Email Verification Code Sent';
+                    $this->loadViews("events/reg_email_sent", $this->global, null , NULL);
                 }
-                else
-                {   
-                    $this->session->set_flashdata('error', 'Email or password mismatch');
-                    
-                    redirect('login');
+                else{
+                    $this->session->set_flashdata('error', 'User creation failed');
+                    $this->global['pageTitle'] = 'Register User Page';
+                    $this->loadViews("events/register_user", $this->global, null , NULL);
                 }
+                
+                
             }
         }
     }
