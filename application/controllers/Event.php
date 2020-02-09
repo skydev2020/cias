@@ -207,22 +207,6 @@ class Event extends BaseController
                     /**
                      * Send a email to a user with a verification code
                      */
-
-                      
-                    
-                    // $this->load->library('email', $config);
-        
-
-                    // $this->email->from('admin@cias.com', 'Admin User in CIAS');
-                    // $this->email->to($email);
-                    
-                    // $this->email->subject('User Signup');
-                    // $email_msg = "Please click link to verify your email. <br/>";
-                    // $email_msg .= "<a href='".base_url()."verify?email=". $email. "code=" . $verification_code . "></a>";
-                    // $this->email->message($email_msg);
-                    // $this->load->library('phpmailer_lib');
-                    // // PHPMailer object
-                    // $mail = $this->phpmailer_lib->load();
                                                            
                     $email_msg = "<p><h3>Please click link to verify your email.</h3></p> \r\n";
                     $email_msg .= "<p><a href=\"".htmlspecialchars(base_url())."verify?email=". $email. "&code=" . $verification_code . "\">Click here to verify</a></p>";
