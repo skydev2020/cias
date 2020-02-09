@@ -142,8 +142,13 @@ class Admin extends BaseController
                 $this->loadViews("admin/tmpl", $this->global, $data, NULL);
             }
             else {
-
-                $this->global['pageTitle'] = 'Swimmeetcast : Edit User';        
+                if ($data['userInfo']->roleId == 1) {
+                    $this->global['pageTitle'] = 'Administrator : Edit User';    
+                }
+                {
+                    $this->global['pageTitle'] = 'Swimmeetcast : Edit User';
+                }
+                    
                 //Prepare the User Edit
                 $data['module'] = $this->load->view('admin/user_edit', $data, true);
             
