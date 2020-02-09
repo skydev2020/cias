@@ -8,6 +8,10 @@
                 </form>                               
             </div>            
         </div>
+        <div class="row">
+            <div class="col-12" style="height: 25px;">
+            </div>
+        </div>
         <?php
         if(!empty($eventRecords))
         {

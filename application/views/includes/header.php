@@ -44,7 +44,7 @@
       <header class="container-fluid">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
           <div class="navbar-brand">
-            <img src="<?php echo base_url(); ?>/assets/images/logo.png" height="40" class="d-inline-block align-top" alt="Logo Image">
+            <img src="<?php echo base_url(); ?>assets/images/logo.png" height="40" class="d-inline-block align-top" alt="Logo Image">
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -80,6 +80,8 @@
               </li>
             </ul>            
           </div>
-        </nav>
-          
+        </nav>          
       </header>
+      <div class="container-fluid d-flex ">
+          <img src="<?php echo base_url(); ?>assets/images/ad.jpg" height="40" class="d-inline-block align-top" alt="Advertisement Image">
+      </div>

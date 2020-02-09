@@ -142,3 +142,8 @@ a[aria-expanded="true"] {
   width: 50%;
   border-radius: 20px;
 }
+
+/** Footer */
+#footer .footer-content {
+  background-color: #1a1a1a;;
+}
