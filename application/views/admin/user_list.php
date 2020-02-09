@@ -36,8 +36,9 @@
                         <tr>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Mobile</th>                            
-                            <th>Created On</th>
+                            <th>Mobile</th>
+                            <th>Verified</th>                            
+                            <th>Signup Date</th>
                             <th class="text-center">Actions</th>
                         </tr>
                         <?php
@@ -52,6 +53,9 @@
                             <td><?php echo $record->fname." ".$record->lname ?></td>
                             <td><?php echo $record->email ?></td>
                             <td><?php echo $record->mobile ?></td>
+                            <td>
+                                <?php echo ($record->isVerified == 1) ? "Verified" : "Not Verified" ?>
+                            </td>
                             <td><?php echo date("d-m-Y", strtotime($record->createdDtm)) ?></td>
                             <td class="text-center">
                                 <a class="" href="<?php echo base_url().'admin/activate/'.$record->userId; ?>" title="<?php echo $actionStr ?>"><?php echo $actionStr ?></a>
