@@ -143,7 +143,6 @@ class User_model extends CI_Model
     }
     
     
-    
     /**
      * This function is used to delete the user information
      * @param number $userId : This is user id
@@ -290,6 +289,34 @@ class User_model extends CI_Model
         $query = $this->db->get();
         
         return $query->row();
+    }
+
+    /**
+     * This function used to get user information by id with role
+     * @param number $userId : This is user id
+     * @return aray $result : This is user information
+     */
+    function get_by_email_code($email, $code) {
+        $this->db->select('BaseTbl.userId, BaseTbl.email, BaseTbl.name, BaseTbl.mobile, BaseTbl.roleId');
+        $this->db->from('tbl_users as BaseTbl');
+        $this->db->where('BaseTbl.email', $email);
+        $this->db->where('BaseTbl.isDeleted', 0);
+        $this->db->where('BaseTbl.verification_code', $code);
+        $query = $this->db->get();
+
+        return $query->row();
+    }
+
+    /**
+     * This function is used to update user information
+     * @param number $userId : This is user id
+     * @return boolean $result : TRUE / FALSE
+     */
+    function updateUser($userId, $userInfo) {
+        $this->db->where('userId', $userId);
+        $this->db->update('tbl_users', $userInfo);
+        
+        return $this->db->affected_rows();
     }
 
 }

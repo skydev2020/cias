@@ -63,6 +63,7 @@ $route['search'] = 'event/search';
 $route['login'] = 'event/login';
 $route['register'] = 'event/register';
 $route['score'] = 'event/score';
+$route['verify'] = 'event/verify';
 $route['loginMe'] = 'login/loginMe';
 $route['logout'] = 'user/logout';
 $route['userListing'] = 'user/userListing';

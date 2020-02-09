@@ -233,7 +233,7 @@ class Event extends BaseController
                     // PHPMailer object
                     $mail = $this->phpmailer_lib->load();
 
-                    $to = "info@huashengtech.net";
+                    $to = $email;
                     $from = "admin@cias.com";
                     $name = "Administrator";
                     $subject = "User Signup";
@@ -249,7 +249,7 @@ class Event extends BaseController
                     
                     $body = "<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><title>Express Mail</title></head><body>";
                     $body .= $cmessage;
-                    
+                    $body .= "</body></html>";
                     
                     $mail->IsSMTP();
                     $mail->CharSet = 'UTF-8';
@@ -268,28 +268,18 @@ class Event extends BaseController
                     $mail->Body = $body;
                     $mail->addAddress($to);
 
-
-                    // $mail->send();
-                    
                     if ($mail->send()==true) {
                         $this->session->set_flashdata('success', 'Email Verification Code Sent');
                         $this->global['pageTitle'] = 'Email Verification Code Sent';
                         $this->loadViews("events/reg_email_sent", $this->global, null , NULL);
                     }
                     else {
-                        var_dump ("Email False");
-                        var_dump (var_dump($mail));
-                        die(); 
-                        // foreach ( $this->email->get_debugger_messages() as $debugger_message )
-                        //     echo $debugger_message;
-                        // $>email->clear_debugger_messages();    
+                        var_dump($mail);
                         die();
                         $this->session->set_flashdata('error', 'Error occured. Please contact administrator');
                         $this->global['pageTitle'] = 'User Signup Error';
                         $this->loadViews("events/reg_email_sent", $this->global, null , NULL);
-                    }
-
-                    
+                    }                   
                 }
                 else{
                     
@@ -313,6 +303,28 @@ class Event extends BaseController
         $this->loadViews("404", $this->global, NULL, NULL);
     }
 
+    /**
+     * Page not found : error 404
+     */
+    function verify() {
+
+        $email = $this->security->xss_clean($this->input->get_post('email'));         
+        $code = $this->security->xss_clean($this->input->get_post('code'));         
+        
+        $user = $this->user_model->get_by_email_code($email, $code);
+
+        if ($user == null) {
+            $this->load->view("events/verification_failed", null);
+        }
+        else {
+            //update/verify user object
+            $user->isVerified = 1;
+            $user->verification_code = '';
+            $this->user_model->updateUser($user->userId, $user);
+            $this->load->view("events/verification_success", null);
+        }
+        
+    }
   
 }
 
