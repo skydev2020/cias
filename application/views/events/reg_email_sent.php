@@ -12,7 +12,17 @@
                     
                     <div class="box-body">
                         <div class="row">
-                            <div class="col-12">                                
+                            <div class="col-12">
+                                <?php                                    
+                                    $error = $this->session->flashdata('error');
+                                    if($error)
+                                    {
+                                ?>
+                                <div class="alert alert-danger alert-dismissable">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    <?php echo $this->session->flashdata('error'); ?>                    
+                                </div>
+                                <?php } ?>
                                 <?php  
                                     $success = $this->session->flashdata('success');
                                     if($success)
@@ -23,13 +33,13 @@
                                     <?php echo $this->session->flashdata('success'); ?>
                                 </div>
                                 <?php } ?>
+ 
                             </div>
                         </div> 
                     </div><!-- /.box-body -->
 
                     <div class="box-footer">
-                        <input type="submit" class="btn btn-primary" value="Submit" />
-                        <input type="reset" class="btn btn-default" value="Reset" />
+                        <a href="<?php echo base_url(); ?>">Home</a>                        
                     </div>
                 </div>
             </div>

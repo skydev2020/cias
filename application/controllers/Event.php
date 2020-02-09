@@ -201,14 +201,33 @@ class Event extends BaseController
                 $result = $this->user_model->addNewUser($userInfo);
                 
                 if($result > 0){
-                    $this->session->set_flashdata('success', 'Email Verification Code Sent');
-                    $this->global['pageTitle'] = 'Email Verification Code Sent';
-
+                    
                     /**
                      * Send a email to a user with a verification code
                      */
 
-                    $this->loadViews("events/reg_email_sent", $this->global, null , NULL);
+                    $this->load->library('email');
+
+                    $this->email->from('admin@cias.com', 'Admin User in CIAS');
+                    $this->email->to($email);
+                    
+                    $this->email->subject('User Signup');
+                    $email_msg = "Please click link to verify your email. <br/>";
+                    $email_msg .= "<a href='".base_url()."verify?code='" . $verification_code . "></a>";
+                    $this->email->message($email_msg);
+                    
+                    if ($this->email->send()==true) {
+                        $this->session->set_flashdata('success', 'Email Verification Code Sent');
+                        $this->global['pageTitle'] = 'Email Verification Code Sent';
+                        $this->loadViews("events/reg_email_sent", $this->global, null , NULL);
+                    }
+                    else {
+                        $this->session->set_flashdata('error', 'Error occured. Please contact administrator');
+                        $this->global['pageTitle'] = 'User Signup Error';
+                        $this->loadViews("events/reg_email_sent", $this->global, null , NULL);
+                    }
+
+                    
                 }
                 else{
                     $this->session->set_flashdata('error', 'User creation failed');
