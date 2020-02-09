@@ -86,7 +86,8 @@
         </nav>          
       </header>
       <?php
-        $hidden_str = ($uri == "register" || $uri == "login") ? "d-none" : "d-flex"; 
+        
+        $hidden_str = ($uri == "register" || $uri == "login" || strpos($uri, "admin") !==false) ? "d-none" : "d-flex"; 
       ?>
       <div class="container-fluid <?php echo $hidden_str; ?>">
           <img src="<?php echo base_url(); ?>assets/images/ad.jpg" height="40" class="d-inline-block align-top" alt="Advertisement Image">
