@@ -269,17 +269,12 @@ class Event extends BaseController
                     $mail->Body = $body;
                     $mail->addAddress($to);
 
-                    var_dump($cmessage);
-                    die();
-
                     if ($mail->send()==true) {
                         $this->session->set_flashdata('success', 'Email Verification Code Sent');
                         $this->global['pageTitle'] = 'Email Verification Code Sent';
                         $this->loadViews("events/reg_email_sent", $this->global, null , NULL);
                     }
                     else {
-                        var_dump($mail);
-                        die();
                         $this->session->set_flashdata('error', 'Error occured. Please contact administrator');
                         $this->global['pageTitle'] = 'User Signup Error';
                         $this->loadViews("events/reg_email_sent", $this->global, null , NULL);
