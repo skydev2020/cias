@@ -19,6 +19,7 @@ class Event extends BaseController
         $this->load->model('login_model');
         $this->load->model('event_model');
         $this->load->model('user_model');
+        $this->load->library('mandrill', array("QHeA9_d_5H66U9py1b2Tlw"));
                 
         if ($this->uri->uri_string() == 'event/login') {
             redirect('login');
@@ -207,17 +208,6 @@ class Event extends BaseController
                      * Send a email to a user with a verification code
                      */
 
-                    // $config = Array(
-                    //     'protocol' => 'smtp',
-                    //     'smtp_host' => 'ssl://stmp.googlemail.com',
-                    //     'smtp_port' => 465,
-                    //     'smtp_user' => 'newcaesar628@gmail.com', // change it to yours
-                    //     'smtp_pass' => 'Top12345', // change it to yours
-                    //     'mailtype' => 'html',
-                    //     'charset' => 'iso-8859-1',
-                    //     'newline' => '\r\n',
-                    //     'wordwrap' => TRUE
-                    //   );
                       
                     
                     // $this->load->library('email', $config);
@@ -230,46 +220,28 @@ class Event extends BaseController
                     // $email_msg = "Please click link to verify your email. <br/>";
                     // $email_msg .= "<a href='".base_url()."verify?email=". $email. "code=" . $verification_code . "></a>";
                     // $this->email->message($email_msg);
-                    $this->load->library('phpmailer_lib');
-                    // PHPMailer object
-                    $mail = $this->phpmailer_lib->load();
+                    // $this->load->library('phpmailer_lib');
+                    // // PHPMailer object
+                    // $mail = $this->phpmailer_lib->load();
+                                                           
+                    $email_msg = "<p><h3>Please click link to verify your email.</h3></p> \r\n";
+                    $email_msg .= "<p><a href=\"".htmlspecialchars(base_url())."verify?email=". $email. "&code=" . $verification_code . "\">Click here to verify</a></p>";
+                 
+                    $params = array(
+                        "html" => $email_msg,
+                        "text" => null,
+                        "from_email" => "info@swimmeetcast.com",
+                        "from_name" => "Swimmeetcast",
+                        "subject" => "User Registration",
+                        "to" => array(array("email" => $email)),
+                        "track_opens" => true,
+                        "track_clicks" => true,
+                        "auto_text" => true
+                    );
+                
+                    $mail_sent = $this->mandrill->messages->send($params, true);
 
-                    $to = $email;
-                    $from = "admin@cias.com";
-                    $name = "Administrator";
-                    $subject = "User Signup";
-                    // $number = $_REQUEST['number'];
-                    $cmessage = "Please click link to verify your email. <br/>";
-                    $cmessage .= "<a href='".base_url()."verify?email=". $email. "&code=" . $verification_code . "></a>";
-                    
-                    $headers = "From: $from";
-                    $headers = "From: " . $from . "\r\n";
-                    $headers .= "Reply-To: ". $from . "\r\n";
-                    $headers .= "MIME-Version: 1.0\r\n";
-                    $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-                    
-                    $body = "<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><title>Express Mail</title></head><body>";
-                    $body .= $cmessage;
-                    $body .= "</body></html>";
-                    
-                    $mail->IsSMTP();
-                    $mail->CharSet = 'UTF-8';
-                    $mail->Host       = 'smtp.gmail.com';
-                    $mail->SMTPAuth   = true;
-                    $mail->Username   = 'newcaesar628@gmail.com';
-                    $mail->Password   = 'Top12345';
-                    $mail->SMTPSecure = 'ssl';
-                    $mail->Port       = 465;
-
-                    //Recipients
-                    $mail->From = $from;
-                    $mail->FromName= $name;
-                    $mail->isHTML(true);
-                    $mail->Subject = $subject;
-                    $mail->Body = $body;
-                    $mail->addAddress($to);
-
-                    if ($mail->send()==true) {
+                    if (is_array($mail_sent) && count($mail_sent) > 0 && $mail_sent[0]['status']=="sent") {
                         $this->session->set_flashdata('success', 'Email Verification Code Sent');
                         $this->global['pageTitle'] = 'Email Verification Code Sent';
                         $this->loadViews("events/reg_email_sent", $this->global, null , NULL);
