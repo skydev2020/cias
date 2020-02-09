@@ -27,6 +27,7 @@ class Login_model extends CI_Model
             $this->db->where('BaseTbl.roleId', 1);
         }
 
+        $this->db->where('BaseTbl.isVerified', 1);
         $this->db->where('BaseTbl.isDeleted', 0);
         $query = $this->db->get();
         $user = $query->row();

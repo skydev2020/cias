@@ -5,7 +5,6 @@ require APPPATH . '/libraries/BaseController.php';
 /**
  * Class : Event (EventController)
  * Event Class to control all event related operations.
- * @author : Sky Dev
  * @version : 1.0
  * @since : 5 Feb 2020
  */
@@ -19,6 +18,8 @@ class Event extends BaseController
         parent::__construct();
         $this->load->model('login_model');
         $this->load->model('event_model');
+        $this->load->model('user_model');
+                
         if ($this->uri->uri_string() == 'event/login') {
             redirect('login');
             return;
@@ -34,7 +35,8 @@ class Event extends BaseController
             return;           
         } 
         
-        if ($this->uri->uri_string() != '' && $this->uri->uri_string() != 'register'  && $this->uri->uri_string() != 'search' && $this->uri->uri_string() != 'login' && $this->isLoggedIn() == false) {
+        if ($this->uri->uri_string() != '' && $this->uri->uri_string() != 'register'  && $this->uri->uri_string() != 'search' 
+        && $this->uri->uri_string() != 'login' && $this->uri->uri_string() != 'verify' && $this->isLoggedIn() == false) {
             redirect('login');
             return;
         }  
@@ -197,7 +199,6 @@ class Event extends BaseController
                                     'mobile'=>$mobile, 'createdBy'=> 0, 
                                     'verification_code'=>$verification_code, 'createdDtm'=>date('Y-m-d H:i:s'));
                 
-                $this->load->model('user_model');
                 $result = $this->user_model->addNewUser($userInfo);
                 
                 if($result > 0){
@@ -239,7 +240,7 @@ class Event extends BaseController
                     $subject = "User Signup";
                     // $number = $_REQUEST['number'];
                     $cmessage = "Please click link to verify your email. <br/>";
-                    $cmessage .= "<a href='".base_url()."verify?email=". $email. "code=" . $verification_code . "></a>";
+                    $cmessage .= "<a href='".base_url()."verify?email=". $email. "&code=" . $verification_code . "></a>";
                     
                     $headers = "From: $from";
                     $headers = "From: " . $from . "\r\n";
@@ -267,6 +268,9 @@ class Event extends BaseController
                     $mail->Subject = $subject;
                     $mail->Body = $body;
                     $mail->addAddress($to);
+
+                    var_dump($cmessage);
+                    die();
 
                     if ($mail->send()==true) {
                         $this->session->set_flashdata('success', 'Email Verification Code Sent');
@@ -307,11 +311,12 @@ class Event extends BaseController
      * Page not found : error 404
      */
     function verify() {
-
+        
         $email = $this->security->xss_clean($this->input->get_post('email'));         
         $code = $this->security->xss_clean($this->input->get_post('code'));         
         
         $user = $this->user_model->get_by_email_code($email, $code);
+
 
         if ($user == null) {
             $this->load->view("events/verification_failed", null);
