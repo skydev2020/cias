@@ -44,28 +44,38 @@
       <header class="container-fluid">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
           <div class="navbar-brand">
-            <p>Event#1</p><p>WOMEN SENIOR 200 FREE</p>
+            <img src="<?php echo base_url(); ?>/assets/images/logo.png" height="40" class="d-inline-block align-top" alt="Logo Image">
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
 
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">         
             <ul class="navbar-nav mr-auto">
+              <?php
+                $active_str = ($uri == "" || $uri == "search") ? "active" : ""; 
+              ?>
               <li class="nav-item">
-                <h1> 16:18:47</h1 >
+                <a class="nav-link <?php echo $active_str; ?>" href="<?php echo base_url(); ?>">Home</a>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  In the water
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">Water 1</a>
-                  <a class="dropdown-item" href="#">Water 2</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Water 3</a>
-                </div>
-              </li>             
+              <?php
+                $active_str = ($uri == "login") ? "active" : ""; 
+              ?>
+              <li class="nav-item">
+                <a class="nav-link <?php echo $active_str; ?>" href="<?php echo base_url(); ?>login">Log in</a>
+              </li>
+              <?php
+                $active_str = ($uri == "register") ? "active" : ""; 
+              ?>
+              <li class="nav-item">
+                <a class="nav-link <?php echo $active_str; ?>" href="<?php echo base_url(); ?>register">Register</a>
+              </li>
+              <?php
+                $hidden_str = ($logged_in != true) ? "d-none" : ""; 
+              ?>
+              <li class="nav-item">
+                <a class="nav-link <?php echo $hidden_str; ?>" href="<?php echo base_url(); ?>logout">Log out</a>
+              </li>
             </ul>            
           </div>
         </nav>

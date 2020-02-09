@@ -19,8 +19,6 @@ class Event extends BaseController
         parent::__construct();
         $this->load->model('login_model');
         $this->load->model('event_model');
-        // $this->isLoggedIn();   
-
         if ($this->uri->uri_string() == 'event/login') {
             redirect('login');
             return;
@@ -31,7 +29,7 @@ class Event extends BaseController
             return;
         }
 
-        if ($this->uri->uri_string() != 'search' && $this->uri->uri_string() != 'login' && $this->isLoggedIn() == false) {
+        if ($this->uri->uri_string() != ''  && $this->uri->uri_string() != 'search' && $this->uri->uri_string() != 'login' && $this->isLoggedIn() == false) {
             redirect('login');
             return;
         }  
@@ -43,7 +41,16 @@ class Event extends BaseController
             else {
                 redirect('');
             }
-        }        
+        }
+
+        if ($this->isLoggedIn() == true) {
+            $this->global['logged_in'] = true; 
+        }
+        else {
+            $this->global['logged_in'] = false;
+        }
+        
+        $this->global['uri'] = $this->uri->uri_string();
     }
     
     /**
