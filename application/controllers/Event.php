@@ -91,14 +91,14 @@ class Event extends BaseController
         $data['swimmingData'] = json_decode($data['event']->swimming);
 
         $this->global['pageTitle'] = 'Score Page';
-        // var_dump($data['swimmingData']->LaneAthleteTeam);
         $this->loadViews("events/score", $this->global, $data , NULL);
     }
 
     function login(){
         // if Get Request, Load Login Page, if Post Request, Check Login
         if ($this->input->server('REQUEST_METHOD') =='GET') {
-            $this->load->view('events/login');
+            $this->global['pageTitle'] = 'Score Page';
+            $this->loadViews("events/login", $this->global, null , NULL);            
         }
         else {
             $this->load->library('form_validation');

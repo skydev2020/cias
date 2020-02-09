@@ -57,14 +57,10 @@
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
           <div class="row">
-            <div class="col-8">    
-              <!-- <div class="checkbox icheck">
-                <label>
-                  <input type="checkbox"> Remember Me
-                </label>
-              </div>  -->                       
+            <div class="col-6">    
+              <input type="button" class="btn btn-primary btn-block btn-flat" value="Register"  onclick="window.location.href='<?php echo base_url(); ?>register'" />
             </div><!-- /.col -->
-            <div class="col-4">
+            <div class="col-6">
               <input type="submit" class="btn btn-primary btn-block btn-flat" value="Sign In" />
             </div><!-- /.col -->
           </div>
