@@ -206,37 +206,84 @@ class Event extends BaseController
                      * Send a email to a user with a verification code
                      */
 
-
-
-                    $config = Array(
-                        'protocol' => 'smtp',
-                        'smtp_host' => 'smtp-mail.outlook.com',
-                        'smtp_port' => 587,
-                        'smtp_user' => 'skydev2020@outlook.com', // change it to yours
-                        'smtp_pass' => 'kangdong1234', // change it to yours
-                        'mailtype' => 'html',
-                        'charset' => 'iso-8859-1',
-                        'wordwrap' => TRUE
-                      );
+                    // $config = Array(
+                    //     'protocol' => 'smtp',
+                    //     'smtp_host' => 'ssl://stmp.googlemail.com',
+                    //     'smtp_port' => 465,
+                    //     'smtp_user' => 'newcaesar628@gmail.com', // change it to yours
+                    //     'smtp_pass' => 'Top12345', // change it to yours
+                    //     'mailtype' => 'html',
+                    //     'charset' => 'iso-8859-1',
+                    //     'newline' => '\r\n',
+                    //     'wordwrap' => TRUE
+                    //   );
                       
                     
-                    $this->load->library('email', $config);
+                    // $this->load->library('email', $config);
         
 
-                    $this->email->from('admin@cias.com', 'Admin User in CIAS');
-                    $this->email->to($email);
+                    // $this->email->from('admin@cias.com', 'Admin User in CIAS');
+                    // $this->email->to($email);
                     
-                    $this->email->subject('User Signup');
-                    $email_msg = "Please click link to verify your email. <br/>";
-                    $email_msg .= "<a href='".base_url()."verify?code='" . $verification_code . "></a>";
-                    $this->email->message($email_msg);
+                    // $this->email->subject('User Signup');
+                    // $email_msg = "Please click link to verify your email. <br/>";
+                    // $email_msg .= "<a href='".base_url()."verify?email=". $email. "code=" . $verification_code . "></a>";
+                    // $this->email->message($email_msg);
+                    $this->load->library('phpmailer_lib');
+                    // PHPMailer object
+                    $mail = $this->phpmailer_lib->load();
+
+                    $to = "info@huashengtech.net";
+                    $from = "admin@cias.com";
+                    $name = "Administrator";
+                    $subject = "User Signup";
+                    // $number = $_REQUEST['number'];
+                    $cmessage = "Please click link to verify your email. <br/>";
+                    $cmessage .= "<a href='".base_url()."verify?email=". $email. "code=" . $verification_code . "></a>";
                     
-                    if ($this->email->send()==true) {
+                    $headers = "From: $from";
+                    $headers = "From: " . $from . "\r\n";
+                    $headers .= "Reply-To: ". $from . "\r\n";
+                    $headers .= "MIME-Version: 1.0\r\n";
+                    $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+                    
+                    $body = "<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><title>Express Mail</title></head><body>";
+                    $body .= $cmessage;
+                    
+                    
+                    $mail->IsSMTP();
+                    $mail->CharSet = 'UTF-8';
+                    $mail->Host       = 'smtp.gmail.com';
+                    $mail->SMTPAuth   = true;
+                    $mail->Username   = 'newcaesar628@gmail.com';
+                    $mail->Password   = 'Top12345';
+                    $mail->SMTPSecure = 'ssl';
+                    $mail->Port       = 465;
+
+                    //Recipients
+                    $mail->From = $from;
+                    $mail->FromName= $name;
+                    $mail->isHTML(true);
+                    $mail->Subject = $subject;
+                    $mail->Body = $body;
+                    $mail->addAddress($to);
+
+
+                    // $mail->send();
+                    
+                    if ($mail->send()==true) {
                         $this->session->set_flashdata('success', 'Email Verification Code Sent');
                         $this->global['pageTitle'] = 'Email Verification Code Sent';
                         $this->loadViews("events/reg_email_sent", $this->global, null , NULL);
                     }
                     else {
+                        var_dump ("Email False");
+                        var_dump (var_dump($mail));
+                        die(); 
+                        // foreach ( $this->email->get_debugger_messages() as $debugger_message )
+                        //     echo $debugger_message;
+                        // $>email->clear_debugger_messages();    
+                        die();
                         $this->session->set_flashdata('error', 'Error occured. Please contact administrator');
                         $this->global['pageTitle'] = 'User Signup Error';
                         $this->loadViews("events/reg_email_sent", $this->global, null , NULL);
@@ -245,6 +292,7 @@ class Event extends BaseController
                     
                 }
                 else{
+                    
                     $this->session->set_flashdata('error', 'User creation failed');
                     $this->global['pageTitle'] = 'Register User Page';
                     $this->loadViews("events/register_user", $this->global, null , NULL);
