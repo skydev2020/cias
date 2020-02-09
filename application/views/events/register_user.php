@@ -68,7 +68,7 @@
                                 </div>
                                 <div class="col-12 col-md-6">
                                     <div class="form-group">
-                                        <input type="text" class="form-control required digits" id="mobile" value="<?php echo set_value('mobile'); ?>" name="mobile" maxlength="10">
+                                        <input type="text" class="form-control" id="mobile" value="<?php echo set_value('mobile'); ?>" name="mobile" maxlength="10">
                                     </div>
                                 </div>
                             </div>
