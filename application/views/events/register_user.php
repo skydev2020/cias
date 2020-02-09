@@ -1,17 +1,8 @@
-<div class="dashboard-content">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        <i class="fa fa-users"></i> User Management
-        <small>Add / Edit User</small>
-      </h1>
-    </section>
-    
-    <section class="content">
-    
+<div class="dashboard-content d-flex">
+    <section class="content">    
         <div class="row">
             <!-- left column -->
-            <div class="col-md-8">
+            <div class="col-12">
               <!-- general form elements -->
                 <div class="box box-primary">
                     <div class="box-header">
@@ -22,38 +13,61 @@
                     <form role="form" id="addUser" action="<?php echo base_url() ?>admin/newUser" method="post" role="form">
                         <div class="box-body">
                             <div class="row">
-                                <div class="col-md-6">                                
+                                <div class="col-12 col-md-6">                                
                                     <div class="form-group">
-                                        <label for="fname">Full Name</label>
-                                        <input type="text" class="form-control required" value="<?php echo set_value('fname'); ?>" id="fname" name="fname" maxlength="128">
-                                    </div>
-                                    
+                                        <label for="fname">Full Name</label>                                       
+                                    </div>                                    
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-12 col-md-6">                                
                                     <div class="form-group">
-                                        <label for="email">Email address</label>
+                                        <input type="text" class="form-control required" value="<?php echo set_value('fname'); ?>" id="fname" name="fname" maxlength="128">
+                                    </div>                                    
+                                </div>
+                            </div>    
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="email">Email address</label>                                        
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
                                         <input type="text" class="form-control required email" id="email" value="<?php echo set_value('email'); ?>" name="email" maxlength="128">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-12 col-md-6">
                                     <div class="form-group">
-                                        <label for="password">Password</label>
+                                        <label for="password">Password</label>                                        
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
                                         <input type="password" class="form-control required" id="password" name="password" maxlength="20">
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-md-6">
                                     <div class="form-group">
-                                        <label for="cpassword">Confirm Password</label>
+                                        <label for="cpassword">Confirm Password</label>                                        
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
                                         <input type="password" class="form-control required equalTo" id="cpassword" name="cpassword" maxlength="20">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-12 col-md-6">
                                     <div class="form-group">
-                                        <label for="mobile">Mobile Number</label>
+                                        <label for="mobile">Mobile Number</label>                                        
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
                                         <input type="text" class="form-control required digits" id="mobile" value="<?php echo set_value('mobile'); ?>" name="mobile" maxlength="10">
                                     </div>
                                 </div>
@@ -67,7 +81,9 @@
                     </form>
                 </div>
             </div>
-            <div class="col-md-4">
+        </div>
+        <div class="row">
+            <div class="col-12">
                 <?php
                     $this->load->helper('form');
                     $error = $this->session->flashdata('error');
