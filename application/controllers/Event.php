@@ -192,9 +192,10 @@ class Event extends BaseController
                 $password = $this->input->post('password');
                 // $roleId = $this->input->post('role');
                 $mobile = $this->security->xss_clean($this->input->post('mobile'));
-                
-                $userInfo = array('email'=>$email, 'password'=>getHashedPassword($password), 'name'=> $name,
-                                    'mobile'=>$mobile, 'createdBy'=>$this->vendorId, 'createdDtm'=>date('Y-m-d H:i:s'));
+                $verification_code = uniqid(rand(), true);
+                $userInfo = array('email'=>$email, 'password'=>getHashedPassword($password), 'name'=> $name, 'roleId'=> 0,
+                                    'mobile'=>$mobile, 'createdBy'=> 0, 
+                                    'verification_code'=>$verification_code, 'createdDtm'=>date('Y-m-d H:i:s'));
                 
                 $this->load->model('user_model');
                 $result = $this->user_model->addNewUser($userInfo);
@@ -202,6 +203,11 @@ class Event extends BaseController
                 if($result > 0){
                     $this->session->set_flashdata('success', 'Email Verification Code Sent');
                     $this->global['pageTitle'] = 'Email Verification Code Sent';
+
+                    /**
+                     * Send a email to a user with a verification code
+                     */
+
                     $this->loadViews("events/reg_email_sent", $this->global, null , NULL);
                 }
                 else{
