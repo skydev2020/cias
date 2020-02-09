@@ -61,6 +61,7 @@ $route['admin'] = 'admin'; //admin page
 // $route['admin/editUser/(:num)'] = "user/editUser/$1";
 $route['search'] = 'event/search';
 $route['login'] = 'event/login';
+$route['register'] = 'event/register';
 $route['score'] = 'event/score';
 $route['loginMe'] = 'login/loginMe';
 $route['logout'] = 'user/logout';

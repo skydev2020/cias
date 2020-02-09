@@ -28,8 +28,13 @@ class Event extends BaseController
             redirect('search');
             return;
         }
-
-        if ($this->uri->uri_string() != ''  && $this->uri->uri_string() != 'search' && $this->uri->uri_string() != 'login' && $this->isLoggedIn() == false) {
+        
+        if ($this->uri->uri_string() == 'register' && $this->isLoggedIn() == true) {            
+            redirect('');
+            return;           
+        } 
+        
+        if ($this->uri->uri_string() != '' && $this->uri->uri_string() != 'register'  && $this->uri->uri_string() != 'search' && $this->uri->uri_string() != 'login' && $this->isLoggedIn() == false) {
             redirect('login');
             return;
         }  
@@ -97,7 +102,7 @@ class Event extends BaseController
     function login(){
         // if Get Request, Load Login Page, if Post Request, Check Login
         if ($this->input->server('REQUEST_METHOD') =='GET') {
-            $this->global['pageTitle'] = 'Score Page';
+            $this->global['pageTitle'] = 'Login Page';
             $this->loadViews("events/login", $this->global, null , NULL);            
         }
         else {
@@ -154,9 +159,67 @@ class Event extends BaseController
             }
         }
     }
-    
 
-   
+    function register(){
+        // if Get Request, Load Login Page, if Post Request, Check Login
+        if ($this->input->server('REQUEST_METHOD') =='GET') {
+            $this->global['pageTitle'] = 'Register User Page';
+            $this->loadViews("events/register_user", $this->global, null , NULL);            
+        }
+        else {
+            $this->load->library('form_validation');
+        
+            $this->form_validation->set_rules('email', 'Email', 'required|valid_email|max_length[128]|trim');
+            $this->form_validation->set_rules('password', 'Password', 'required|max_length[32]');
+        
+            if($this->form_validation->run() == FALSE)
+            {
+                redirect('register');
+            }
+            else
+            {
+                $email = strtolower($this->security->xss_clean($this->input->post('email')));
+                $password = $this->input->post('password');
+                
+                $result = $this->login_model->loginMe($email, $password, false);
+               
+                if(!empty($result))
+                {
+                    $lastLogin = $this->login_model->lastLoginInfo($result->userId);
+
+                    $sessionArray = array('userId'=>$result->userId,                    
+                                            'role'=>$result->roleId,
+                                            'roleText'=>$result->role,
+                                            'name'=>$result->name,
+                                            'lastLogin'=> $lastLogin->createdDtm,
+                                            'isLoggedIn' => TRUE
+                                        );
+                
+
+                    $this->session->set_userdata($sessionArray);
+                    
+                    unset($sessionArray['userId'], $sessionArray['isLoggedIn'], $sessionArray['lastLogin']);
+
+                    $loginInfo = array("userId"=>$result->userId, "sessionData" => json_encode($sessionArray), "machineIp"=>$_SERVER['REMOTE_ADDR'], "userAgent"=>getBrowserAgent(), "agentString"=>$this->agent->agent_string(), "platform"=>$this->agent->platform());
+
+                    $this->login_model->lastLogin($loginInfo);
+                    
+                    if ($result->roleId == ROLE_ADMIN) {
+                        redirect('admin/users');
+                    }
+                    else {
+                        redirect('');
+                    }
+                }
+                else
+                {   
+                    $this->session->set_flashdata('error', 'Email or password mismatch');
+                    
+                    redirect('login');
+                }
+            }
+        }
+    }
     
     /**
      * Page not found : error 404
