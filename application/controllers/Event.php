@@ -206,7 +206,22 @@ class Event extends BaseController
                      * Send a email to a user with a verification code
                      */
 
-                    $this->load->library('email');
+
+
+                    $config = Array(
+                        'protocol' => 'smtp',
+                        'smtp_host' => 'smtp-mail.outlook.com',
+                        'smtp_port' => 587,
+                        'smtp_user' => 'skydev2020@outlook.com', // change it to yours
+                        'smtp_pass' => 'kangdong1234', // change it to yours
+                        'mailtype' => 'html',
+                        'charset' => 'iso-8859-1',
+                        'wordwrap' => TRUE
+                      );
+                      
+                    
+                    $this->load->library('email', $config);
+        
 
                     $this->email->from('admin@cias.com', 'Admin User in CIAS');
                     $this->email->to($email);
