@@ -20,12 +20,6 @@
     <!-- Custom Project style -->
     <link href="<?php echo base_url(); ?>assets/dist/css/cias.css" rel="stylesheet" type="text/css" />
 
-    <style>
-    	.error{
-    		color:red;
-    		font-weight: normal;
-    	}
-    </style>
     <script src="<?php echo base_url(); ?>assets/plugins/jquery/jquery.min.js"></script>
     <script type="text/javascript">
         var baseURL = "<?php echo base_url(); ?>";
@@ -56,10 +50,11 @@
             ?>         
             <ul class="navbar-nav ml-auto <?php echo $hidden_str; ?>">
               <?php
-                $active_str = ($uri == "" || $uri == "search") ? "active" : ""; 
+                $active_str = ($uri == "" || $uri == "search" ) ? "active" : ""; 
+                $hidden_str = (strpos($uri, "admin") !==false) ? "d-none" : "";
               ?>
               <li class="nav-item">
-                <a class="nav-link <?php echo $active_str; ?>" href="<?php echo base_url(); ?>">Home</a>
+                <a class="nav-link <?php echo $active_str; ?> <?php echo $hidden_str; ?>" href="<?php echo base_url(); ?>">Home</a>
               </li>
               <?php
                 $active_str = ($uri == "login") ? "active" : ""; 
@@ -76,7 +71,7 @@
                 <a class="nav-link <?php echo $active_str; ?> <?php echo $hidden_str; ?>" href="<?php echo base_url(); ?>register">Register</a>
               </li>
               <?php
-                $hidden_str = ($logged_in != true) ? "d-none" : ""; 
+                $hidden_str = ($logged_in != true || strpos($uri, "admin") !==false) ? "d-none" : ""; 
               ?>
               <li class="nav-item">
                 <a class="nav-link <?php echo $hidden_str; ?>" href="<?php echo base_url(); ?>logout">Log out</a>

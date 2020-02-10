@@ -1,4 +1,7 @@
-    <div class="container-fluid" id="footer">
+    <?php
+        $hidden_str = (strpos($uri, "admin") !==false) ? "d-none" : "";
+    ?>
+    <div class="container-fluid <?php echo $hidden_str; ?>" id="footer">
         <div class="row">
             <div class="col-3 d-flex align-items-center">
                 Sponsored by: &nbsp;&nbsp;&nbsp;&nbsp;
