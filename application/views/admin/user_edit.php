@@ -52,7 +52,7 @@
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="email">Email address</label>
-                                        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" value="<?php echo $email; ?>" maxlength="128">
+                                        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" value="<?php echo $email; ?>" maxlength="128" readonly>
                                     </div>
                                 </div>
                             </div>

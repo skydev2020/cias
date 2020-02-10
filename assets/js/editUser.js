@@ -13,12 +13,12 @@ $(document).ready(function(){
 		
 		rules:{
 			fname :{ required : true },
-			email : { required : true, email : true, remote : { url : baseURL + "checkEmailExists", type :"post", data : { userId : function(){ return $("#userId").val(); } } } },
+			email : { required : true, email : true },
 			cpassword : {equalTo: "#password"}			
 		},
 		messages:{
 			fname :{ required : "This field is required" },
-			email : { required : "This field is required", email : "Please enter valid email address", remote : "Email already taken" },
+			email : { required : "This field is required", email : "Please enter valid email address" },
 			cpassword : {equalTo: "Please enter same password" }		
 		}
 	});

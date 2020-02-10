@@ -367,6 +367,12 @@ class Admin extends BaseController
                 // $roleId = $this->input->post('role');
                 // $mobile = $this->security->xss_clean($this->input->post('mobile'));
                 
+                if ($this->auth_model->checkEmailExist($email) != null) {
+                    // Check whether user already exists 
+                    $this->session->set_flashdata('error', 'Same Email is already exists.');
+                    redirect('admin');
+                }
+
                 $userInfo = array('email'=>$email, 'password'=>getHashedPassword($password), 'fname'=> $fname, 'lname'=> $lname,
                                     'mobile'=>"", 'createdBy'=> 1, 'isVerified'=> 1, 
                                     'createdDtm'=>date('Y-m-d H:i:s'));
