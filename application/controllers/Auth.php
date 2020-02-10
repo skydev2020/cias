@@ -223,8 +223,7 @@ class Auth extends CI_Controller
     /**
      * This function used to create new password for user
      */
-    function createPasswordUser()
-    {
+    function createNewPassword() {
         $status = '';
         $message = '';
         $email = strtolower($this->input->post("email"));
@@ -237,7 +236,7 @@ class Auth extends CI_Controller
         
         if($this->form_validation->run() == FALSE)
         {
-            $this->resetPasswordConfirmUser($activation_id, urlencode($email));
+            $this->resetPasswordConfirm($activation_id, urlencode($email));
         }
         else
         {
@@ -262,7 +261,7 @@ class Auth extends CI_Controller
             
             setFlashData($status, $message);
 
-            redirect("/login");
+            redirect("login");
         }
     }
 

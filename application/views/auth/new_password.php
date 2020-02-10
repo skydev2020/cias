@@ -43,7 +43,7 @@
             </div>
         <?php } ?>
         
-        <form action="<?php echo base_url(); ?>createPasswordUser" method="post">
+        <form action="<?php echo base_url(); ?>create_new_password" method="post">
           <div class="form-group has-feedback">
             <input type="email" class="form-control" placeholder="Email" name="email" value="<?php echo $email; ?>" readonly required />
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -70,7 +70,7 @@
       </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->
 
-    <script src="<?php echo base_url(); ?>assets/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/plugins/jquery/jquery.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
   </body>
 </html>
