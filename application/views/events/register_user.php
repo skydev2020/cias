@@ -5,8 +5,8 @@
             <div class="col-12">
               <!-- general form elements -->
                 <div class="box box-primary">
-                    <div class="box-header">
-                        <h3 class="box-title">Enter User Details</h3>
+                    <div class="box-header text-center">
+                        <h3 class="box-title font-weight-bold font-size-22">Sign up for Swimmeetcast</h3>
                     </div><!-- /.box-header -->
                     <!-- form start -->
                     <?php $this->load->helper("form"); ?>

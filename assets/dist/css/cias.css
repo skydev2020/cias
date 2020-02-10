@@ -48,8 +48,12 @@
   font-size: 18px;
 }
 
+.font-size-20 {
+  font-size: 20px !important;
+}
+
 .font-size-22 {
-  font-size: 22px;
+  font-size: 22px !important;
 }
 
 .font-size-24 {
@@ -134,6 +138,14 @@ a[aria-expanded="true"] {
 .dashboard-content .register-form {
   min-height: 250px;
   min-width: 450px;
+}
+
+.dashboard-content .box-title {
+  color: #d32323;
+}
+
+.login-box-msg {
+  color: #d32323;
 }
 
 
