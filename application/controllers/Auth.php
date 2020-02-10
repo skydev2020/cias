@@ -118,7 +118,6 @@ class Auth extends BaseController
 
                 $sessionArray = array('userId'=>$result->userId,                    
                                         'role'=>$result->roleId,
-                                        'roleText'=>$result->role,
                                         'fname'=>$result->fname,
                                         'lname'=>$result->lname,
                                         'lastLogin'=> $lastLogin->createdDtm,
@@ -362,14 +361,13 @@ class Auth extends BaseController
                 $password = $this->input->post('password');
                 
                 $result = $this->auth_model->loginMe($email, $password, false);
-               
+         
                 if(!empty($result))
                 {
                     $lastLogin = $this->auth_model->lastLoginInfo($result->userId);
 
                     $sessionArray = array('userId'=>$result->userId,                    
                                             'role'=>$result->roleId,
-                                            'roleText'=>$result->role,
                                             'fname'=>$result->fname,
                                             'lname'=>$result->lname,
                                             'lastLogin'=> $lastLogin->createdDtm,
