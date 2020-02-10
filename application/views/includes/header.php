@@ -38,7 +38,9 @@
       <header class="container-fluid">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
           <div class="navbar-brand">
-            <img src="<?php echo base_url(); ?>assets/images/logo.png" height="40" class="d-inline-block align-top" alt="Logo Image">
+            <a href="<?php echo base_url(); ?>">
+              <img src="<?php echo base_url(); ?>assets/images/logo.png" height="40" class="d-inline-block align-top" alt="Logo Image">
+            </a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

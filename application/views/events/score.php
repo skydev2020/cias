@@ -132,6 +132,16 @@
         ?>
     </section>
 </div>
+<div class="container-fluid " id="footer">
+    <div class="row">
+        <div class="col-3 d-flex align-items-center justify-content-center">
+            <img src="<?php echo base_url(); ?>assets/images/footer-img1.png" height="50" class="d-inline-block align-top" alt="Advertisement Image">
+        </div>
+        <div class="col-9 text-white footer-content font-italic d-flex align-items-center">
+            #1 WOMEN SENIOR 200 FREE FINALS - 1.JONES.K. 1:48.78 // 2.WARHOL.M. 1:49.92 // 3.BISHOP.G 1:49.69 #2 MEN SENIOR
+        </div>
+    </div>  
+</div>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/common.js" charset="utf-8"></script>
 <script type="text/javascript">
     jQuery(document).ready(function(){
