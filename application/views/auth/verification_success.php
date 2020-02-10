@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Swimmeetcast | Registration Email Sent</title>
+        <title>Swimmeetcast | Email Verification</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
         <link href="<?php echo base_url(); ?>assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url(); ?>assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
@@ -32,35 +32,14 @@
                 <p class="login-box-msg font-size-22 font-weight-bold">Email Verification</p>
                 
                 <div class="row">
-                    <div class="col-12">
-                    <?php                                    
-                        $error = $this->session->flashdata('error');
-                        if($error)
-                        {
-                    ?>
-                        <div class="alert alert-danger alert-dismissable">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                            <?php echo $this->session->flashdata('error'); ?>                    
-                        </div>
-                        <?php } ?>
-                        <?php  
-                            $success = $this->session->flashdata('success');
-                            if($success)
-                            {
-                        ?>
+                    <div class="col-12">                   
                         <div class="alert alert-success alert-dismissable">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                            <?php echo $this->session->flashdata('success'); ?>
-                        </div>
-                    <?php } ?>
+                            Email Verification Succeed:                   
+                        </div>                        
                     </div>
                 </div>
-                
-                
-
             </div><!-- /.login-box-body -->
         </div><!-- /.login-box -->
-
-   </body>
-   
-  </html>
+   </body>   
+</html>

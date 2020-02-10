@@ -20,36 +20,18 @@ class Event extends BaseController
         $this->load->model('event_model');
         $this->load->model('user_model');
         $this->load->library('mandrill', array(MANDRILL_API_KEY));
-                
-        if ($this->uri->uri_string() == 'event/login') {
-            redirect('login');
-            return;
-        }
-        
+                       
         if ($this->uri->uri_string() == 'event/search') {
             redirect('search');
             return;
         }
-        
-        if ($this->uri->uri_string() == 'register' && $this->isLoggedIn() == true) {            
-            redirect('');
-            return;           
-        } 
-        
+              
         if ($this->uri->uri_string() != '' && $this->uri->uri_string() != 'register'  && $this->uri->uri_string() != 'search' 
         && $this->uri->uri_string() != 'login' && $this->uri->uri_string() != 'verify' && $this->isLoggedIn() == false) {
             redirect('login');
             return;
         }  
 
-        if ($this->uri->uri_string() == 'login' && $this->isLoggedIn() == true) {
-            if ($this->isAdmin() ==true) {
-                redirect('admin/users');
-            }
-            else {
-                redirect('');
-            }
-        }
 
         if ($this->isLoggedIn() == true) {
             $this->global['logged_in'] = true; 
@@ -202,26 +184,7 @@ class Event extends BaseController
     /**
      * Page not found : error 404
      */
-    function verify() {
-        
-        $email = $this->security->xss_clean($this->input->get_post('email'));         
-        $code = $this->security->xss_clean($this->input->get_post('code'));         
-        
-        $user = $this->user_model->get_by_email_code($email, $code);
-
-
-        if ($user == null) {
-            $this->load->view("events/verification_failed", null);
-        }
-        else {
-            //update/verify user object
-            $user->isVerified = 1;
-            $user->verification_code = '';
-            $this->user_model->updateUser($user->userId, $user);
-            $this->load->view("events/verification_success", null);
-        }
-        
-    }
+    
   
 }
 

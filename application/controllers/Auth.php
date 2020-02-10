@@ -488,6 +488,27 @@ class Auth extends BaseController
             }
         }
     }
+
+    function verify() {
+        
+        $email = $this->security->xss_clean($this->input->get_post('email'));         
+        $code = $this->security->xss_clean($this->input->get_post('code'));         
+        
+        $user = $this->user_model->get_by_email_code($email, $code);
+
+
+        if ($user == null) {
+            $this->load->view("auth/verification_failed", null);
+        }
+        else {
+            //update/verify user object
+            $user->isVerified = 1;
+            $user->verification_code = '';
+            $this->user_model->updateUser($user->userId, $user);
+            $this->load->view("auth/verification_success", null);
+        }
+        
+    }
 }
 
 ?>
