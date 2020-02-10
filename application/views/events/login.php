@@ -50,8 +50,10 @@
             </div>
             <div class="row">
                 <div class="col-12 d-flex justify-content-end align-items-center">    
-                    <small class="text-muted">New to Swimmeetcast?</small>&nbsp;
-                    <a href="<?php echo base_url() ?>register"><small>Sign up</small></a>
+                    <small class="text-muted">
+                        New to Swimmeetcast? &nbsp;
+                        <a href="<?php echo base_url() ?>register">Sign up</a>
+                    </small>                    
                 </div><!-- /.col -->
             </div>
             

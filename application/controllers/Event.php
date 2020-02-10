@@ -181,7 +181,6 @@ class Event extends BaseController
             $this->form_validation->set_rules('password','Password','required|max_length[20]');
             $this->form_validation->set_rules('cpassword','Confirm Password','trim|required|matches[password]|max_length[20]');
             // $this->form_validation->set_rules('role','Role','trim|required|numeric');
-            $this->form_validation->set_rules('mobile','Mobile Number','required|min_length[10]');
             
             if($this->form_validation->run() == FALSE)
             {
@@ -190,15 +189,16 @@ class Event extends BaseController
             }
             else
             {
-                $name = ucwords(strtolower($this->security->xss_clean($this->input->post('fname'))));
+                $fname = ucwords(strtolower($this->security->xss_clean($this->input->post('fname'))));
+                $lname = ucwords(strtolower($this->security->xss_clean($this->input->post('lname'))));
                 $email = strtolower($this->security->xss_clean($this->input->post('email')));
                 $password = $this->input->post('password');
                 // $roleId = $this->input->post('role');
                 $mobile = $this->security->xss_clean($this->input->post('mobile'));
                 $verification_code = uniqid(rand(), true);
-                $userInfo = array('email'=>$email, 'password'=>getHashedPassword($password), 'name'=> $name, 'roleId'=> 0,
-                                    'mobile'=>$mobile, 'createdBy'=> 0, 
-                                    'verification_code'=>$verification_code, 'createdDtm'=>date('Y-m-d H:i:s'));
+                $userInfo = array('email'=>$email, 'password'=>getHashedPassword($password), 'fname'=> $fname, 'lname'=> $lname,
+                                'roleId'=> 0, 'mobile'=>$mobile, 'createdBy'=> 0, 
+                                'verification_code'=>$verification_code, 'createdDtm'=>date('Y-m-d H:i:s'));
                 
                 $result = $this->user_model->addNewUser($userInfo);
                 
