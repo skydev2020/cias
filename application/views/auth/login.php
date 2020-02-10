@@ -72,7 +72,7 @@
                     <div class="row" style="padding-top: 10px;">                
                         <div class="col-12">
                             <div class="form-group w-100">
-                            <input type="submit" class="btn btn-primary btn-block btn-flat" value="Sign In" />
+                            <input type="submit" class="btn btn-primary btn-block btn-flat" value="Login In" />
                             </div>  
                         </div><!-- /.col -->
                     </div>

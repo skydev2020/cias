@@ -156,7 +156,7 @@ a[aria-expanded="true"] {
 */
 
 .auth-page, .register-page {
-  background: #d2d6de;
+  background: transparent;
 }
 
 .auth-page .header {
