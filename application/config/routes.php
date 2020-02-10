@@ -67,6 +67,9 @@ $route['verify'] = 'event/verify';
 
 $route['forgot_password'] = "auth/forgotPassword";
 $route['reset_password'] = "auth/resetPassword";
+$route['reset_password_confirm'] = "auth/resetPasswordConfirm";
+$route['reset_password_confirm/(:any)'] = "auth/resetPasswordConfirm/$1";
+$route['reset_password_confirm/(:any)/(:any)'] = "auth/resetPasswordConfirm/$1/$2";
 
 $route['loginMe'] = 'auth/loginMe';
 $route['logout'] = 'user/logout';
@@ -94,9 +97,6 @@ $route['login-history/(:num)/(:num)'] = "user/loginHistoy/$1/$2";
 
 
 $route['resetPasswordUser'] = "login/resetPasswordUser";
-$route['resetPasswordConfirmUser'] = "login/resetPasswordConfirmUser";
-$route['resetPasswordConfirmUser/(:any)'] = "login/resetPasswordConfirmUser/$1";
-$route['resetPasswordConfirmUser/(:any)/(:any)'] = "login/resetPasswordConfirmUser/$1/$2";
 $route['createPasswordUser'] = "login/createPasswordUser";
 
 /* End of file routes.php */

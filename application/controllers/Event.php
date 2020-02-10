@@ -16,7 +16,7 @@ class Event extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('login_model');
+        $this->load->model('auth_model');
         $this->load->model('event_model');
         $this->load->model('user_model');
         $this->load->library('mandrill', array(MANDRILL_API_KEY));
@@ -123,11 +123,11 @@ class Event extends BaseController
                 $email = strtolower($this->security->xss_clean($this->input->post('email')));
                 $password = $this->input->post('password');
                 
-                $result = $this->login_model->loginMe($email, $password, false);
+                $result = $this->auth_model->loginMe($email, $password, false);
                
                 if(!empty($result))
                 {
-                    $lastLogin = $this->login_model->lastLoginInfo($result->userId);
+                    $lastLogin = $this->auth_model->lastLoginInfo($result->userId);
 
                     $sessionArray = array('userId'=>$result->userId,                    
                                             'role'=>$result->roleId,
@@ -144,7 +144,7 @@ class Event extends BaseController
 
                     $loginInfo = array("userId"=>$result->userId, "sessionData" => json_encode($sessionArray), "machineIp"=>$_SERVER['REMOTE_ADDR'], "userAgent"=>getBrowserAgent(), "agentString"=>$this->agent->agent_string(), "platform"=>$this->agent->platform());
 
-                    $this->login_model->lastLogin($loginInfo);
+                    $this->auth_model->lastLogin($loginInfo);
                     
                     if ($result->roleId == ROLE_ADMIN) {
                         redirect('admin/users');

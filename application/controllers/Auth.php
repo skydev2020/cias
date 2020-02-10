@@ -199,7 +199,7 @@ class Auth extends CI_Controller
      * @param string $activation_id : This is unique id
      * @param string $email : This is user email
      */
-    function resetPasswordConfirmUser($activation_id, $email)
+    function resetPasswordConfirm($activation_id, $email)
     {
         // Get email and activation code from URL values at index 3-4
         $email = urldecode($email);
@@ -212,7 +212,7 @@ class Auth extends CI_Controller
         
         if ($is_correct == 1)
         {
-            $this->load->view('newPassword', $data);
+            $this->load->view('auth/new_password', $data);
         }
         else
         {
