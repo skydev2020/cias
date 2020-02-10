@@ -7,6 +7,7 @@
     <link href="<?php echo base_url(); ?>assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>assets/dist/css/AdminLTE.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url(); ?>assets/dist/css/cias.css" rel="stylesheet" type="text/css" />
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -19,11 +20,11 @@
   </head>
   <body class="login-page">
     <div class="login-box">
-      <div class="login-logo">
+      <!-- <div class="login-logo">
         <a href="#"><b>Swimmeetcast</b><br>Admin System</a>
-      </div><!-- /.login-logo -->
+      </div>/.login-logo -->
       <div class="login-box-body">
-        <p class="login-box-msg">Reset Password</p>
+        <p class="login-box-msg font-size-22 font-weight-bold">Reset Password</p>
         <?php $this->load->helper('form'); ?>
         <div class="row">
             <div class="col-md-12">
@@ -58,16 +59,11 @@
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
           <div class="row">
-            <div class="col-xs-8">    
-              <!-- <div class="checkbox icheck">
-                <label>
-                  <input type="checkbox"> Remember Me
-                </label>
-              </div>  -->                       
-            </div><!-- /.col -->
-            <div class="col-xs-4">
-              <input type="submit" class="btn btn-primary btn-block btn-flat" value="Submit" />
-            </div><!-- /.col -->
+            <div class="col-12">
+              <div class="form-group w-100">
+                <input type="submit" class="btn btn-primary btn-block btn-flat" value="Submit" />
+              </div>  
+            </div><!-- /.col -->            
           </div>
         </form>
         
