@@ -43,10 +43,12 @@
             </div>
             <div class="row" style="padding-top: 10px;">                
                 <div class="col-12">
-                    <input type="submit" class="btn btn-primary btn-block btn-flat" value="Sign In" />
+                    <div class="form-group w-100">
+                      <input type="submit" class="btn btn-primary btn-block btn-flat" value="Sign In" />
+                    </div>  
                 </div><!-- /.col -->
             </div>
-            <div class="row" style="padding-top: 10px;">
+            <div class="row">
                 <div class="col-12 d-flex justify-content-end align-items-center">    
                     <small class="text-muted">New to Swimmeetcast?</small>&nbsp;
                     <a href="<?php echo base_url() ?>register"><small>Sign up</small></a>

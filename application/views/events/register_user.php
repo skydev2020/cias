@@ -13,64 +13,58 @@
                     <form role="form" id="addUser" action="<?php echo base_url() ?>register" method="post" role="form">
                         <div class="box-body">
                             <div class="row">
-                                <div class="col-12 col-md-6 d-flex align-items-center ">                                
+                                <div class="col-12 col-md-6 d-flex ">                                
                                     <div class="form-group">
-                                        <label for="fname">Full Name</label>                                       
+                                        <input type="text" class="form-control required" placeholder="First Name" id="fname" name="fname" maxlength="128">
                                     </div>                                    
                                 </div>
                                 <div class="col-12 col-md-6">                                
                                     <div class="form-group">
-                                        <input type="text" class="form-control required" value="<?php echo set_value('fname'); ?>" id="fname" name="fname" maxlength="128">
-                                    </div>                                    
+                                        <input type="text" class="form-control required" placeholder="Last Name" id="lname" name="lname" maxlength="128">
+                                    </div>
                                 </div>
                             </div>    
                             <div class="row">
-                                <div class="col-12 col-md-6 d-flex align-items-center">
+                                <div class="col-12 d-flex align-items-center">
+                                    <div class="form-group w-100">
+                                        <input type="text" class="form-control required email" id="email" placeholder="Email" name="email" maxlength="128">                                        
+                                    </div>
+                                </div>                                
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-md-6 d-flex">
                                     <div class="form-group">
-                                        <label for="email">Email address</label>                                        
+                                        <input type="password" class="form-control required" placeholder="Password" id="password" name="password" maxlength="20">
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6">
                                     <div class="form-group">
-                                        <input type="text" class="form-control required email" id="email" value="<?php echo set_value('email'); ?>" name="email" maxlength="128">
+                                    <input type="password" class="form-control required equalTo" placeholder="Confirm Password"  id="cpassword" name="cpassword" maxlength="20">
+                                    </div>
+                                </div>
+                            </div>
+             
+                            <div class="row">
+                                <div class="col-12 d-flex align-items-center">
+                                    <div class="form-group w-100">
+                                        <input type="text" class="form-control" placeholder="Mobile" id="mobile" name="mobile" maxlength="10">                                        
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-12 col-md-6 d-flex align-items-center">
-                                    <div class="form-group">
-                                        <label for="password">Password</label>                                        
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6">
-                                    <div class="form-group">
-                                        <input type="password" class="form-control required" id="password" name="password" maxlength="20">
+                                <div class="col-12 d-flex align-items-center">
+                                    <div class="form-group w-100">
+                                        <input type="submit" class="btn btn-primary btn-block" value="Sign Up" />
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-12 col-md-6 d-flex align-items-center">
-                                    <div class="form-group">
-                                        <label for="cpassword">Confirm Password</label>                                        
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6">
-                                    <div class="form-group">
-                                        <input type="password" class="form-control required equalTo" id="cpassword" name="cpassword" maxlength="20">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12 col-md-6 d-flex align-items-center">
-                                    <div class="form-group">
-                                        <label for="mobile">Mobile Number</label>                                        
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="mobile" value="<?php echo set_value('mobile'); ?>" name="mobile" maxlength="10">
-                                    </div>
-                                </div>
+                                <div class="col-12 d-flex justify-content-end align-items-center">    
+                                    <small class="text-muted">
+                                        Already on Swimmeetcast?&nbsp;
+                                        <a href="<?php echo base_url() ?>login">Log in</a>
+                                    </small>                                    
+                                </div><!-- /.col -->
                             </div>
                             <div class="row">
                                 <div class="col-12">
@@ -104,13 +98,6 @@
                                 </div>
                             </div> 
                         </div><!-- /.box-body -->
-    
-                        <div class="box-footer">
-                            <input type="submit" class="btn btn-primary" value="Submit" />
-                            <input type="reset" class="btn btn-default" value="Reset" />
-                            <br/><br/>
-                            &nbsp;<a href="<?php echo base_url() ?>login">Login Page</a>
-                        </div>
                     </form>
                 </div>
             </div>

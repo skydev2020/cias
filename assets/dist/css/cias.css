@@ -148,6 +148,10 @@ a[aria-expanded="true"] {
   color: #d32323;
 }
 
+.register-form .form-group input, .login-box .form-group input {
+  border-radius: 5px;
+}
+
 
 /* Search Page*/
 .search-page input.search {
