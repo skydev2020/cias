@@ -18,6 +18,7 @@ class Auth extends BaseController
     {
         parent::__construct();
         $this->load->model('auth_model');
+        $this->load->model('user_model');
         $this->load->library('mandrill', array(MANDRILL_API_KEY));
 
         if ($this->uri->uri_string() == 'auth/login') {
@@ -469,12 +470,14 @@ class Auth extends BaseController
                     if (is_array($mail_sent) && count($mail_sent) > 0 && $mail_sent[0]['status']=="sent") {
                         $this->session->set_flashdata('success', 'Email Verification Code Sent');
                         $this->global['pageTitle'] = 'Email Verification Code Sent';
-                        $this->loadViews("auth/reg_email_sent", $this->global, null , NULL);
+                        $this->load->view('auth/reg_email_sent', null);   
+                        // $this->loadViews("auth/reg_email_sent", $this->global, null , NULL);
                     }
                     else {
                         $this->session->set_flashdata('error', 'Error occured. Please contact administrator');
                         $this->global['pageTitle'] = 'User Signup Error';
-                        $this->loadViews("auth/reg_email_sent", $this->global, null , NULL);
+                        $this->load->view('auth/reg_email_sent', null);   
+                        // $this->loadViews("auth/reg_email_sent", $this->global, null , NULL);
                     }                   
                 }
                 else{
