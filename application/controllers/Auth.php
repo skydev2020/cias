@@ -449,7 +449,12 @@ class Auth extends BaseController
                                                            
                     $email_msg = "<p><h3>Please click link to verify your email.</h3></p> \r\n";
                     $email_msg .= "<p><a href=\"".htmlspecialchars(base_url())."verify?email=". $email. "&code=" . $verification_code . "\">Click here to verify</a></p>";
-                 
+                    
+                    $data['verification_link'] = base_url()."verify?email=". $email. "&code=" . $verification_code;
+                    $data['fname'] = $fname;
+                    $data['lname'] = $lname;
+                    $email_msg =  $this->load->view('email/verification_content', $data, true);
+                   
                     $params = array(
                         "html" => $email_msg,
                         "text" => null,

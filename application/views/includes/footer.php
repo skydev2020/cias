@@ -3,8 +3,7 @@
     ?>
     <div class="container-fluid <?php echo $hidden_str; ?>" id="footer">
         <div class="row">
-            <div class="col-3 d-flex align-items-center">
-                Sponsored by: &nbsp;&nbsp;&nbsp;&nbsp;
+            <div class="col-3 d-flex align-items-center justify-content-center">
                 <img src="<?php echo base_url(); ?>assets/images/footer-img1.png" height="50" class="d-inline-block align-top" alt="Advertisement Image">
             </div>
             <div class="col-9 text-white footer-content font-italic d-flex align-items-center">
