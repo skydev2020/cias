@@ -340,7 +340,7 @@ class Auth extends BaseController
     }
 
 
-    function login(){
+    function login() {
         // if Get Request, Load Login Page, if Post Request, Check Login
         if ($this->input->server('REQUEST_METHOD') =='GET') {
             $this->global['pageTitle'] = 'Login Page';
@@ -398,6 +398,93 @@ class Auth extends BaseController
                     
                     redirect('login');
                 }
+            }
+        }
+    }
+
+    /**
+     * Show Register User Page
+     * Register User into DB
+     */
+    function register(){
+        // if Get Request, Load Login Page, if Post Request, Check Login
+        if ($this->input->server('REQUEST_METHOD') =='GET') {
+            $this->global['pageTitle'] = 'Register User Page';
+            $this->load->view('auth/register_user', null);   
+            return;           
+        }
+        else {
+            $this->load->library('form_validation');
+            
+            $this->form_validation->set_rules('fname','Full Name','trim|required|max_length[128]');
+            $this->form_validation->set_rules('email','Email','trim|required|valid_email|max_length[128]');
+            $this->form_validation->set_rules('password','Password','required|max_length[20]');
+            $this->form_validation->set_rules('cpassword','Confirm Password','trim|required|matches[password]|max_length[20]');
+            // $this->form_validation->set_rules('role','Role','trim|required|numeric');
+            
+            if($this->form_validation->run() == FALSE)
+            {
+                $this->global['pageTitle'] = 'Register User Page';
+                $this->load->view('auth/register_user', null);   
+                return;           
+            }
+            else
+            {
+                $fname = ucwords(strtolower($this->security->xss_clean($this->input->post('fname'))));
+                $lname = ucwords(strtolower($this->security->xss_clean($this->input->post('lname'))));
+                $email = strtolower($this->security->xss_clean($this->input->post('email')));
+                $password = $this->input->post('password');
+                // $roleId = $this->input->post('role');
+                $mobile = $this->security->xss_clean($this->input->post('mobile'));
+                $verification_code = uniqid(rand(), true);
+                $userInfo = array('email'=>$email, 'password'=>getHashedPassword($password), 'fname'=> $fname, 'lname'=> $lname,
+                                'roleId'=> 0, 'mobile'=>$mobile, 'createdBy'=> 0, 
+                                'verification_code'=>$verification_code, 'createdDtm'=>date('Y-m-d H:i:s'));
+                
+                $result = $this->user_model->addNewUser($userInfo);
+                
+                if($result > 0){
+                    
+                    /**
+                     * Send a email to a user with a verification code
+                     */
+                                                           
+                    $email_msg = "<p><h3>Please click link to verify your email.</h3></p> \r\n";
+                    $email_msg .= "<p><a href=\"".htmlspecialchars(base_url())."verify?email=". $email. "&code=" . $verification_code . "\">Click here to verify</a></p>";
+                 
+                    $params = array(
+                        "html" => $email_msg,
+                        "text" => null,
+                        "from_email" => EMAIL_FROM,
+                        "from_name" => FROM_NAME,
+                        "subject" => "User Registration",
+                        "to" => array(array("email" => $email)),
+                        "track_opens" => true,
+                        "track_clicks" => true,
+                        "auto_text" => true
+                    );
+                
+                    $mail_sent = $this->mandrill->messages->send($params, true);
+
+                    if (is_array($mail_sent) && count($mail_sent) > 0 && $mail_sent[0]['status']=="sent") {
+                        $this->session->set_flashdata('success', 'Email Verification Code Sent');
+                        $this->global['pageTitle'] = 'Email Verification Code Sent';
+                        $this->loadViews("auth/reg_email_sent", $this->global, null , NULL);
+                    }
+                    else {
+                        $this->session->set_flashdata('error', 'Error occured. Please contact administrator');
+                        $this->global['pageTitle'] = 'User Signup Error';
+                        $this->loadViews("auth/reg_email_sent", $this->global, null , NULL);
+                    }                   
+                }
+                else{
+                    
+                    $this->session->set_flashdata('error', 'User creation failed');
+                    $this->global['pageTitle'] = 'Register User Page';
+                    $this->loadViews("auth/register_user", $this->global, null , NULL);
+                }
+                
+                
             }
         }
     }

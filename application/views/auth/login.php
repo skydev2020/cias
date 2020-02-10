@@ -20,22 +20,23 @@
     </head>
     <body class="auth-page">
         <div class="w-100 header d-flex justify-content-center">
-            <img src="<?php echo base_url(); ?>assets/images/logo.png" height="40" class="d-inline-block align-top" alt="Logo Image">
+            <a href="<?php echo base_url(); ?>">
+                <img src="<?php echo base_url(); ?>assets/images/logo.png" height="40" class="d-inline-block align-top" alt="Logo Image">
+            </a>
         </div>
         <div class="login-box" style="padding-top: 100px; margin-top: 0px;">      
-            <div class="login-logo">
+            <!-- <div class="login-logo">
                 <a href="#"><b>Swimmeetcast</b><br>Admin System</a>
-            </div>
+            </div> -->
             <div class="login-box-body">
                 <p class="login-box-msg font-size-22 font-weight-bold">Log In to Swimmeetcast</p>
                 <?php $this->load->helper('form'); ?>
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-12">
                         <?php echo validation_errors('<div class="alert alert-danger alert-dismissable">', ' <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button></div>'); ?>
                     </div>
                 </div>
-                <?php
-                $this->load->helper('form');
+                <?php               
                 $error = $this->session->flashdata('error');
                 if($error)
                 {
