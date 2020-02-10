@@ -29,7 +29,7 @@
             </li>
             <li>
                 <a href="<?php echo base_url(); ?>logout" class="text-white">
-                    <i class="fa fa-sign-out"></i>&nbsp;&nbsp;Log out
+                    <i class="fa fa-sign-out"></i>&nbsp;&nbsp;Log Out
                 </a>
             </li>
         </ul>

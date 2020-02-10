@@ -73,7 +73,7 @@
 }
 
 body {
-  background-color: #f4f7fc;
+  background-color: white;
 }
 
 /* ---------------------------------------------------
@@ -182,6 +182,25 @@ a[aria-expanded="true"] {
   width: 50%;
   border-radius: 20px;
 }
+
+.search-page .event-cell {
+  line-height: 40px;
+  border-bottom: 1px solid rgba(0,0,0,0.1);  
+}
+.search-page .event-cell a {
+  color: #4B7AF0;
+}
+.search-page .search-btn {
+  background-color: #4B7AF0;
+}
+
+.search-page .query-text {
+  height: 50px;
+  font-size: 30px;
+}
+
+
+
 
 /** Footer */
 #footer .footer-content {

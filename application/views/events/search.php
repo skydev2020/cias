@@ -1,10 +1,17 @@
-<div class="container-fluid search-page">
+<div class="container search-page">
     <!-- Content Page -->
     <section class="content">
         <div class="row">
             <div class="col-12">
                 <form action="<?php echo base_url() ?>search?"  id="searchList" class="justify-content-center d-flex">
-                    <input class="form-control search" type="text" name="q" value="<?php echo $q; ?>" placeholder="Start typing...">
+                    <!-- <input class="form-control search" type="text" name="q" value="<?php echo $q; ?>" placeholder="Start typing..."> -->
+                    <div class="input-group md-form form-sm form-2 pl-0 w-50">
+                        <input class="form-control my-0 py-1 query-text" name="q" value="<?php echo $q; ?>"  type="text" placeholder="Start typing..." aria-label="Search">
+                        <div class="input-group-append">
+                            <button class="input-group-text search-btn"><i class="fa fa-search text-white font-size-24"
+                                aria-hidden="true"></i></button>
+                        </div>
+                    </div>
                 </form>                               
             </div>            
         </div>
@@ -19,15 +26,9 @@
             {
         ?>
         <div class="row">
-            <div class="col-12 col-sm-4 text-center">
+            <div class="col-12 text-center event-cell font-size-24">
                 <a href="<?php echo base_url() ?>score?id=<?php echo $event->id ?>"><?php echo $event->name ?></a>
-            </div>
-            <div class="col-12 col-sm-4 text-center">
-                <?php echo date("d-m-Y", strtotime($event->date_start)) ?>
-            </div>
-            <div class="col-12 col-sm-4 text-center">
-                <?php echo date("d-m-Y", strtotime($event->date_end)) ?>
-            </div>
+            </div>            
         </div>                    
         <?php
             }

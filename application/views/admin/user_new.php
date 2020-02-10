@@ -36,18 +36,12 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-12">
                                     <div class="form-group">
                                         <label for="email">Email address</label>
                                         <input type="text" class="form-control required email" id="email" value="<?php echo set_value('email'); ?>" name="email" maxlength="128">
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="mobile">Mobile Number</label>
-                                        <input type="text" class="form-control" id="mobile" value="<?php echo set_value('mobile'); ?>" name="mobile" maxlength="10">
-                                    </div>
-                                </div>
+                                </div>                                
                             </div>
                             <div class="row">
                                 <div class="col-md-6">

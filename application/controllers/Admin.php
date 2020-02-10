@@ -286,7 +286,7 @@ class Admin extends BaseController
             $this->form_validation->set_rules('password','Password','matches[cpassword]|max_length[20]');
             $this->form_validation->set_rules('cpassword','Confirm Password','matches[password]|max_length[20]');
             // $this->form_validation->set_rules('role','Role','trim|required|numeric');
-            $this->form_validation->set_rules('mobile','Mobile Number','required|min_length[10]');
+            // $this->form_validation->set_rules('mobile','Mobile Number','required|min_length[10]');
             
             if($this->form_validation->run() == FALSE)
             {
@@ -300,19 +300,19 @@ class Admin extends BaseController
                 $email = strtolower($this->security->xss_clean($this->input->post('email')));
                 $password = $this->input->post('password');
                 // $roleId = $this->input->post('role');
-                $mobile = $this->security->xss_clean($this->input->post('mobile'));
+                // $mobile = $this->security->xss_clean($this->input->post('mobile'));
                 
                 $userInfo = array();
                 
                 if(empty($password))
                 {
                     $userInfo = array('email'=>$email, 'fname'=>$fname, 'lname'=>$lname,
-                                    'mobile'=>$mobile, 'updatedBy'=>$this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
+                                    'mobile'=>"", 'updatedBy'=>$this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
                 }
                 else
                 {
                     $userInfo = array('email'=>$email, 'password'=>getHashedPassword($password), 'fname'=>ucwords($fname),
-                        'lname'=>ucwords($lname), 'mobile'=>$mobile, 'updatedBy'=>$this->vendorId, 
+                        'lname'=>ucwords($lname), 'mobile'=>"", 'updatedBy'=>$this->vendorId, 
                         'updatedDtm'=>date('Y-m-d H:i:s'));
                 }
                 
@@ -352,7 +352,7 @@ class Admin extends BaseController
             $this->form_validation->set_rules('password','Password','required|max_length[20]');
             $this->form_validation->set_rules('cpassword','Confirm Password','trim|required|matches[password]|max_length[20]');
             // $this->form_validation->set_rules('role','Role','trim|required|numeric');
-            $this->form_validation->set_rules('mobile','Mobile Number','required|min_length[10]');
+            // $this->form_validation->set_rules('mobile','Mobile Number','required|min_length[10]');
             
             if($this->form_validation->run() == FALSE)
             {
@@ -365,10 +365,10 @@ class Admin extends BaseController
                 $email = strtolower($this->security->xss_clean($this->input->post('email')));
                 $password = $this->input->post('password');
                 // $roleId = $this->input->post('role');
-                $mobile = $this->security->xss_clean($this->input->post('mobile'));
+                // $mobile = $this->security->xss_clean($this->input->post('mobile'));
                 
                 $userInfo = array('email'=>$email, 'password'=>getHashedPassword($password), 'fname'=> $fname, 'lname'=> $lname,
-                                    'mobile'=>$mobile, 'createdBy'=> 1, 'isVerified'=> 1, 
+                                    'mobile'=>"", 'createdBy'=> 1, 'isVerified'=> 1, 
                                     'createdDtm'=>date('Y-m-d H:i:s'));
                 
                 $this->load->model('user_model');

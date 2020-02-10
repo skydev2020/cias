@@ -35,8 +35,11 @@
   </head>
   <body class="hold-transition">
     <div class="wrapper">
-      <header class="container-fluid">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <?php 
+          $className = ($uri == "") ? "container" : "container-fluid";
+      ?>
+      <header class="<?php echo $className; ?>">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white">
           <div class="navbar-brand">
             <a href="<?php echo base_url(); ?>">
               <img src="<?php echo base_url(); ?>assets/images/logo.png" height="40" class="d-inline-block align-top" alt="Logo Image">
@@ -56,7 +59,7 @@
                 $hidden_str = (strpos($uri, "admin") !==false) ? "d-none" : "";
               ?>
               <li class="nav-item">
-                <a class="nav-link <?php echo $active_str; ?> <?php echo $hidden_str; ?>" href="<?php echo base_url(); ?>">Home</a>
+                <a class="nav-link <?php echo $active_str; ?> <?php echo $hidden_str; ?>" href="<?php echo base_url(); ?>">Search</a>
               </li>
               <?php
                 $active_str = ($uri == "login") ? "active" : ""; 
@@ -86,6 +89,6 @@
         
         $hidden_str = ($uri == "register" || $uri == "forgot_password"  || $uri == "login" || strpos($uri, "admin") !==false) ? "d-none" : "d-flex"; 
       ?>
-      <div class="container-fluid <?php echo $hidden_str; ?>">
-          <img src="<?php echo base_url(); ?>assets/images/ad.jpg" height="40" class="d-inline-block align-top" alt="Advertisement Image">
+      <div class="<?php echo $className; ?> justify-content-center <?php echo $hidden_str; ?>">
+          <img src="<?php echo base_url(); ?>assets/images/ad.png" height="40" class="d-inline-block align-top" alt="Advertisement Image">
       </div>
