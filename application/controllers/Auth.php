@@ -1,13 +1,16 @@
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed');
 
+require APPPATH . '/libraries/BaseController.php';
+
 /**
  * Class : Auth (AuthController)
  * Auth class to control to authenticate user credentials and starts user's session.
  * @version : 1.1
  * @since : 5 Feb 2020
  */
-class Auth extends CI_Controller
+class Auth extends BaseController
 {
+    
     /**
      * This is default constructor of the class
      */
@@ -16,6 +19,42 @@ class Auth extends CI_Controller
         parent::__construct();
         $this->load->model('auth_model');
         $this->load->library('mandrill', array(MANDRILL_API_KEY));
+
+        if ($this->uri->uri_string() == 'auth/login') {
+            redirect('login');
+            return;
+        }
+        
+        
+        if ($this->uri->uri_string() == 'register' && $this->isLoggedIn() == true) {            
+            redirect('');
+            return;           
+        } 
+        
+        if ($this->uri->uri_string() != '' && $this->uri->uri_string() != 'register'  && $this->uri->uri_string() != 'search' 
+        && $this->uri->uri_string() != 'login' && $this->uri->uri_string() != 'verify' && $this->isLoggedIn() == false) {
+            redirect('login');
+            return;
+        }  
+
+        if ($this->uri->uri_string() == 'login' && $this->isLoggedIn() == true) {
+            if ($this->isAdmin() ==true) {
+                redirect('admin/users');
+            }
+            else {
+                redirect('');
+            }
+        }
+
+        if ($this->isLoggedIn() == true) {
+            $this->global['logged_in'] = true; 
+        }
+        else {
+            $this->global['logged_in'] = false;
+        }
+        
+        $this->global['uri'] = $this->uri->uri_string();
+
     }
 
     /**
@@ -23,27 +62,32 @@ class Auth extends CI_Controller
      */
     public function index()
     {
-        $this->isLoggedIn();
+        // $this->isLoggedIn();
     }
     
     /**
      * This function used to check the user is logged in or not
      */
-    function isLoggedIn()
-    {
-        $isLoggedIn = $this->session->userdata('isLoggedIn');
-        
-        if(!isset($isLoggedIn) || $isLoggedIn != TRUE)
-        {
-            // $this->load->view('login');
-            redirect('/events');
-        }
-        else
-        {
-            // redirect('/dashboard');
-            redirect('/events');
-        }
-    }
+    // function isLoggedIn()
+    // {
+    //     $isLoggedIn = $this->session->userdata ( 'isLoggedIn' );
+		
+	// 	if (! isset ( $isLoggedIn ) || $isLoggedIn != TRUE) {
+	// 		return false;
+	// 	} else {
+	// 		$this->role = $this->session->userdata ( 'role' );
+	// 		$this->vendorId = $this->session->userdata ( 'userId' );
+	// 		$this->name = $this->session->userdata ( 'name' );
+	// 		$this->roleText = $this->session->userdata ( 'roleText' );
+	// 		$this->lastLogin = $this->session->userdata ( 'lastLogin' );
+			
+	// 		$this->global ['name'] = $this->name;
+	// 		$this->global ['role'] = $this->role;
+	// 		$this->global ['role_text'] = $this->roleText;
+	// 		$this->global ['last_login'] = $this->lastLogin;
+	// 		return true;
+	// 	}
+    // }
     
     
     /**
@@ -293,6 +337,69 @@ class Auth extends CI_Controller
             return false;
         }
         
+    }
+
+
+    function login(){
+        // if Get Request, Load Login Page, if Post Request, Check Login
+        if ($this->input->server('REQUEST_METHOD') =='GET') {
+            $this->global['pageTitle'] = 'Login Page';
+            // $this->loadViews("auth/login", $this->global, null , NULL);
+            $this->load->view('auth/login', null);          
+        }
+        else {
+            $this->load->library('form_validation');
+        
+            $this->form_validation->set_rules('email', 'Email', 'required|valid_email|max_length[128]|trim');
+            $this->form_validation->set_rules('password', 'Password', 'required|max_length[32]');
+        
+            if($this->form_validation->run() == FALSE)
+            {
+                redirect('login');
+            }
+            else
+            {
+                $email = strtolower($this->security->xss_clean($this->input->post('email')));
+                $password = $this->input->post('password');
+                
+                $result = $this->auth_model->loginMe($email, $password, false);
+               
+                if(!empty($result))
+                {
+                    $lastLogin = $this->auth_model->lastLoginInfo($result->userId);
+
+                    $sessionArray = array('userId'=>$result->userId,                    
+                                            'role'=>$result->roleId,
+                                            'roleText'=>$result->role,
+                                            'name'=>$result->name,
+                                            'lastLogin'=> $lastLogin->createdDtm,
+                                            'isLoggedIn' => TRUE
+                                        );
+                
+
+                    $this->session->set_userdata($sessionArray);
+                    
+                    unset($sessionArray['userId'], $sessionArray['isLoggedIn'], $sessionArray['lastLogin']);
+
+                    $loginInfo = array("userId"=>$result->userId, "sessionData" => json_encode($sessionArray), "machineIp"=>$_SERVER['REMOTE_ADDR'], "userAgent"=>getBrowserAgent(), "agentString"=>$this->agent->agent_string(), "platform"=>$this->agent->platform());
+
+                    $this->auth_model->lastLogin($loginInfo);
+                    
+                    if ($result->roleId == ROLE_ADMIN) {
+                        redirect('admin/users');
+                    }
+                    else {
+                        redirect('');
+                    }
+                }
+                else
+                {   
+                    $this->session->set_flashdata('error', 'Email or password mismatch');
+                    
+                    redirect('login');
+                }
+            }
+        }
     }
 }
 

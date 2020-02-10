@@ -151,7 +151,17 @@ a[aria-expanded="true"] {
 .register-form .form-group input, .login-box .form-group input {
   border-radius: 5px;
 }
+/**
+  Auth Page Settings like Login, Register, Reset ,etc
+*/
 
+.auth-page, .register-page {
+  background: #d2d6de;
+}
+
+.auth-page .header {
+  background-color: #3c8dbc;
+}
 
 /* Search Page*/
 .search-page input.search {

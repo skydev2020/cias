@@ -60,10 +60,10 @@ $route['translate_uri_dashes'] = FALSE;
 $route['admin'] = 'admin'; //admin page
 // $route['admin/editUser/(:num)'] = "user/editUser/$1";
 $route['search'] = 'event/search';
-$route['login'] = 'event/login';
-$route['register'] = 'event/register';
 $route['score'] = 'event/score';
-$route['verify'] = 'event/verify';
+$route['login'] = 'auth/login';
+$route['register'] = 'auth/register';
+$route['verify'] = 'auth/verify';
 
 $route['forgot_password'] = "auth/forgotPassword";
 $route['reset_password'] = "auth/resetPassword";

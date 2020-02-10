@@ -102,66 +102,7 @@ class Event extends BaseController
         $this->loadViews("events/score", $this->global, $data , NULL);
     }
 
-    function login(){
-        // if Get Request, Load Login Page, if Post Request, Check Login
-        if ($this->input->server('REQUEST_METHOD') =='GET') {
-            $this->global['pageTitle'] = 'Login Page';
-            $this->loadViews("events/login", $this->global, null , NULL);            
-        }
-        else {
-            $this->load->library('form_validation');
-        
-            $this->form_validation->set_rules('email', 'Email', 'required|valid_email|max_length[128]|trim');
-            $this->form_validation->set_rules('password', 'Password', 'required|max_length[32]');
-        
-            if($this->form_validation->run() == FALSE)
-            {
-                redirect('login');
-            }
-            else
-            {
-                $email = strtolower($this->security->xss_clean($this->input->post('email')));
-                $password = $this->input->post('password');
-                
-                $result = $this->auth_model->loginMe($email, $password, false);
-               
-                if(!empty($result))
-                {
-                    $lastLogin = $this->auth_model->lastLoginInfo($result->userId);
-
-                    $sessionArray = array('userId'=>$result->userId,                    
-                                            'role'=>$result->roleId,
-                                            'roleText'=>$result->role,
-                                            'name'=>$result->name,
-                                            'lastLogin'=> $lastLogin->createdDtm,
-                                            'isLoggedIn' => TRUE
-                                        );
-                
-
-                    $this->session->set_userdata($sessionArray);
-                    
-                    unset($sessionArray['userId'], $sessionArray['isLoggedIn'], $sessionArray['lastLogin']);
-
-                    $loginInfo = array("userId"=>$result->userId, "sessionData" => json_encode($sessionArray), "machineIp"=>$_SERVER['REMOTE_ADDR'], "userAgent"=>getBrowserAgent(), "agentString"=>$this->agent->agent_string(), "platform"=>$this->agent->platform());
-
-                    $this->auth_model->lastLogin($loginInfo);
-                    
-                    if ($result->roleId == ROLE_ADMIN) {
-                        redirect('admin/users');
-                    }
-                    else {
-                        redirect('');
-                    }
-                }
-                else
-                {   
-                    $this->session->set_flashdata('error', 'Email or password mismatch');
-                    
-                    redirect('login');
-                }
-            }
-        }
-    }
+    
 
     /**
      * Show Register User Page
