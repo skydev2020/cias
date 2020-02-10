@@ -119,7 +119,8 @@ class Auth extends BaseController
                 $sessionArray = array('userId'=>$result->userId,                    
                                         'role'=>$result->roleId,
                                         'roleText'=>$result->role,
-                                        'name'=>$result->name,
+                                        'fname'=>$result->fname,
+                                        'lname'=>$result->lname,
                                         'lastLogin'=> $lastLogin->createdDtm,
                                         'isLoggedIn' => TRUE
                                 );
@@ -369,7 +370,8 @@ class Auth extends BaseController
                     $sessionArray = array('userId'=>$result->userId,                    
                                             'role'=>$result->roleId,
                                             'roleText'=>$result->role,
-                                            'name'=>$result->name,
+                                            'fname'=>$result->fname,
+                                            'lname'=>$result->lname,
                                             'lastLogin'=> $lastLogin->createdDtm,
                                             'isLoggedIn' => TRUE
                                         );

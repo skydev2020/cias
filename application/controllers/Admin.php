@@ -110,10 +110,11 @@ class Admin extends BaseController
     {
 
         if (!$this->isLoggedInAsAdmin()) {
-            redirect('admin');
+            redirect('');
             return;
         }
-     
+        $data['admin_name'] = "sdfds";
+
         if ($userId==null && $this->input->server('REQUEST_METHOD') =='GET') {
             $searchText = $this->security->xss_clean($this->input->get_post('searchText'));
             $data['searchText'] = $searchText;
@@ -128,7 +129,7 @@ class Admin extends BaseController
             
             //Prepare the User search
             $data['module'] = $this->load->view('admin/user_list', $data, true);
-        
+            
             $this->loadViews("admin/tmpl", $this->global, $data, NULL);
         }
         else if ($userId!=null && $this->input->server('REQUEST_METHOD') =='GET') {
@@ -206,11 +207,13 @@ class Admin extends BaseController
             
             $this->role = $this->session->userdata ( 'role' );
 			$this->vendorId = $this->session->userdata ( 'userId' );
-			$this->name = $this->session->userdata ( 'name' );
+            $this->fname = $this->session->userdata ( 'fname' );
+            $this->lname = $this->session->userdata ( 'lname' );
 			$this->roleText = $this->session->userdata ( 'roleText' );
             $this->lastLogin = $this->session->userdata ( 'lastLogin' );
 
-            $this->global ['name'] = $this->name;
+            $this->global ['fname'] = $this->fname;
+            $this->global ['lname'] = $this->lname;
             $this->global ['role'] = $this->role;
             $this->global ['role_text'] = $this->roleText;
             $this->global ['last_login'] = $this->lastLogin;
