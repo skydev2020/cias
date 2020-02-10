@@ -1,4 +1,4 @@
-<div class="dashboard-content d-flex d-flex align-items-center justify-content-center">
+<div class="dashboard-content d-flex d-flex justify-content-center" style="padding-top: 100px;">
     <section class="register-form">
         <div class="row">
             <!-- left column -->

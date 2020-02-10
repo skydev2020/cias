@@ -131,7 +131,7 @@ a[aria-expanded="true"] {
 .dashboard-content {
   width: 100%;
   padding: 0px 20px;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   transition: all 0.3s;
 }
 

@@ -1,4 +1,4 @@
-<div class="login-box">      
+<div class="login-box" style="padding-top: 100px; margin-top: 0px;">      
     <div class="login-box-body">
         <p class="login-box-msg font-size-22 font-weight-bold">Log In to Swimmeetcast</p>
         <?php $this->load->helper('form'); ?>
