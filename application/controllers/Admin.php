@@ -18,7 +18,7 @@ class Admin extends BaseController
     {
         parent::__construct();
         $this->load->model('user_model');
-        $this->load->model('login_model');  
+        $this->load->model('auth_model');  
 
         if ($this->isLoggedIn() == true) {
             $this->global['logged_in'] = true; 
@@ -69,11 +69,11 @@ class Admin extends BaseController
             $email = strtolower($this->security->xss_clean($this->input->post('email')));
             $password = $this->input->post('password');
             
-            $result = $this->login_model->loginMe($email, $password, true);
+            $result = $this->auth_model->loginMe($email, $password, true);
             
             if(!empty($result))
             {
-                $lastLogin = $this->login_model->lastLoginInfo($result->userId);
+                $lastLogin = $this->auth_model->lastLoginInfo($result->userId);
 
                 $sessionArray = array('userId'=>$result->userId,                    
                                         'role'=>$result->roleId,
@@ -90,7 +90,7 @@ class Admin extends BaseController
 
                 $loginInfo = array("userId"=>$result->userId, "sessionData" => json_encode($sessionArray), "machineIp"=>$_SERVER['REMOTE_ADDR'], "userAgent"=>getBrowserAgent(), "agentString"=>$this->agent->agent_string(), "platform"=>$this->agent->platform());
 
-                $this->login_model->lastLogin($loginInfo);
+                $this->auth_model->lastLogin($loginInfo);
                 
                 redirect('admin/users');
             }

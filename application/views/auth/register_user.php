@@ -57,7 +57,7 @@
                 <?php } ?>
                 <form action="<?php echo base_url(); ?>register" role="form" id="addUser" method="post">
                     <div class="row">
-                        <div class="col-12 col-md-6 d-flex ">                                
+                        <div class="col-12 col-md-6 ">                                
                             <div class="form-group">
                                 <input type="text" class="form-control required" placeholder="First Name" id="fname" name="fname" maxlength="128">
                             </div>                                    
@@ -69,7 +69,7 @@
                         </div>
                     </div>    
                     <div class="row">
-                        <div class="col-12 d-flex align-items-center">
+                        <div class="col-12 align-items-center">
                             <div class="form-group w-100">
                                 <input type="text" class="form-control required email" id="email" placeholder="Email" name="email" maxlength="128">                                        
                             </div>
@@ -116,6 +116,7 @@
 
     </body>
     <script src="<?php echo base_url(); ?>assets/plugins/jquery/jquery.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/js/jquery.validate.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/addUser.js" type="text/javascript"></script>
 </html>

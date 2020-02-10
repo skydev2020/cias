@@ -163,6 +163,15 @@ a[aria-expanded="true"] {
   background-color: #3c8dbc;
 }
 
+.auth-page .login-box {
+  min-width: 450px;
+}
+
+.error {
+  color: red;
+  font-weight: normal;
+}
+
 /* Search Page*/
 .search-page input.search {
   width: 50%;
