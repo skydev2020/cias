@@ -438,7 +438,7 @@ class Auth extends BaseController
                 $mobile = $this->security->xss_clean($this->input->post('mobile'));
                 $verification_code = uniqid(rand(), true);
                 $userInfo = array('email'=>$email, 'password'=>getHashedPassword($password), 'fname'=> $fname, 'lname'=> $lname,
-                                'roleId'=> 0, 'mobile'=>$mobile, 'createdBy'=> 0, 
+                                'roleId'=> 0, 'createdBy'=> 0, 
                                 'verification_code'=>$verification_code, 'createdDtm'=>date('Y-m-d H:i:s'));
                 
                 $result = $this->user_model->addNewUser($userInfo);

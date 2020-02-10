@@ -19,17 +19,14 @@
             {
         ?>
         <div class="row">
-            <div class="col-12 col-sm-2 col-md-3">
-                <?php echo $event->name ?>
+            <div class="col-12 col-sm-4 text-center">
+                <a href="<?php echo base_url() ?>score?id=<?php echo $event->id ?>"><?php echo $event->name ?></a>
             </div>
-            <div class="col-12 col-sm-2 col-md-3">
+            <div class="col-12 col-sm-4 text-center">
                 <?php echo date("d-m-Y", strtotime($event->date_start)) ?>
             </div>
-            <div class="col-12 col-sm-2 col-md-3">
+            <div class="col-12 col-sm-4 text-center">
                 <?php echo date("d-m-Y", strtotime($event->date_end)) ?>
-            </div>
-            <div class="col-12 col-sm-2 col-md-3">
-                <a href="<?php echo base_url() ?>score?id=<?php echo $event->id ?>"> Detail </a>
             </div>
         </div>                    
         <?php

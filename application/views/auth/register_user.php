@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Swimmeetcast | Reset Password</title>
+        <title>Swimmeetcast | Register User</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
         <link href="<?php echo base_url(); ?>assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url(); ?>assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
@@ -76,25 +76,20 @@
                         </div>                                
                     </div>
                     <div class="row">
-                        <div class="col-12 col-md-6 d-flex">
+                        <div class="col-12">
                             <div class="form-group">
                                 <input type="password" class="form-control required" placeholder="Password" id="password" name="password" maxlength="20">
                             </div>
                         </div>
-                        <div class="col-12 col-md-6">
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
                             <div class="form-group">
                             <input type="password" class="form-control required equalTo" placeholder="Confirm Password"  id="cpassword" name="cpassword" maxlength="20">
                             </div>
                         </div>
                     </div>
-    
-                    <div class="row">
-                        <div class="col-12 d-flex align-items-center">
-                            <div class="form-group w-100">
-                                <input type="text" class="form-control" placeholder="Mobile" id="mobile" name="mobile" maxlength="10">                                        
-                            </div>
-                        </div>
-                    </div>
+
                     <div class="row">
                         <div class="col-12 d-flex align-items-center">
                             <div class="form-group w-100">
