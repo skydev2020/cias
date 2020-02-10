@@ -431,6 +431,15 @@ class Auth extends BaseController
                 $fname = ucwords(strtolower($this->security->xss_clean($this->input->post('fname'))));
                 $lname = ucwords(strtolower($this->security->xss_clean($this->input->post('lname'))));
                 $email = strtolower($this->security->xss_clean($this->input->post('email')));
+
+                if ($this->auth_model->checkEmailExist($email) != null) {
+                    // Check whether user already exists 
+                    $this->session->set_flashdata('error', 'Same Email is already exists.');
+                    $this->global['pageTitle'] = 'User Signup Error';
+                    $this->load->view('auth/register_user', null);  
+                    return; 
+                }
+
                 $password = $this->input->post('password');
                 // $roleId = $this->input->post('role');
                 $mobile = $this->security->xss_clean($this->input->post('mobile'));
@@ -447,9 +456,7 @@ class Auth extends BaseController
                      * Send a email to a user with a verification code
                      */
                                                            
-                    $email_msg = "<p><h3>Please click link to verify your email.</h3></p> \r\n";
-                    $email_msg .= "<p><a href=\"".htmlspecialchars(base_url())."verify?email=". $email. "&code=" . $verification_code . "\">Click here to verify</a></p>";
-                    
+                   
                     $data['verification_link'] = base_url()."verify?email=". $email. "&code=" . $verification_code;
                     $data['fname'] = $fname;
                     $data['lname'] = $lname;
