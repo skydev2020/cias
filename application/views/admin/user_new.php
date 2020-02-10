@@ -67,7 +67,7 @@
     
                         <div class="box-footer">
                             <input type="submit" class="btn btn-primary" value="Save" />
-                            &nbsp;&nbsp;<a href="<?php echo base_url() ?>admin/users">Reset</a>
+                            &nbsp;&nbsp;<a href="<?php echo base_url() ?>admin/users">Back</a>
                         </div>
                     </form>
                 </div>

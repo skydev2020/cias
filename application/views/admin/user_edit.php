@@ -84,7 +84,7 @@
                             <?php
                             $hiddenStr = ($roleId == ROLE_ADMIN) ?  "d-none" : "";  
                             ?>
-                            &nbsp;&nbsp;<a href="<?php echo base_url() ?>admin/users" class="<?php echo $hiddenStr; ?>">Reset</a>
+                            &nbsp;&nbsp;<a href="<?php echo base_url() ?>admin/users" class="<?php echo $hiddenStr; ?>">Back</a>
                         </div>
                     </form>
                 </div>
