@@ -26,14 +26,14 @@ class Auth extends BaseController
             return;
         }
         
-        
         if ($this->uri->uri_string() == 'register' && $this->isLoggedIn() == true) {            
             redirect('');
             return;           
         } 
         
         if ($this->uri->uri_string() != '' && $this->uri->uri_string() != 'register'  && $this->uri->uri_string() != 'search' 
-        && $this->uri->uri_string() != 'login' && $this->uri->uri_string() != 'verify' && $this->isLoggedIn() == false) {
+        && $this->uri->uri_string() != 'login' && $this->uri->uri_string() != 'verify' && $this->uri->uri_string() != 'forgot_password'
+        && $this->uri->uri_string() != 'resetPassword' && $this->isLoggedIn() == true) {
             redirect('login');
             return;
         }  
@@ -159,10 +159,7 @@ class Auth extends BaseController
                 'logged_in' => $isLoggedIn
             ];
             
-
-            $this->load->view('includes/header', $data);
-            $this->load->view('auth/forgot_password', $data);
-            $this->load->view('includes/footer', $data);          
+            $this->load->view('auth/forgot_password', $data);                  
         }
         else
         {
@@ -217,25 +214,25 @@ class Auth extends BaseController
                     $sendStatus = $this->resetPasswordEmail($data1);
 
                     if($sendStatus){
-                        $status = "send";
+                        $status = "success";
                         setFlashData($status, "Reset password link sent successfully, please check mails.");
                     } else {
-                        $status = "notsend";
+                        $status = "error";
                         setFlashData($status, "Email has been failed, try again.");
                     }
                 }
                 else
                 {
-                    $status = 'unable';
+                    $status = 'error';
                     setFlashData($status, "It seems an error while sending your details, try again.");
                 }
             }
             else
             {
-                $status = 'invalid';
+                $status = 'error';
                 setFlashData($status, "This email is not registered with us.");
             }
-            redirect('forgot_password');
+            $this->forgotPassword();
         }
     }
 
