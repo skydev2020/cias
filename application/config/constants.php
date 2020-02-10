@@ -95,9 +95,9 @@ define('SEGMENT',								2);
 
 /************************** EMAIL CONSTANTS *****************************/
 
-define('EMAIL_FROM',                            'Your from email');		// e.g. email@example.com
+define('EMAIL_FROM',                            'info@swimmeetcast.com');		// e.g. email@example.com
 define('EMAIL_BCC',                            	'Your bcc email');		// e.g. email@example.com
-define('FROM_NAME',                             'CIAS Admin System');	// Your system name
+define('FROM_NAME',                             'Swimmeetcast');	// Your system name
 define('EMAIL_PASS',                            'Your email password');	// Your email password
 define('PROTOCOL',                             	'smtp');				// mail, sendmail, smtp
 define('SMTP_HOST',                             'Your smtp host');		// your smtp host e.g. smtp.gmail.com
@@ -105,3 +105,6 @@ define('SMTP_PORT',                             '25');					// your smtp port e.g
 define('SMTP_USER',                             'Your smtp user');		// your smtp user
 define('SMTP_PASS',                             'Your smtp password');	// your smtp password
 define('MAIL_PATH',                             '/usr/sbin/sendmail');
+
+/*************************** Mandrill Details *************************/
+define('MANDRILL_API_KEY',            'QHeA9_d_5H66U9py1b2Tlw');

@@ -14,7 +14,8 @@ class Auth extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('login_model');
+        $this->load->model('auth_model');
+        $this->load->library('mandrill', array(MANDRILL_API_KEY));
     }
 
     /**
@@ -64,11 +65,11 @@ class Auth extends CI_Controller
             $email = strtolower($this->security->xss_clean($this->input->post('email')));
             $password = $this->input->post('password');
             
-            $result = $this->login_model->loginMe($email, $password);
+            $result = $this->auth_model->loginMe($email, $password);
             
             if(!empty($result))
             {
-                $lastLogin = $this->login_model->lastLoginInfo($result->userId);
+                $lastLogin = $this->auth_model->lastLoginInfo($result->userId);
 
                 $sessionArray = array('userId'=>$result->userId,                    
                                         'role'=>$result->roleId,
@@ -84,7 +85,7 @@ class Auth extends CI_Controller
 
                 $loginInfo = array("userId"=>$result->userId, "sessionData" => json_encode($sessionArray), "machineIp"=>$_SERVER['REMOTE_ADDR'], "userAgent"=>getBrowserAgent(), "agentString"=>$this->agent->agent_string(), "platform"=>$this->agent->platform());
 
-                $this->login_model->lastLogin($loginInfo);
+                $this->auth_model->lastLogin($loginInfo);
                 
                 redirect('/dashboard');
             }
@@ -133,7 +134,7 @@ class Auth extends CI_Controller
         
         $this->load->library('form_validation');
         
-        $this->form_validation->set_rules('login_email','Email','trim|required|valid_email');
+        $this->form_validation->set_rules('email','Email','trim|required|valid_email');
                 
         if($this->form_validation->run() == FALSE)
         {
@@ -143,7 +144,7 @@ class Auth extends CI_Controller
         {
             $email = strtolower($this->security->xss_clean($this->input->post('email')));
             
-            if($this->login_model->checkEmailExist($email))
+            if($this->auth_model->checkEmailExist($email))
             {
                 $encoded_email = urlencode($email);
                 
@@ -154,20 +155,21 @@ class Auth extends CI_Controller
                 $data['agent'] = getBrowserAgent();
                 $data['client_ip'] = $this->input->ip_address();
                 
-                $save = $this->login_model->resetPasswordUser($data);                
+                $save = $this->auth_model->resetPassword($data);                
                 
                 if($save)
                 {
-                    $data1['reset_link'] = base_url() . "resetPasswordConfirmUser/" . $data['activation_id'] . "/" . $encoded_email;
-                    $userInfo = $this->login_model->getCustomerInfoByEmail($email);
+                    $data1['reset_link'] = base_url() . "reset_password_confirm/" . $data['activation_id'] . "/" . $encoded_email;
+                    $userInfo = $this->auth_model->getCustomerInfoByEmail($email);
 
                     if(!empty($userInfo)){
-                        $data1["name"] = $userInfo->name;
+                        $data1["fname"] = $userInfo->fname;
+                        $data1["lname"] = $userInfo->lname;
                         $data1["email"] = $userInfo->email;
                         $data1["message"] = "Reset Your Password";
                     }
 
-                    $sendStatus = resetPasswordEmail($data1);
+                    $sendStatus = $this->resetPasswordEmail($data1);
 
                     if($sendStatus){
                         $status = "send";
@@ -188,7 +190,7 @@ class Auth extends CI_Controller
                 $status = 'invalid';
                 setFlashData($status, "This email is not registered with us.");
             }
-            redirect('/forgotPassword');
+            redirect('forgot_password');
         }
     }
 
@@ -203,7 +205,7 @@ class Auth extends CI_Controller
         $email = urldecode($email);
         
         // Check activation id in database
-        $is_correct = $this->login_model->checkActivationDetails($email, $activation_id);
+        $is_correct = $this->auth_model->checkActivationDetails($email, $activation_id);
         
         $data['email'] = $email;
         $data['activation_code'] = $activation_id;
@@ -214,7 +216,7 @@ class Auth extends CI_Controller
         }
         else
         {
-            redirect('/login');
+            redirect('login');
         }
     }
     
@@ -243,11 +245,11 @@ class Auth extends CI_Controller
             $cpassword = $this->input->post('cpassword');
             
             // Check activation id in database
-            $is_correct = $this->login_model->checkActivationDetails($email, $activation_id);
+            $is_correct = $this->auth_model->checkActivationDetails($email, $activation_id);
             
             if($is_correct == 1)
             {                
-                $this->login_model->createPasswordUser($email, $password);
+                $this->auth_model->createPasswordUser($email, $password);
                 
                 $status = 'success';
                 $message = 'Password reset successfully';
@@ -262,6 +264,36 @@ class Auth extends CI_Controller
 
             redirect("/login");
         }
+    }
+
+
+    function resetPasswordEmail($detail) {
+        $email_data["data"] = $detail;
+        // pre($detail);
+        // die;
+ 
+        $email_msg = $this->load->view('email/resetPassword', $email_data, TRUE); 
+        
+        $params = array(
+            "html" => $email_msg,
+            "text" => null,
+            "from_email" => EMAIL_FROM,
+            "from_name" => FROM_NAME,
+            "subject" => "Password Reset",
+            "to" => array(array("email" => $detail['email'])),
+            "track_opens" => true,
+            "track_clicks" => true,
+            "auto_text" => true
+        );
+    
+        $mail_sent = $this->mandrill->messages->send($params, true);
+        if (is_array($mail_sent) && count($mail_sent) > 0 && $mail_sent[0]['status']=="sent") {
+            return true;
+        }
+        else {
+            return false;
+        }
+        
     }
 }
 

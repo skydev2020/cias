@@ -19,7 +19,7 @@ class Event extends BaseController
         $this->load->model('login_model');
         $this->load->model('event_model');
         $this->load->model('user_model');
-        $this->load->library('mandrill', array("QHeA9_d_5H66U9py1b2Tlw"));
+        $this->load->library('mandrill', array(MANDRILL_API_KEY));
                 
         if ($this->uri->uri_string() == 'event/login') {
             redirect('login');
@@ -214,8 +214,8 @@ class Event extends BaseController
                     $params = array(
                         "html" => $email_msg,
                         "text" => null,
-                        "from_email" => "info@swimmeetcast.com",
-                        "from_name" => "Swimmeetcast",
+                        "from_email" => EMAIL_FROM,
+                        "from_name" => FROM_NAME,
                         "subject" => "User Registration",
                         "to" => array(array("email" => $email)),
                         "track_opens" => true,

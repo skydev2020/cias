@@ -1,13 +1,12 @@
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
- * Class : Login_model (Login Model)
- * Login model class to get to authenticate user credentials 
- * @author : Kishor Mali
+ * Class : Auth_model (Auth Model)
+ * Auth model class to get to authenticate user credentials 
+ * @author : Sky Dev
  * @version : 1.1
- * @since : 15 November 2016
- */
-class Login_model extends CI_Model
+ * @since : 10 Feb 2020 */
+class Auth_model extends CI_Model
 {
     
     /**
@@ -68,7 +67,7 @@ class Login_model extends CI_Model
      * @param {array} $data : This is reset password data
      * @return {boolean} $result : TRUE/FALSE
      */
-    function resetPasswordUser($data)
+    function resetPassword($data)
     {
         $result = $this->db->insert('tbl_reset_password', $data);
 
@@ -86,7 +85,7 @@ class Login_model extends CI_Model
      */
     function getCustomerInfoByEmail($email)
     {
-        $this->db->select('userId, email, name');
+        $this->db->select('*');
         $this->db->from('tbl_users');
         $this->db->where('isDeleted', 0);
         $this->db->where('email', $email);
