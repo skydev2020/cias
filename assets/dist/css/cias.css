@@ -160,7 +160,12 @@ a[aria-expanded="true"] {
 }
 
 .auth-page .header {
-  background-color: #3c8dbc;
+  /* background-color: #3c8dbc; */
+  background-color: #4B7AF0;
+}
+
+.auth-page .btn-block {
+  background-color: #4B7AF0;
 }
 
 .auth-page .login-box {
