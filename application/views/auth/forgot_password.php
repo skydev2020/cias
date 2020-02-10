@@ -1,6 +1,6 @@
 <div class="login-box" style="padding-top: 100px; margin-top: 0px;">      
     <div class="login-box-body">
-        <p class="login-box-msg font-size-22 font-weight-bold">Log In to Swimmeetcast</p>
+        <p class="login-box-msg font-size-22 font-weight-bold">Forgot Password</p>
         <?php $this->load->helper('form'); ?>
         <div class="row">
             <div class="col-md-12">
@@ -27,32 +27,22 @@
                 <?php echo $success; ?>                    
             </div>
         <?php } ?>
-        <form action="<?php echo base_url(); ?>login" method="post">
+        <form action="<?php echo base_url(); ?>reset_password" method="post">
             <div class="form-group has-feedback">
                 <input type="email" class="form-control" placeholder="Email" name="email" required />
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
-            <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="Password" name="password" required />
-                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-            </div>
-            <div class="row">
-                <div class="col-12 d-flex justify-content-end">    
-                    <a class="" href="<?php echo base_url() ?>forgot_password"><small>Forgot Password?</small></a><br/>
-                </div><!-- /.col -->              
-            </div>
-            <div class="row" style="padding-top: 10px;">                
+            <div class="row">                
                 <div class="col-12">
                     <div class="form-group w-100">
-                      <input type="submit" class="btn btn-primary btn-block btn-flat" value="Sign In" />
+                      <input type="submit" class="btn btn-primary btn-block btn-flat" value="Reset Password" />
                     </div>  
                 </div><!-- /.col -->
             </div>
             <div class="row">
                 <div class="col-12 d-flex justify-content-end align-items-center">    
-                    <small class="text-muted">
-                        New to Swimmeetcast? &nbsp;
-                        <a href="<?php echo base_url() ?>register">Sign up</a>
+                    <small class="text-muted">   
+                        <a href="<?php echo base_url() ?>login">Back to Login</a>
                     </small>                    
                 </div><!-- /.col -->
             </div>

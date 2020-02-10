@@ -1,12 +1,12 @@
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
- * Class : Login (LoginController)
- * Login class to control to authenticate user credentials and starts user's session.
+ * Class : Auth (AuthController)
+ * Auth class to control to authenticate user credentials and starts user's session.
  * @version : 1.1
  * @since : 5 Feb 2020
  */
-class Login extends CI_Controller
+class Auth extends CI_Controller
 {
     /**
      * This is default constructor of the class
@@ -105,19 +105,29 @@ class Login extends CI_Controller
         $isLoggedIn = $this->session->userdata('isLoggedIn');
         
         if(!isset($isLoggedIn) || $isLoggedIn != TRUE)
-        {
-            $this->load->view('forgotPassword');
+        {             
+            $this->global['pageTitle'] = 'Login Page';         
+            $data= [
+                'pageTitle' => 'Forgot Password',
+                'uri'=>  $this->uri->uri_string(),
+                'logged_in' => $isLoggedIn
+            ];
+            
+
+            $this->load->view('includes/header', $data);
+            $this->load->view('auth/forgot_password', $data);
+            $this->load->view('includes/footer', $data);          
         }
         else
         {
-            redirect('/dashboard');
+            redirect('');
         }
     }
     
     /**
      * This function used to generate reset password request link
      */
-    function resetPasswordUser()
+    function resetPassword()
     {
         $status = '';
         
@@ -131,7 +141,7 @@ class Login extends CI_Controller
         }
         else 
         {
-            $email = strtolower($this->security->xss_clean($this->input->post('login_email')));
+            $email = strtolower($this->security->xss_clean($this->input->post('email')));
             
             if($this->login_model->checkEmailExist($email))
             {

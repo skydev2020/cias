@@ -64,7 +64,11 @@ $route['login'] = 'event/login';
 $route['register'] = 'event/register';
 $route['score'] = 'event/score';
 $route['verify'] = 'event/verify';
-$route['loginMe'] = 'login/loginMe';
+
+$route['forgot_password'] = "auth/forgotPassword";
+$route['reset_password'] = "auth/resetPassword";
+
+$route['loginMe'] = 'auth/loginMe';
 $route['logout'] = 'user/logout';
 $route['userListing'] = 'user/userListing';
 $route['userListing/(:num)'] = "user/userListing/$1";
@@ -88,7 +92,7 @@ $route['login-history'] = "user/loginHistoy";
 $route['login-history/(:num)'] = "user/loginHistoy/$1";
 $route['login-history/(:num)/(:num)'] = "user/loginHistoy/$1/$2";
 
-$route['forgotPassword'] = "login/forgotPassword";
+
 $route['resetPasswordUser'] = "login/resetPasswordUser";
 $route['resetPasswordConfirmUser'] = "login/resetPasswordConfirmUser";
 $route['resetPasswordConfirmUser/(:any)'] = "login/resetPasswordConfirmUser/$1";
