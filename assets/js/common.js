@@ -10,7 +10,7 @@ jQuery(document).ready(function(){
 			hitURL = baseURL + "admin/user_del",
 			currentRow = $(this);
 		
-		var confirmation = confirm("Are you sure to delete this user ?");
+		var confirmation = confirm("Are you sure to delete?");
 		
 		if(confirmation)
 		{

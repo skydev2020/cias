@@ -36,7 +36,6 @@
                         <tr>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Mobile</th>
                             <th>Verified</th>                            
                             <th>Signup Date</th>
                             <th class="text-center">Actions</th>
@@ -51,10 +50,9 @@
                         ?>
                         <tr>
                             <td><?php echo $record->fname." ".$record->lname ?></td>
-                            <td><?php echo $record->email ?></td>
-                            <td><?php echo $record->mobile ?></td>
+                            <td><?php echo $record->email ?></td>                            
                             <td>
-                                <?php echo ($record->isVerified == 1) ? "Verified" : "Not Verified" ?>
+                                <?php echo ($record->isVerified == 1) ? "Yes" : "No" ?>
                             </td>
                             <td><?php echo date("d-m-Y", strtotime($record->createdDtm)) ?></td>
                             <td class="text-center">
