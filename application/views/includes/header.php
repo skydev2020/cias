@@ -36,7 +36,7 @@
   <body class="hold-transition">
     <div class="wrapper">
       <?php 
-          $className = ($uri == "") ? "container" : "container-fluid";
+          $className = ($uri == "" || $uri == "search") ? "container" : "container-fluid";
       ?>
       <header class="<?php echo $className; ?>">
         <nav class="navbar navbar-expand-lg navbar-light bg-white">

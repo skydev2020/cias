@@ -26,7 +26,7 @@
             {
         ?>
         <div class="row">
-            <div class="col-12 event-cell font-size-24">
+            <div class="col-12 event-cell font-size-20 font-weight-bold">
                 <a href="<?php echo base_url() ?>score?id=<?php echo $event->id ?>"><?php echo $event->name ?></a>
             </div>            
         </div>                    

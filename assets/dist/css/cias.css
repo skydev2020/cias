@@ -198,7 +198,9 @@ a[aria-expanded="true"] {
   padding-bottom: 10px;
 }
 .search-page .event-cell a {
-  color: #4B7AF0;
+  color: rgb(43,39,60);
+  font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+  
 }
 .search-page .search-btn {
   background-color: #4B7AF0;
@@ -210,6 +212,8 @@ a[aria-expanded="true"] {
 .search-page .query-text {
   height: 48px;
   color: rgb(51,51,51);
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
 }
 
 
