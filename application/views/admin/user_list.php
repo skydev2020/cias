@@ -56,8 +56,15 @@
                             </td>
                             <td><?php echo date("m/d/Y", strtotime($record->createdDtm)) ?></td>
                             <td class="text-center">
-                                <a class="" href="<?php echo base_url().'admin/activate/'.$record->userId; ?>" title="<?php echo $actionStr ?>"><?php echo $actionStr ?></a>
-                                <a class="btn btn-sm btn-info" href="<?php echo base_url().'admin/users/'.$record->userId; ?>" title="Edit"><i class="fas fa-lock"></i></i></a>
+                                <?php if ($record->isLocked==true): ?>
+                                <a class="btn btn-sm btn-info" href="<?php echo base_url().'admin/lock/'.$record->userId; ?>" title="Activate">                                
+                                    <i class="fas fa-lock"></i>
+                                </a>
+                                <?php else: ?>
+                                    <a class="btn btn-sm btn-info" href="<?php echo base_url().'admin/lock/'.$record->userId; ?>" title="Suspend">
+                                    <i class="fas fa-unlock"></i>
+                                <?php endif ?>                                                                    
+                                </a>
                                 <a class="btn btn-sm btn-info" href="<?php echo base_url().'admin/users/'.$record->userId; ?>" title="Edit"><i class="fa fa-pencil"></i></a>
                                 <a class="btn btn-sm btn-danger deleteUser" href="#" data-userid="<?php echo $record->userId; ?>" title="Delete"><i class="fa fa-trash"></i></a>
                             </td>

@@ -160,9 +160,9 @@ class Admin extends BaseController
     }
 
      /**
-     * This function used to activate/deactivate user
+     * This function used to lock/unlock user
      */
-    public function activate($userId = null) {
+    public function lock($userId = null) {
 
         if (!$this->isLoggedInAsAdmin()) {
             redirect('admin');
@@ -184,11 +184,11 @@ class Admin extends BaseController
 
         $userInfo = array();
         
-        if ($user->isVerified == 1) {
-            $userInfo['isVerified'] = 0;
+        if ($user->isLocked == 1) {
+            $userInfo['isLocked'] = 0;
         }
         else {
-            $userInfo['isVerified'] = 1;
+            $userInfo['isLocked'] = 1;
         }
         
         $result = $this->user_model->editUser($userInfo, $userId);
