@@ -341,7 +341,7 @@ class Auth extends BaseController
     function login() {
         // if Get Request, Load Login Page, if Post Request, Check Login
         if ($this->input->server('REQUEST_METHOD') =='GET') {
-            $this->global['pageTitle'] = 'Login Page';
+            $this->global['pageTitle'] = 'Log In - Swimmeetcast';
             // $this->loadViews("auth/login", $this->global, null , NULL);
             $this->load->view('auth/login', null);          
         }
@@ -407,7 +407,7 @@ class Auth extends BaseController
     function register(){
         // if Get Request, Load Login Page, if Post Request, Check Login
         if ($this->input->server('REQUEST_METHOD') =='GET') {
-            $this->global['pageTitle'] = 'Register User Page';
+            $this->global['pageTitle'] = 'Sign Up - Swimmeetcast';
             $this->load->view('auth/register_user', null);   
             return;           
         }

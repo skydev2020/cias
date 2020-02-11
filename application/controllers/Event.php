@@ -80,7 +80,7 @@ class Event extends BaseController
         $data['event'] = $this->event_model->getEvent($id);
         $data['swimmingData'] = json_decode($data['event']->swimming);
 
-        $this->global['pageTitle'] = 'Score Page';
+        $this->global['pageTitle'] = 'Live Swim Meet Score - Swimmeetcast';
         $this->loadViews("events/score", $this->global, $data , NULL);
     }
 

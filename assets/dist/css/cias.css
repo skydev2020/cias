@@ -209,6 +209,14 @@ a[aria-expanded="true"] {
   border: 1px solid #4B7AF0;
 }
 
+.search-page .search-dropdown button.dropdown-toggle{
+  color: #4d4d4d !important;
+}
+
+.search-page .search-dropdown .dropdown-menu > li > a {
+  color: #4d4d4d !important;
+}
+
 .search-page .query-text {
   height: 48px;
   color: rgb(51,51,51);

@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid search-page">
     <!-- Content Page -->
     <section class="content">
         <div class="row event">
@@ -33,14 +33,17 @@
             </div>
            
             <div class="col-md-4 col-sm-6 col-12 d-flex align-items-center justify-content-center">
-                <div>
-                    <select id="In the Water">
-                        <option value="volvo">Volvo</option>
-                        <option value="saab">Saab</option>
-                        <option value="opel">Opel</option>
-                        <option value="audi">Audi</option>
-                    </select>
-                </div>                                                       
+                <div class="dropdown search-dropdown">
+                    <button class="btn btn-primary dropdown-toggle bg-white" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        In the water
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <button class="dropdown-item" type="button">Jumping</button>
+                        <button class="dropdown-item" type="button">Diving</button>
+                        <button class="dropdown-item" type="button">Swimming</button>
+                    </div>
+                </div>
+                                                                        
             </div>
         </div>
         <?php
