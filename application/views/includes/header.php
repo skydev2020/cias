@@ -59,27 +59,27 @@
                 $hidden_str = (strpos($uri, "admin") !==false) ? "d-none" : "";
               ?>
               <li class="nav-item">
-                <a class="nav-link <?php echo $active_str; ?> <?php echo $hidden_str; ?>" href="<?php echo base_url(); ?>">Search</a>
+                <a class="nav-link font-size-14 font-weight-bold <?php echo $active_str; ?> <?php echo $hidden_str; ?>" href="<?php echo base_url(); ?>">Search</a>
               </li>
               <?php
                 $active_str = ($uri == "login") ? "active" : ""; 
                 $hidden_str = ($logged_in == true) ? "d-none" : "";
               ?>
               <li class="nav-item">
-                <a class="nav-link <?php echo $active_str; ?> <?php echo $hidden_str; ?>" href="<?php echo base_url(); ?>login">Log In</a>
+                <a class="nav-link font-size-14 font-weight-bold <?php echo $active_str; ?> <?php echo $hidden_str; ?>" href="<?php echo base_url(); ?>login">Log In</a>
               </li>
               <?php
                 $active_str = ($uri == "register") ? "active" : ""; 
                 $hidden_str = ($logged_in == true) ? "d-none" : "";
               ?>
               <li class="nav-item">
-                <a class="nav-link <?php echo $active_str; ?> <?php echo $hidden_str; ?>" href="<?php echo base_url(); ?>register">Register</a>
+                <a class="nav-link font-size-14 font-weight-bold <?php echo $active_str; ?> <?php echo $hidden_str; ?>" href="<?php echo base_url(); ?>register">Register</a>
               </li>
               <?php
                 $hidden_str = ($logged_in != true || strpos($uri, "admin") !==false) ? "d-none" : ""; 
               ?>
               <li class="nav-item">
-                <a class="nav-link <?php echo $hidden_str; ?>" href="<?php echo base_url(); ?>logout">Log Out</a>
+                <a class="nav-link font-size-14 font-weight-bold <?php echo $hidden_str; ?>" href="<?php echo base_url(); ?>logout">Log Out</a>
               </li>
             </ul>            
           </div>
@@ -90,5 +90,5 @@
         $hidden_str = ($uri == "register" || $uri == "forgot_password"  || $uri == "login" || strpos($uri, "admin") !==false) ? "d-none" : "d-flex"; 
       ?>
       <div class="<?php echo $className; ?> justify-content-center <?php echo $hidden_str; ?>">
-          <img src="<?php echo base_url(); ?>assets/images/ad.jpg" height="40" class="d-inline-block align-top" alt="Advertisement Image">
+          <img src="<?php echo base_url(); ?>assets/images/ad.jpg" height="90px" class="d-inline-block align-top" alt="Advertisement Image">
       </div>
