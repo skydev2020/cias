@@ -78,6 +78,7 @@
 
 body {
   background-color: white;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 /* ---------------------------------------------------
@@ -186,21 +187,29 @@ a[aria-expanded="true"] {
   width: 50%;
   border-radius: 20px;
 }
+.search-page .search-panel {
+  width: 480px;
+}
 
 .search-page .event-cell {
   line-height: 40px;
   border-bottom: 1px solid rgba(0,0,0,0.1);  
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 .search-page .event-cell a {
   color: #4B7AF0;
 }
 .search-page .search-btn {
   background-color: #4B7AF0;
+  padding-left: 16px;
+  padding-right: 16px;
+  border: 1px solid #4B7AF0;
 }
 
 .search-page .query-text {
-  height: 50px;
-  font-size: 30px;
+  height: 48px;
+  color: rgb(51,51,51);
 }
 
 
