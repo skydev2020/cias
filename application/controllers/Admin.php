@@ -49,60 +49,7 @@ class Admin extends BaseController
     }
 
 
-    /**
-     * This function used to logged in user
-     */
-    public function login()
-    {
-        
-        $this->load->library('form_validation');
-        
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|max_length[128]|trim');
-        $this->form_validation->set_rules('password', 'Password', 'required|max_length[32]');
-       
-        if($this->form_validation->run() == FALSE)
-        {
-            $this->index();
-        }
-        else
-        {
-            $email = strtolower($this->security->xss_clean($this->input->post('email')));
-            $password = $this->input->post('password');
-            
-            $result = $this->auth_model->loginMe($email, $password, true);
-            
-            if(!empty($result))
-            {
-                $lastLogin = $this->auth_model->lastLoginInfo($result->userId);
-
-                $sessionArray = array('userId'=>$result->userId,                    
-                                        'role'=>$result->roleId,
-                                        'roleText'=>$result->role,
-                                        'name'=>$result->name,
-                                        'lastLogin'=> $lastLogin->createdDtm,
-                                        'isLoggedIn' => TRUE
-                                );
-               
-
-                $this->session->set_userdata($sessionArray);
-                
-                unset($sessionArray['userId'], $sessionArray['isLoggedIn'], $sessionArray['lastLogin']);
-
-                $loginInfo = array("userId"=>$result->userId, "sessionData" => json_encode($sessionArray), "machineIp"=>$_SERVER['REMOTE_ADDR'], "userAgent"=>getBrowserAgent(), "agentString"=>$this->agent->agent_string(), "platform"=>$this->agent->platform());
-
-                $this->auth_model->lastLogin($loginInfo);
-                
-                redirect('admin/users');
-            }
-            else
-            {   
-                $this->session->set_flashdata('error', 'Email or password mismatch');
-                
-                $this->index();
-            }
-        }
-    }
-
+   
     /**
      * This function used to load the first screen of the user
      */
@@ -113,7 +60,7 @@ class Admin extends BaseController
             redirect('');
             return;
         }
-        $data['admin_name'] = "sdfds";
+        $data['admin_name'] = "Admin";
 
         if ($userId==null && $this->input->server('REQUEST_METHOD') =='GET') {
             $searchText = $this->security->xss_clean($this->input->get_post('searchText'));
@@ -196,6 +143,7 @@ class Admin extends BaseController
         redirect("admin/users");
     
     }
+    
 
     /**
 	 * This function used to check the user is logged in or not
@@ -249,23 +197,6 @@ class Admin extends BaseController
         
     }
 
-    /**
-     * This function is used to check whether email already exist or not
-     */
-    function checkEmailExists()
-    {
-        $userId = $this->input->post("userId");
-        $email = $this->input->post("email");
-
-        if(empty($userId)){
-            $result = $this->user_model->checkEmailExists($email);
-        } else {
-            $result = $this->user_model->checkEmailExists($email, $userId);
-        }
-
-        if(empty($result)){ echo("true"); }
-        else { echo("false"); }
-    }
     
     /**
      * This function is used to edit the user information

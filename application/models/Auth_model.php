@@ -14,7 +14,7 @@ class Auth_model extends CI_Model
      * @param string $email : This is email of the user
      * @param string $password : This is encrypted password of the user
      */
-    function loginMe($email, $password, $isAdmin)
+    function getUserByEmailPwd($email, $password, $isAdmin)
     {
         $this->db->select('BaseTbl.*');
         $this->db->from('tbl_users as BaseTbl');
@@ -26,12 +26,22 @@ class Auth_model extends CI_Model
             $this->db->where('BaseTbl.roleId', 1);
         }
 
-        $this->db->where('BaseTbl.isVerified', 1);
-        $this->db->where('BaseTbl.isDeleted', 0);
         $query = $this->db->get();
         $user = $query->row();
     
         if(!empty($user)){
+            if ($user->isDeleted==1) {
+                return "deleted";                
+            }
+            
+            if ($user->isVerified!=1) {
+                return "not_verified";                
+            }
+
+            if ($user->isLocked==1) {
+                return "locked";                
+            }
+
             if(verifyHashedPassword($password, $user->password)){
                 return $user;
             } else {

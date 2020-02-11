@@ -360,12 +360,30 @@ class Auth extends BaseController
                 $email = strtolower($this->security->xss_clean($this->input->post('email')));
                 $password = $this->input->post('password');
                 
-                $result = $this->auth_model->loginMe($email, $password, false);
-         
+                //result can have string or array
+                $result = $this->auth_model->getUserByEmailPwd($email, $password, false);
+                
+                if ($result == "deleted") {
+                    $this->session->set_flashdata('error', 'This user has been deleted. Please contact an administrator.');                    
+                    redirect('login');
+                    return;
+                }
+
+                if ($result == "not_verified") {
+                    $this->session->set_flashdata('error', 'This user has not been verified yet. Please verify.');                    
+                    redirect('login');
+                    return;
+                }
+
+                if ($result == "locked") {
+                    $this->session->set_flashdata('error', 'This user has been suspended. Please contact an administrator.');                    
+                    redirect('login');
+                    return;
+                }
+
                 if(!empty($result))
                 {
                     $lastLogin = $this->auth_model->lastLoginInfo($result->userId);
-
                     $sessionArray = array('userId'=>$result->userId,                    
                                             'role'=>$result->roleId,
                                             'fname'=>$result->fname,
@@ -392,8 +410,7 @@ class Auth extends BaseController
                 }
                 else
                 {   
-                    $this->session->set_flashdata('error', 'Email or password mismatch');
-                    
+                    $this->session->set_flashdata('error', 'Email or password mismatch');                    
                     redirect('login');
                 }
             }
@@ -442,7 +459,6 @@ class Auth extends BaseController
 
                 $password = $this->input->post('password');
                 // $roleId = $this->input->post('role');
-                $mobile = $this->security->xss_clean($this->input->post('mobile'));
                 $verification_code = uniqid(rand(), true);
                 $userInfo = array('email'=>$email, 'password'=>getHashedPassword($password), 'fname'=> $fname, 'lname'=> $lname,
                                 'roleId'=> 0, 'createdBy'=> 0, 

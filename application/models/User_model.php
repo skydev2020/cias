@@ -87,7 +87,7 @@ class User_model extends CI_Model
         $this->db->select("email");
         $this->db->from("tbl_users");
         $this->db->where("email", $email);   
-        $this->db->where("isDeleted", 0);
+        // $this->db->where("isDeleted", 0);
         if($userId != 0){
             $this->db->where("userId !=", $userId);
         }
