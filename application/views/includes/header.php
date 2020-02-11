@@ -8,7 +8,7 @@
     <!-- Bootstrap-->
     <link href="<?php echo base_url(); ?>assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <!-- FontAwesome 4.3.0 -->
-    <link href="<?php echo base_url(); ?>assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <!-- <link href="<?php echo base_url(); ?>assets/plugins/fontawesome-free/css/fontawesome.min.css" rel="stylesheet" type="text/css" /> -->
     <!-- Ionicons 2.0.0 -->
     <link href="<?php echo base_url(); ?>assets/plugins/Ionicons/css/ionicons.min.css" rel="stylesheet" type="text/css" />
     <!-- Theme style -->
