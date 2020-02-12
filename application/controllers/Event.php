@@ -59,8 +59,18 @@ class Event extends BaseController
         $this->global['pageTitle'] = 'Search - Swimmeetcast';
         
         $q = $this->security->xss_clean($this->input->get_post('q'));         
-        $data['q'] = $q; 
-        $data['eventRecords'] = $this->event_model->eventListing($q);
+        $q = trim($q);
+        $data['q'] = $q;       
+
+        if ($q != "" && $this->global['logged_in'] == true) {
+            $data['eventRecords'] = $this->event_model->eventListing($q);
+        }
+        else {            
+            $data['eventRecords'] = [];
+        }
+
+        
+        
         $this->loadViews("events/search", $this->global, $data , NULL);
     }
 

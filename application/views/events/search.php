@@ -19,6 +19,14 @@
             <div class="col-12" style="height: 25px;">
             </div>
         </div>
+        <div class="row">
+            <?php
+            $hidden_str = ($logged_in !=true) ? "" : "d-none"; 
+             ?>
+            <div class="col-12 <?php echo $hidden_str; ?>">
+                <h3>Log in to begin search, please</h3>
+            </div>
+        </div>
         <?php
         if(!empty($eventRecords))
         {
