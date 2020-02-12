@@ -56,7 +56,7 @@ class Event extends BaseController
      */
     function search()
     {
-        $this->global['pageTitle'] = 'Event List';
+        $this->global['pageTitle'] = 'Search - Swimmeetcast';
         
         $q = $this->security->xss_clean($this->input->get_post('q'));         
         $data['q'] = $q; 
@@ -80,7 +80,7 @@ class Event extends BaseController
         $data['event'] = $this->event_model->getEvent($id);
         $data['swimmingData'] = json_decode($data['event']->swimming);
 
-        $this->global['pageTitle'] = 'Live Swim Meet Score - Swimmeetcast';
+        $this->global['pageTitle'] = 'Meet Score - Swimmeetcast';
         $this->loadViews("events/score", $this->global, $data , NULL);
     }
 
