@@ -63,14 +63,15 @@ class Admin extends BaseController
         $data['admin_name'] = "Admin";
 
         if ($userId==null && $this->input->server('REQUEST_METHOD') =='GET') {
-            $searchText = $this->security->xss_clean($this->input->get_post('searchText'));
-            $data['searchText'] = $searchText;
+            $q = $this->security->xss_clean($this->input->get_post('q'));
+            $q = trim($q);
+            $data['q'] = $q;
             
             $this->load->library('pagination');
             
-            $count = $this->user_model->userListingCount($searchText);
+            $count = $this->user_model->userListingCount($q);
             $returns = $this->paginationCompress ( "userListing/", $count, 10 );            
-            $data['userRecords'] = $this->user_model->userListing($searchText, $returns["page"], $returns["segment"]);
+            $data['userRecords'] = $this->user_model->userListing($q, $returns["page"], $returns["segment"]);
             
             $this->global['pageTitle'] = 'Swimmeetcast : User Listing'; 
             
@@ -203,6 +204,7 @@ class Admin extends BaseController
      */
     function editUser($userId = NULL)
     {
+        
         if (!$this->isLoggedInAsAdmin()) {
             redirect('admin');
             return;
@@ -230,6 +232,10 @@ class Admin extends BaseController
                 $lname = ucwords(strtolower($this->security->xss_clean($this->input->post('lname'))));
                 $email = strtolower($this->security->xss_clean($this->input->post('email')));
                 $password = $this->input->post('password');
+                $fname = trim($fname);
+                $lname = trim($lname);
+                $email = trim($email);
+                $password = trim($password);
                 // $roleId = $this->input->post('role');
                 // $mobile = $this->security->xss_clean($this->input->post('mobile'));
                 
@@ -238,12 +244,12 @@ class Admin extends BaseController
                 if(empty($password))
                 {
                     $userInfo = array('email'=>$email, 'fname'=>$fname, 'lname'=>$lname,
-                                    'mobile'=>"", 'updatedBy'=>$this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
+                                    'updatedBy'=>$this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
                 }
                 else
                 {
                     $userInfo = array('email'=>$email, 'password'=>getHashedPassword($password), 'fname'=>ucwords($fname),
-                        'lname'=>ucwords($lname), 'mobile'=>"", 'updatedBy'=>$this->vendorId, 
+                        'lname'=>ucwords($lname),  'updatedBy'=>$this->vendorId, 
                         'updatedDtm'=>date('Y-m-d H:i:s'));
                 }
                 
@@ -282,8 +288,6 @@ class Admin extends BaseController
             $this->form_validation->set_rules('email','Email','trim|required|valid_email|max_length[128]');
             $this->form_validation->set_rules('password','Password','required|max_length[20]');
             $this->form_validation->set_rules('cpassword','Confirm Password','trim|required|matches[password]|max_length[20]');
-            // $this->form_validation->set_rules('role','Role','trim|required|numeric');
-            // $this->form_validation->set_rules('mobile','Mobile Number','required|min_length[10]');
             
             if($this->form_validation->run() == FALSE)
             {
@@ -295,8 +299,12 @@ class Admin extends BaseController
                 $lname = ucwords(strtolower($this->security->xss_clean($this->input->post('lname'))));
                 $email = strtolower($this->security->xss_clean($this->input->post('email')));
                 $password = $this->input->post('password');
-                // $roleId = $this->input->post('role');
-                // $mobile = $this->security->xss_clean($this->input->post('mobile'));
+                
+                $fname = trim($fname);
+                $lname = trim($lname);
+                $email = trim($email);
+                $password = trim($password);
+
                 
                 if ($this->auth_model->checkEmailExist($email) != null) {
                     // Check whether user already exists 
@@ -305,7 +313,7 @@ class Admin extends BaseController
                 }
 
                 $userInfo = array('email'=>$email, 'password'=>getHashedPassword($password), 'fname'=> $fname, 'lname'=> $lname,
-                                    'mobile'=>"", 'createdBy'=> 1, 'isVerified'=> 1, 
+                                    'createdBy'=> 1, 'isVerified'=> 1, 
                                     'createdDtm'=>date('Y-m-d H:i:s'));
                 
                 $this->load->model('user_model');

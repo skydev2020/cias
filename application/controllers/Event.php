@@ -26,8 +26,8 @@ class Event extends BaseController
             return;
         }
               
-        if ($this->uri->uri_string() != '' && $this->uri->uri_string() != 'register'  && $this->uri->uri_string() != 'search' 
-        && $this->uri->uri_string() != 'login' && $this->uri->uri_string() != 'verify' && $this->isLoggedIn() == false) {
+        if ($this->uri->uri_string() != ''   && $this->uri->uri_string() != 'search' 
+          && $this->isLoggedIn() == false) {
             redirect('login');
             return;
         }  
@@ -56,6 +56,7 @@ class Event extends BaseController
      */
     function search()
     {
+        
         $this->global['pageTitle'] = 'Search - Swimmeetcast';
         
         $q = $this->security->xss_clean($this->input->get_post('q'));         
@@ -69,8 +70,6 @@ class Event extends BaseController
             $data['eventRecords'] = [];
         }
 
-        
-        
         $this->loadViews("events/search", $this->global, $data , NULL);
     }
 

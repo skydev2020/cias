@@ -62,6 +62,7 @@ $route['admin'] = 'admin'; //admin page
 $route['search'] = 'event/search';
 $route['score'] = 'event/score';
 $route['login'] = 'auth/login';
+$route['logout'] = 'auth/logout';
 $route['register'] = 'auth/register';
 $route['verify'] = 'auth/verify';
 
@@ -73,9 +74,7 @@ $route['reset_password_confirm/(:any)/(:any)'] = "auth/resetPasswordConfirm/$1/$
 $route['create_new_password'] = "auth/createNewPassword";
 
 $route['loginMe'] = 'auth/loginMe';
-$route['logout'] = 'user/logout';
-$route['userListing'] = 'user/userListing';
-$route['userListing/(:num)'] = "user/userListing/$1";
+
 $route['addNew'] = "user/addNew";
 $route['addNewUser'] = "user/addNewUser";
 // $route['editOld'] = "user/editOld";

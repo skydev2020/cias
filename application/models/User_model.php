@@ -22,8 +22,7 @@ class User_model extends CI_Model
         if(!empty($searchText)) {
             $likeCriteria = "(BaseTbl.email  LIKE '%".$searchText."%'
                             OR  BaseTbl.fname  LIKE '%".$searchText."%'
-                            OR  BaseTbl.lname  LIKE '%".$searchText."%'
-                            OR  BaseTbl.mobile  LIKE '%".$searchText."%')";
+                            OR  BaseTbl.lname  LIKE '%".$searchText."%')";
             $this->db->where($likeCriteria);
         }
         $this->db->where('BaseTbl.isDeleted', 0);
@@ -48,8 +47,7 @@ class User_model extends CI_Model
         if(!empty($searchText)) {
             $likeCriteria = "(BaseTbl.email  LIKE '%".$searchText."%'
                             OR  BaseTbl.fname  LIKE '%".$searchText."%'
-                            OR  BaseTbl.lname  LIKE '%".$searchText."%'
-                            OR  BaseTbl.mobile  LIKE '%".$searchText."%')";
+                            OR  BaseTbl.lname  LIKE '%".$searchText."%')";
             $this->db->where($likeCriteria);
         }
         $this->db->where('BaseTbl.isDeleted', 0);
@@ -283,7 +281,7 @@ class User_model extends CI_Model
      */
     function getUserInfoWithRole($userId)
     {
-        $this->db->select('BaseTbl.userId, BaseTbl.email, BaseTbl.fname, BaseTbl.lname, BaseTbl.mobile, BaseTbl.roleId, Roles.role');
+        $this->db->select('BaseTbl.userId, BaseTbl.email, BaseTbl.fname, BaseTbl.lname,  BaseTbl.roleId, Roles.role');
         $this->db->from('tbl_users as BaseTbl');
         $this->db->join('tbl_roles as Roles','Roles.roleId = BaseTbl.roleId');
         $this->db->where('BaseTbl.userId', $userId);
@@ -299,7 +297,7 @@ class User_model extends CI_Model
      * @return aray $result : This is user information
      */
     function get_by_email_code($email, $code) {
-        $this->db->select('BaseTbl.userId, BaseTbl.email, BaseTbl.fname, BaseTbl.lname, BaseTbl.mobile, BaseTbl.roleId');
+        $this->db->select('BaseTbl.*');
         $this->db->from('tbl_users as BaseTbl');
         $this->db->where('BaseTbl.email', $email);
         $this->db->where('BaseTbl.isDeleted', 0);
