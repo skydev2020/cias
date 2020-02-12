@@ -38,6 +38,20 @@ class Auth extends BaseController
             redirect('');
             return;           
         } 
+
+        if ($this->uri->uri_string() == 'checkEmailExists' || $this->uri->uri_string() == 'auth/checkEmailExists') {            
+            if ($this->isLoggedIn() == true) {
+                $this->global['logged_in'] = true; 
+            }
+            else {
+                $this->global['logged_in'] = false;
+            }
+            
+            $this->global['uri'] = $this->uri->uri_string();
+            return;           
+        } 
+
+        
        
         
         if ($this->uri->uri_string() != '' && $this->uri->uri_string() != 'register'  && $this->uri->uri_string() != 'search' 
@@ -546,6 +560,25 @@ class Auth extends BaseController
         }
         
     }
+
+     /**
+     * This function is used to check whether email already exist or not
+     */
+    function checkEmailExists()
+    {
+        $userId = $this->input->post("userId");
+        $email = $this->input->post("email");
+
+        if(empty($userId)){
+            $result = $this->user_model->checkEmailExists($email);
+        } else {
+            $result = $this->user_model->checkEmailExists($email, $userId);
+        }
+
+        if(empty($result)){ echo("true"); }
+        else { echo("false"); }
+    }
+    
 }
 
 ?>

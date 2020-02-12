@@ -74,7 +74,7 @@ $route['reset_password_confirm'] = "auth/resetPasswordConfirm";
 $route['reset_password_confirm/(:any)'] = "auth/resetPasswordConfirm/$1";
 $route['reset_password_confirm/(:any)/(:any)'] = "auth/resetPasswordConfirm/$1/$2";
 $route['create_new_password'] = "auth/createNewPassword";
-
+$route['checkEmailExists'] = "auth/checkEmailExists";
 $route['loginMe'] = 'auth/loginMe';
 
 
