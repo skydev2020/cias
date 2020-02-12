@@ -63,11 +63,15 @@ class Event extends BaseController
         $q = trim($q);
         $data['q'] = $q;       
 
-        if ($q != "" && $this->global['logged_in'] == true) {
+        if ($q == "") {
+            $data['eventRecords'] = [];
+        }
+        else if ($this->global['logged_in'] == true) {
             $data['eventRecords'] = $this->event_model->eventListing($q);
         }
         else {            
-            $data['eventRecords'] = [];
+            $this->session->set_flashdata('error', 'To search, please log in.');                        
+            redirect('login');
         }
 
         $this->loadViews("events/search", $this->global, $data , NULL);

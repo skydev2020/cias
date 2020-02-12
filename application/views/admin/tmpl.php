@@ -1,7 +1,7 @@
-<div class="container-fluid d-flex align-items-stretch">
+<div class="d-flex align-items-stretch" style="flex-grow: 1">
     <nav id="sidebar">
         <div class="sidebar-header">
-            <h3>Navigation</h3>
+            <h3>Admin Panel</h3>
         </div>
         <ul class="list-unstyled components">
             <?php

@@ -31,8 +31,8 @@
     <![endif]-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
   </head>
-  <body class="hold-transition">
-    <div class="wrapper">
+  <body>
+    <div class="wrapper d-flex flex-column" style="min-height: 100vh">
       <?php 
           $className = ($uri == "" || $uri == "search") ? "container" : "container-fluid";
       ?>
