@@ -503,10 +503,14 @@ class CI_Pagination {
 		elseif (empty($this->cur_page))
 		{
 			// Default to the last segment number if one hasn't been defined.
+			
 			if ($this->uri_segment === 0)
 			{
 				$this->uri_segment = count($this->CI->uri->segment_array());
 			}
+
+			
+			
 
 			$this->cur_page = $this->CI->uri->segment($this->uri_segment);
 
@@ -520,6 +524,8 @@ class CI_Pagination {
 		{
 			$this->cur_page = (string) $this->cur_page;
 		}
+
+		var_dump($this->cur_page);
 
 		// If something isn't quite right, back to the default base page.
 		if ( ! ctype_digit($this->cur_page) OR ($this->use_page_numbers && (int) $this->cur_page === 0))
@@ -583,13 +589,13 @@ class CI_Pagination {
 			if ($i === $base_page)
 			{
 				// First page
-				$output .= $this->prev_tag_open.'<a href="'.$first_url.'"'.$attributes.$this->_attr_rel('prev').'>'
+				$output .= $this->prev_tag_open.'<a  class="page-link" href="'.$first_url.'"'.$attributes.$this->_attr_rel('prev').'>'
 					.$this->prev_link.'</a>'.$this->prev_tag_close;
 			}
 			else
 			{
 				$append = $this->prefix.$i.$this->suffix;
-				$output .= $this->prev_tag_open.'<a href="'.$base_url.$append.'"'.$attributes.$this->_attr_rel('prev').'>'
+				$output .= $this->prev_tag_open.'<a  class="page-link" href="'.$base_url.$append.'"'.$attributes.$this->_attr_rel('prev').'>'
 					.$this->prev_link.'</a>'.$this->prev_tag_close;
 			}
 
