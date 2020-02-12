@@ -57,7 +57,7 @@
                             <td><?php echo date("m/d/Y", strtotime($record->createdDtm)) ?></td>
                             <td class="text-center">
                                 <?php if ($record->isLocked==true): ?>
-                                <a class="btn btn-sm btn-info" href="<?php echo base_url().'admin/lock/'.$record->userId; ?>" title="Activate">                                
+                                <a class="btn btn-sm btn-info bg-black" href="<?php echo base_url().'admin/lock/'.$record->userId; ?>" title="Activate">                                
                                     <i class="fas fa-lock"></i>
                                 </a>
                                 <?php else: ?>

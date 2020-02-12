@@ -20,9 +20,17 @@ class Auth extends BaseController
         $this->load->model('auth_model');
         $this->load->model('user_model');
         $this->load->library('mandrill', array(MANDRILL_API_KEY));
-
+        
+        
         if ($this->uri->uri_string() == 'auth/login') {
             redirect('login');
+            return;
+        }
+        
+     
+
+        if ($this->uri->uri_string() == 'auth/logout') {
+            redirect('logout');
             return;
         }
         
@@ -30,14 +38,15 @@ class Auth extends BaseController
             redirect('');
             return;           
         } 
+       
         
         if ($this->uri->uri_string() != '' && $this->uri->uri_string() != 'register'  && $this->uri->uri_string() != 'search' 
         && $this->uri->uri_string() != 'login' && $this->uri->uri_string() != 'verify' && $this->uri->uri_string() != 'forgot_password'
-        && $this->uri->uri_string() != 'resetPassword' && $this->isLoggedIn() == true) {
+        && $this->uri->uri_string() != 'resetPassword'  && $this->uri->uri_string() != 'logout' && $this->isLoggedIn() == true) {
             redirect('login');
             return;
         }  
-
+       
         if ($this->uri->uri_string() == 'login' && $this->isLoggedIn() == true) {
             if ($this->isAdmin() ==true) {
                 redirect('admin/users');
@@ -46,7 +55,7 @@ class Auth extends BaseController
                 redirect('');
             }
         }
-
+    
         if ($this->isLoggedIn() == true) {
             $this->global['logged_in'] = true; 
         }

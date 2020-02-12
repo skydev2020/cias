@@ -130,7 +130,7 @@ class Admin extends BaseController
             return;
         }
 
-        $userInfo = array();
+        $userInfo = array('updatedBy'=>$this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
         
         if ($user->isLocked == 1) {
             $userInfo['isLocked'] = 0;
@@ -236,8 +236,7 @@ class Admin extends BaseController
                 $lname = trim($lname);
                 $email = trim($email);
                 $password = trim($password);
-                // $roleId = $this->input->post('role');
-                // $mobile = $this->security->xss_clean($this->input->post('mobile'));
+                // $roleId = $this->input->post('role');    
                 
                 $userInfo = array();
                 
