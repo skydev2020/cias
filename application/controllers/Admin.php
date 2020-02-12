@@ -109,8 +109,7 @@ class Admin extends BaseController
         $data['q'] = $q;
 
         $this->load->library('pagination');
-        // // http://127.0.0.1/cias/userListing/10
-        // // http://127.0.0.1/cias/admin/users?q=you
+     
         $count = $this->user_model->userListingCount($q);
         $returns = $this->paginationCompress ( "admin/users/", $count, 10, 3 );            
         $data['userRecords'] = $this->user_model->userListing($q, $returns["page"], $returns["segment"]);
