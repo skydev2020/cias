@@ -103,8 +103,8 @@ class Admin extends BaseController
             return;
         }
         
-        
         $q = $this->security->xss_clean($this->input->post('q'));
+        var_dump($q);
         $q = trim($q);
         $data['q'] = $q;
 

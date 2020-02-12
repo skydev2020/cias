@@ -85,3 +85,14 @@
     </section>
 </div>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/common.js" charset="utf-8"></script>  
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        jQuery('ul.pagination li a').click(function (e) {
+            e.preventDefault();            
+            var link = jQuery(this).get(0).href;            
+            var value = link.substring(link.lastIndexOf('/') + 1);
+            jQuery("#searchList").attr("action", baseURL + "admin/users/" + value);
+            jQuery("#searchList").submit();
+        });
+    });
+</script>
