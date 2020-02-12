@@ -48,12 +48,10 @@ class Admin extends BaseController
        
     }
 
-
-   
     /**
      * This function used to load the first screen of the user
      */
-    public function users($userId = null)
+    public function getUser($userId = null)
     {
 
         if (!$this->isLoggedInAsAdmin()) {
@@ -61,26 +59,12 @@ class Admin extends BaseController
             return;
         }
         $data['admin_name'] = "Admin";
-
-        if ($userId==null && $this->input->server('REQUEST_METHOD') =='GET') {
-            $q = $this->security->xss_clean($this->input->get_post('q'));
-            $q = trim($q);
-            $data['q'] = $q;
-            
-            $this->load->library('pagination');
-            
-            $count = $this->user_model->userListingCount($q);
-            $returns = $this->paginationCompress ( "userListing/", $count, 10 );            
-            $data['userRecords'] = $this->user_model->userListing($q, $returns["page"], $returns["segment"]);
-            
-            $this->global['pageTitle'] = 'Swimmeetcast : User Listing'; 
-            
-            //Prepare the User search
-            $data['module'] = $this->load->view('admin/user_list', $data, true);
-            
-            $this->loadViews("admin/tmpl", $this->global, $data, NULL);
+        if ($userId==null) {
+            redirect('admin/users');
+            return;
         }
-        else if ($userId!=null && $this->input->server('REQUEST_METHOD') =='GET') {
+       
+        if ($userId!=null && $this->input->server('REQUEST_METHOD') =='GET') {
                         
             $data['userInfo'] = $this->user_model->getUserInfo($userId);
 
@@ -94,7 +78,7 @@ class Admin extends BaseController
                 if ($data['userInfo']->roleId == 1) {
                     $this->global['pageTitle'] = 'Administrator : Edit User';    
                 }
-                {
+                else  {
                     $this->global['pageTitle'] = 'Swimmeetcast : Edit User';
                 }
                     
@@ -105,6 +89,39 @@ class Admin extends BaseController
             }
             
         }
+    }
+
+   
+    /**
+     * This function used to load the first screen of the user
+     */
+    public function users()
+    {
+    
+        if (!$this->isLoggedInAsAdmin()) {
+            redirect('');
+            return;
+        }
+        
+        
+        $q = $this->security->xss_clean($this->input->post('q'));
+        $q = trim($q);
+        $data['q'] = $q;
+
+        $this->load->library('pagination');
+        // // http://127.0.0.1/cias/userListing/10
+        // // http://127.0.0.1/cias/admin/users?q=you
+        $count = $this->user_model->userListingCount($q);
+        $returns = $this->paginationCompress ( "admin/users/", $count, 10 );            
+        $data['userRecords'] = $this->user_model->userListing($q, $returns["page"], $returns["segment"]);
+        
+        $this->global['pageTitle'] = 'Swimmeetcast : User Listing'; 
+        
+        //Prepare the User search
+        $data['module'] = $this->load->view('admin/user_list', $data, true);
+        
+        $this->loadViews("admin/tmpl", $this->global, $data, NULL);
+        
     }
 
      /**

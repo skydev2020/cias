@@ -57,8 +57,10 @@ $route['translate_uri_dashes'] = FALSE;
 
 /*********** USER DEFINED ROUTES *******************/
 
-$route['admin'] = 'admin'; //admin page
-// $route['admin/editUser/(:num)'] = "user/editUser/$1";
+// $route['admin'] = 'admin'; //admin page
+$route['admin/users'] = "admin/users";
+$route['admin/users/(:num)'] = "admin/users/$1";
+
 $route['search'] = 'event/search';
 $route['score'] = 'event/score';
 $route['login'] = 'auth/login';
@@ -75,8 +77,6 @@ $route['create_new_password'] = "auth/createNewPassword";
 
 $route['loginMe'] = 'auth/loginMe';
 
-$route['addNew'] = "user/addNew";
-$route['addNewUser'] = "user/addNewUser";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

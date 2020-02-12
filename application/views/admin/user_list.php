@@ -21,7 +21,7 @@
                     <div class="box-header">
                         <h3 class="box-title font-weight-bold">Users List</h3>
                         <div class="box-tools">
-                            <form action="<?php echo base_url() ?>admin/users"  id="searchList">
+                            <form action="<?php echo base_url() ?>admin/users"  method="POST" id="searchList">
                                 <div class="input-group">
                                     <input type="text" name="q" value="<?php echo $q; ?>" class="form-control pull-right" style="width: 150px; height: 31px;" placeholder="Search"/>
                                     <div class="input-group-btn">
@@ -65,7 +65,7 @@
                                     <i class="fas fa-unlock"></i>
                                 <?php endif ?>                                                                    
                                 </a>
-                                <a class="btn btn-sm btn-info" href="<?php echo base_url().'admin/users/'.$record->userId; ?>" title="Edit"><i class="fa fa-pencil"></i></a>
+                                <a class="btn btn-sm btn-info" href="<?php echo base_url().'admin/getUser/'.$record->userId; ?>" title="Edit"><i class="fa fa-pencil"></i></a>
                                 <a class="btn btn-sm btn-danger deleteUser" href="#" data-userid="<?php echo $record->userId; ?>" title="Delete"><i class="fa fa-trash"></i></a>
                             </td>
                         </tr>
@@ -79,9 +79,9 @@
                     <div class="box-footer clearfix">
                         <?php echo $this->pagination->create_links(); ?>
                     </div>
-                    </div><!-- /.box -->
-                </div>
+                </div><!-- /.box -->
             </div>
+        </div>
     </section>
 </div>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/common.js" charset="utf-8"></script>  

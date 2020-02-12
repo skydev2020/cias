@@ -6,10 +6,10 @@
         <ul class="list-unstyled components">
             <?php
                 $url = $_SERVER['REQUEST_URI'];
-                $active = ( strpos($url,'admin/users/1') !==false) ? "class='active'" : "" ;
+                $active = ( strpos($url,'admin/getUser/1') !==false) ? "class='active'" : "" ;
             ?>
             <li <?php echo $active; ?>>
-                <a href="<?php echo base_url(); ?>admin/users/1" class="text-white">                    
+                <a href="<?php echo base_url(); ?>admin/getUser/1" class="text-white">                    
                 <i class="fas fa-user-cog"></i>&nbsp;&nbsp;<?php echo $fname. " " . $lname; ?>
                 </a>
             </li>
