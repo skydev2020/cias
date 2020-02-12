@@ -10,8 +10,7 @@
             ?>
             <li <?php echo $active; ?>>
                 <a href="<?php echo base_url(); ?>admin/users/1" class="text-white">                    
-                    <img src="<?php echo base_url(); ?>assets/dist/img/avatar.png" class="img-circle" alt="User Image" />
-                    <?php echo $fname. " " . $lname; ?>
+                <i class="fas fa-user-cog"></i>&nbsp;&nbsp;<?php echo $fname. " " . $lname; ?>
                 </a>
             </li>
             <?php
