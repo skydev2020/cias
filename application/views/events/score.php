@@ -2,7 +2,7 @@
     <!-- Content Page -->
     <section class="content">
         <div class="row event">
-            <div class="col-md-4 col-sm-6 col-12 padding-bottom-10">
+            <div class="col-md-4 col-sm-6 col-12 pb-1 pl-0">
                 <div class="row">
                     <div class="col-12 d-flex font-size-22 font-weight-bold name font-italic">
                         EVENT #<?php echo $swimmingData->EventNumber; ?>
@@ -19,7 +19,7 @@
                     </div>
                 </div>                                                 
             </div>
-            <div class="col-md-4 col-sm-6 col-12 d-flex flex-column align-items-center justify-content-center padding-bottom-10">
+            <div class="col-md-4 col-sm-6 col-12 d-flex flex-column align-items-start align-items-sm-start justify-content-center pb-1 pl-0">
                 <div class="clock-cell">
                     <div class="col-12 d-flex font-size-10 text-white align-items-center justify-content-center">
                         LIVE MEET CLOCK
@@ -32,7 +32,7 @@
                 </div>                                                            
             </div>
            
-            <div class="col-md-4 col-sm-12 col-12 d-flex align-items-center justify-content-center padding-bottom-10">
+            <div class="col-md-4 col-sm-12 col-12 d-flex align-items-center justify-content-start justify-content-md-center pb-1 pl-0">
                 <div class="dropdown search-dropdown">
                     <button class="btn btn-primary dropdown-toggle bg-white" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         In the water
