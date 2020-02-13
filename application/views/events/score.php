@@ -2,7 +2,7 @@
     <!-- Content Page -->
     <section class="content">
         <div class="row event">
-            <div class="col-md-4 col-sm-6 col-12">
+            <div class="col-md-4 col-sm-6 col-12 padding-bottom-10">
                 <div class="row">
                     <div class="col-12 d-flex font-size-22 font-weight-bold name font-italic">
                         EVENT #<?php echo $swimmingData->EventNumber; ?>
@@ -19,7 +19,7 @@
                     </div>
                 </div>                                                 
             </div>
-            <div class="col-md-4 col-sm-6 col-12 d-flex flex-column align-items-center justify-content-center">
+            <div class="col-md-4 col-sm-6 col-12 d-flex flex-column align-items-center justify-content-center padding-bottom-10">
                 <div class="clock-cell">
                     <div class="col-12 d-flex font-size-10 text-white align-items-center justify-content-center">
                         LIVE MEET CLOCK
@@ -32,7 +32,7 @@
                 </div>                                                            
             </div>
            
-            <div class="col-md-4 col-sm-6 col-12 d-flex align-items-center justify-content-center">
+            <div class="col-md-4 col-sm-12 col-12 d-flex align-items-center justify-content-center padding-bottom-10">
                 <div class="dropdown search-dropdown">
                     <button class="btn btn-primary dropdown-toggle bg-white" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         In the water
@@ -52,14 +52,14 @@
             {
         ?>
         <div class="row lane">
-            <div class="col-md-4 col-sm-6 col-12">
+            <div class="pb-1 col-md-4 col-sm-4 col-12">
                 <div class="row">
                     <div class="col-1 d-flex number font-size-36 justify-content-center align-items-center text-white">
                         <?php echo $lane->LaneNumber ?>
                     </div>
                     <div class="col-1 bg-white">
                     </div>
-                    <div class="col bg-white d-flex flex-column justify-content-center ">
+                    <div class="col bg-white d-flex flex-column justify-content-center pl-0 pr-0">
                         <div class="row">
                             <div class="col-12 d-flex font-size-24 font-weight-bold color-dark">
                                 <?php echo $lane->AthleteName ?>&nbsp;
@@ -74,7 +74,7 @@
                     </div>
                 </div>                
             </div>
-            <div class="col-md-2 col-sm-6 col-12 d-flex flex-column">
+            <div class="pb-1 pl-0 pr-1 col-md-2 col-sm-2 col-3 d-flex flex-column">
                 <div class="">
                     <div class="col-12 d-flex text-white justify-content-center distance-cell align-items-center font-size-18" style="height: 30px;">50m</div>
                 </div>
@@ -82,7 +82,7 @@
                     <div class="col-12 h-100 bg-white d-flex font-size-30 color-dark align-items-center justify-content-center">(27.44)</div>
                 </div>
             </div>
-            <div class="col-md-2 col-sm-6 col-12 d-flex flex-column">
+            <div class="pb-1 pl-0 pr-1  col-md-2 col-sm-2 col-3 d-flex flex-column">
                 <div class="">
                     <div class="col-12 d-flex text-white justify-content-center distance-cell align-items-center font-size-18" style="height: 30px;">100m</div>
                 </div>
@@ -93,7 +93,7 @@
                     <div class="col-12 h-100 bg-white d-flex font-size-30 color-dark align-items-center justify-content-center">(27.44)</div>
                 </div>
             </div>
-            <div class="col-md-2 col-sm-6 col-12 d-flex flex-column">
+            <div class="pb-1 pl-0 pr-1  col-md-2 col-sm-2 col-3 d-flex flex-column">
                 <div class="">
                     <div class="col-12 d-flex text-white justify-content-center distance-cell align-items-center font-size-18" style="height: 30px;">150m</div>
                 </div>
@@ -104,7 +104,7 @@
                     <div class="col-12 h-100 bg-white d-flex font-size-30 color-dark align-items-center justify-content-center">(27.44)</div>
                 </div>
             </div>
-            <div class="col-md-2 col-sm-6 col-12 d-flex flex-column">
+            <div class="pb-1 pl-0 pr-1  col-md-2 col-sm-2 col-3 d-flex flex-column">
                 <div class="">
                     <div class="col-12 d-flex text-white justify-content-center distance-cell align-items-center font-size-18" style="height: 30px;">200m</div>
                 </div>
