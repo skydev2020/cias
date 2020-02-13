@@ -16,6 +16,7 @@
         <![endif]-->
         <!-- Google Font -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+        <link rel="shortcut icon" type="image/jpg" href="<?php echo base_url(); ?>/assets/images/favicon.png"/>    
         <script type="text/javascript">
             var baseURL = "<?php echo base_url(); ?>";
         </script>
