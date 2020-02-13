@@ -166,7 +166,8 @@ a[aria-expanded="true"] {
 
 .auth-page .header {
   /* background-color: #3c8dbc; */
-  background-color: #4B7AF0;
+  /* background-color: #4B7AF0; */
+  background-color: white;
 }
 
 .auth-page .btn-block {
