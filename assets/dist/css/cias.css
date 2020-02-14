@@ -22,6 +22,7 @@
   background-color: #fcbf02;
 }
 
+
 .lane .color-dark {
   color: #1a1a1a;
 }
@@ -34,9 +35,59 @@
   min-width: 120px;
 }
 
+
+
 .lane .distance-cell{
   background-color: #4B7AF0;
 }
+
+.lane .distance-cell3 {
+  font-size: 30px;
+}
+
+.lane .distance-cell2 {
+  font-size: 24px;
+}
+
+@media (max-width: 992px) {
+  .event .clock-cell {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  /*Bootstrap xs */
+  .lane .distance-cell3  {
+      font-size: 24px;
+  }
+  .lane .number  {
+    height: 80px;
+  }
+
+  .event .clock-cell {
+    width: 100%;
+  }
+}
+
+@media (max-width: 415px) {
+/*Screen Size Pixel 2, iPhone 6/7/8 Plus*/
+  .lane .distance-cell3 {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 320px) {
+  /*Screen Size Pixel 2, iPhone 6/7/8 Plus*/
+  .lane .distance-cell2, .lane .distance-cell3 {
+      font-size: 16px;
+  }
+  .lane .number  {
+    height: 80px;
+  }
+}
+
+
+
 
 /* Font Size Class */
 
