@@ -24,7 +24,7 @@
                 <img src="<?php echo base_url(); ?>assets/images/logo.png" height="40" class="d-inline-block align-top" alt="Logo Image">
             </a>
         </div>
-        <div class="login-box" style="padding-top: 100px; margin-top: 0px;">      
+        <div class="login-box ml-auto mr-auto" style="padding-top: 100px; margin-top: 0px;">      
             <div class="login-box-body">
                 <p class="login-box-msg font-size-22 font-weight-bold">Forgot Password</p>
                 <?php $this->load->helper('form'); ?>
