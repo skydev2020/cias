@@ -89,5 +89,5 @@
         $hidden_str = ($uri == "register" || $uri == "forgot_password"  || $uri == "login" || strpos($uri, "admin") !==false) ? "d-none" : "d-flex"; 
       ?>
       <div class="<?php echo $className; ?> justify-content-center <?php echo $hidden_str; ?>">
-          <img id="adimg" src="<?php echo base_url(); ?>assets/images/ad.jpg" height="90px" class="d-inline-block align-top" alt="Advertisement Image">
+          <img id="adimg" src="<?php echo base_url(); ?>assets/images/ad.jpg"  class="d-inline-block align-top" alt="Advertisement Image">
       </div>

@@ -4,17 +4,17 @@
         <div class="row event score-header">
             <div class="col-md-4 col-sm-6 col-12 pb-1 pl-0">
                 <div class="row">
-                    <div class="col-12 d-flex font-size-22 font-weight-bold name font-italic">
+                    <div class="col-12 d-flex font-weight-bold name font-italic">
                         EVENT #<?php echo $swimmingData->EventNumber; ?>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12 d-flex font-size-24 font-weight-bold color-dark">
+                    <div class="col-12 d-flex cell-2 font-weight-bold color-dark">
                         <?php echo $swimmingData->EventName; ?>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12 d-flex font-size-22 color-dark">
+                    <div class="col-12 d-flex cell-3 color-dark">
                         <?php echo $event->name; ?>
                     </div>
                 </div>                                                 

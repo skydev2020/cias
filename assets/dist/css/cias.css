@@ -37,8 +37,6 @@
   min-width: 120px;
 }
 
-
-
 .lane .distance-cell{
   background-color: #4B7AF0;
 }
@@ -49,6 +47,9 @@
 
 .lane .distance-cell2 {
   font-size: 24px;
+}
+#adimg {
+  height: 90px;
 }
 
 @media (max-width: 992px) {
@@ -78,7 +79,15 @@
   }
   #adimg {
     width: 100%;
-    height: auto;
+    height: 50px;
+  }
+  
+  .event .cell-2 {
+    font-size: 20px;
+  }
+
+  .event .name, .event .cell-3{
+    font-size: 18px;
   }
 }
 
@@ -91,12 +100,20 @@
     height: 80px;
   }
 
+  .event .name, .event .cell-3 {
+    font-size: 16px;
+  }
+
+  .event .cell-2 {
+    font-size: 18px;
+  }
+
   .header .logo-img{
-    content:url("http://127.0.0.1/cias/assets/images/favicon.png");
+    content:url(../../../assets/images/favicon.png);
   }
   #adimg {
     width: 100%;
-    height: auto;
+    height: 50px;
   }
 }
 
@@ -260,6 +277,9 @@ a[aria-expanded="true"] {
 }
 
 /* Search Page*/
+.search-page {
+  background-color: #F3F9FC;
+}
 .search-page input.search {
   width: 50%;
   border-radius: 20px;
