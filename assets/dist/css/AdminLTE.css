@@ -3237,18 +3237,18 @@ table.text-center th {
 .register-page {
   background: #d2d6de;
 }
-.login-box,
+/* .login-box,
 .register-box {
   width: 360px;
   margin: 7% auto;
-}
-@media (max-width: 768px) {
+} */
+/* @media (max-width: 768px) {
   .login-box,
   .register-box {
     width: 90%;
     margin-top: 20px;
   }
-}
+} */
 .login-box-body,
 .register-box-body {
   background: #fff;

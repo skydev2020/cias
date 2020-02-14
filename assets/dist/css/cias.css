@@ -162,6 +162,7 @@ a[aria-expanded="true"] {
 
 .auth-page, .register-page {
   background: transparent;
+  padding-top: 13px;
 }
 
 .auth-page .header {
@@ -175,7 +176,14 @@ a[aria-expanded="true"] {
 }
 
 .auth-page .login-box {
-  min-width: 450px;
+  width: 450px;
+}
+
+@media (max-width: 400px) {
+  .auth-page .login-box {
+    /* min-width: auto; */
+    width: auto;
+  }
 }
 
 .error {
