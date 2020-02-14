@@ -8,11 +8,13 @@ require APPPATH . '/libraries/BaseController.php';
  * @version : 1.0
  * @since : 5 Feb 2020
  */
+
 class Event extends BaseController
 {
     /**
      * This is default constructor of the class
      */
+    
     public function __construct()
     {
         parent::__construct();
@@ -20,13 +22,15 @@ class Event extends BaseController
         $this->load->model('event_model');
         $this->load->model('user_model');
         $this->load->library('mandrill', array(MANDRILL_API_KEY));
-                       
+                   
+        $this->API_KEY = "upcC6+SNW!M@3mahP&K8YR2h5Dvu*AHH9WH4uqfU";
+
         if ($this->uri->uri_string() == 'event/search') {
             redirect('search');
             return;
         }
-              
-        if ($this->uri->uri_string() != ''   && $this->uri->uri_string() != 'search' 
+       
+        if ($this->uri->uri_string() != ''   && $this->uri->uri_string() != 'search'   && $this->uri->uri_string() != 'event/restInsert'
           && $this->isLoggedIn() == false) {
             redirect('login');
             return;
@@ -195,8 +199,55 @@ class Event extends BaseController
     }
 
     /**
-     * Page not found : error 404
+     * Rest API
      */
+    function restInsert() {
+        $key = $this->security->xss_clean($this->input->post('key'));         
+        $data = $this->security->xss_clean($this->input->post('data'));
+        
+        $key = trim($key);
+        $data = trim($data);
+        $rtr = "Invalid API";
+
+        if ($key == $this->API_KEY) {
+            
+            $event_param = json_decode($data, true);
+            if ($event_param) {
+               
+                //Insert Event Table: 
+                /**
+                 * field:
+                 * ID": 29,
+                 * "CustomerID": 1,    
+                 * "Name": "Test Object",    
+                 * "DateStart": "2020-02-01T00:00:00",    
+                 * "DateEnd": "2020-02-01T00:00:00",    
+                 * "DateAdded": "2020-02-01T09:33:33.0249571-06:00"
+                 */
+               
+                $event = array(
+                    'customer_id'=> $event_param['dbEvent']['CustomerID'], 
+                    'name'=> $event_param['dbEvent']['Name'] , 
+                    'date_start'=> $event_param['dbEvent']['DateStart'], 
+                    'date_end'=> $event_param['dbEvent']['DateEnd'], 
+                    'date_added'=> $event_param['dbEvent']['DateAdded'],
+                    'swimming'=> json_encode($event_param['swimming'])
+                );
+                
+                $result = $this->event_model->addEvent($event);
+                
+                if($result > 0){
+                    $rtr = 'Success';
+                }
+                else {
+                    $rtr = 'DBFail';
+                }
+            } else {
+                $rtr = 'Invalid data format';
+            }
+        }
+        echo $rtr;
+    }
     
   
 }

@@ -42,6 +42,21 @@ class Event_model extends CI_Model
         
         return $query->row();
     }
+     /**
+     * This function is used to add new event
+     * @return number $insert_id : This is last inserted id
+     */
+    function addEvent($obj)
+    {
+        $this->db->trans_start();
+        $this->db->insert('tbl_events', $obj);
+        
+        $insert_id = $this->db->insert_id();
+        
+        $this->db->trans_complete();
+        
+        return $insert_id;
+    }
 }
 
   
