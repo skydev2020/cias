@@ -176,15 +176,18 @@ a[aria-expanded="true"] {
 }
 
 .auth-page .login-box {
-  width: 450px;
+  width: auto;
+  max-width: 450px;
 }
 
-@media (max-width: 400px) {
-  .auth-page .login-box {
+/* @media (max-width: 415px) 
+/*Screen Size Pixel 2, iPhone 6/7/8 Plus*/
+/* { */
+  /* .auth-page .login-box { */
     /* min-width: auto; */
-    width: auto;
-  }
-}
+    /* width: auto; */
+  /* } */
+/* } */ */
 
 .error {
   color: red;
