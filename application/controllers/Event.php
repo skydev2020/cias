@@ -23,14 +23,14 @@ class Event extends BaseController
         $this->load->model('user_model');
         $this->load->library('mandrill', array(MANDRILL_API_KEY));
                    
-        $this->API_KEY = "upcC6+SNW!M@3mahP&K8YR2h5Dvu*AHH9WH4uqfU";
+        $this->API_KEY = "0fb516885cdd494aa8c70015938f7950";
 
         if ($this->uri->uri_string() == 'event/search') {
             redirect('search');
             return;
         }
        
-        if ($this->uri->uri_string() != ''   && $this->uri->uri_string() != 'search'   && $this->uri->uri_string() != 'event/restInsert'
+        if ($this->uri->uri_string() != ''   && $this->uri->uri_string() != 'search'   && $this->uri->uri_string() != 'event/api_push'
           && $this->isLoggedIn() == false) {
             redirect('login');
             return;
@@ -201,7 +201,7 @@ class Event extends BaseController
     /**
      * Rest API
      */
-    function restInsert() {
+    function api_push() {
         $key = $this->security->xss_clean($this->input->post('key'));         
         $data = $this->security->xss_clean($this->input->post('data'));
         
