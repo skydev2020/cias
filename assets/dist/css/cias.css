@@ -29,7 +29,9 @@
 
 .lane {
   padding-top: 15px;
+  background-color: #F3F9FC;
 }
+
 .lane .r-cell {
   border-radius: 20px;
   min-width: 120px;
@@ -74,6 +76,10 @@
   .lane .distance-cell3 {
     font-size: 24px;
   }
+  #adimg {
+    width: 100%;
+    height: auto;
+  }
 }
 
 @media (max-width: 320px) {
@@ -83,6 +89,14 @@
   }
   .lane .number  {
     height: 80px;
+  }
+
+  .header .logo-img{
+    content:url("http://127.0.0.1/cias/assets/images/favicon.png");
+  }
+  #adimg {
+    width: 100%;
+    height: auto;
   }
 }
 
@@ -252,6 +266,10 @@ a[aria-expanded="true"] {
 }
 .search-page .search-panel {
   width: 480px;
+}
+
+.search-page .score-header {
+  background-color: #F3F9FC;
 }
 
 .search-page .event-cell {

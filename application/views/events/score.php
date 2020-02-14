@@ -1,7 +1,7 @@
 <div class="container-fluid search-page">
     <!-- Content Page -->
     <section class="content">
-        <div class="row event">
+        <div class="row event score-header">
             <div class="col-md-4 col-sm-6 col-12 pb-1 pl-0">
                 <div class="row">
                     <div class="col-12 d-flex font-size-22 font-weight-bold name font-italic">
@@ -52,8 +52,8 @@
             {
         ?>
         <div class="row lane">
-            <div class="pb-1 col-md-4 col-sm-4 col-12">
-                <div class="row">
+            <div class="pb-1 col-md-4 col-sm-12 col-12">
+                <div class="row mr-0">
                     <div class="col-1 d-flex number font-size-36 justify-content-center align-items-center text-white">
                         <?php echo $lane->LaneNumber ?>
                     </div>
@@ -74,7 +74,7 @@
                     </div>
                 </div>                
             </div>
-            <div class="pb-1 pl-0 pr-1 col-md-2 col-sm-2 col-3 d-flex flex-column">
+            <div class="pb-1 pl-0 pr-1 col-md-2 col-sm-3 col-3 d-flex flex-column">
                 <div class="">
                     <div class="col-12 d-flex text-white justify-content-center distance-cell align-items-center font-size-18" style="height: 30px;">50m</div>
                 </div>
@@ -82,7 +82,7 @@
                     <div class="col-12 h-100 bg-white d-flex distance-cell3 color-dark align-items-center justify-content-center">(27.44)</div>
                 </div>
             </div>
-            <div class="pb-1 pl-0 pr-1  col-md-2 col-sm-2 col-3 d-flex flex-column">
+            <div class="pb-1 pl-0 pr-1  col-md-2 col-sm-3 col-3 d-flex flex-column">
                 <div class="">
                     <div class="col-12 d-flex text-white justify-content-center distance-cell align-items-center font-size-18" style="height: 30px;">100m</div>
                 </div>
@@ -93,7 +93,7 @@
                     <div class="col-12 h-100 bg-white d-flex color-dark distance-cell3 align-items-center justify-content-center">(27.44)</div>
                 </div>
             </div>
-            <div class="pb-1 pl-0 pr-1  col-md-2 col-sm-2 col-3 d-flex flex-column">
+            <div class="pb-1 pl-0 pr-1  col-md-2 col-sm-3 col-3 d-flex flex-column">
                 <div class="">
                     <div class="col-12 d-flex text-white justify-content-center distance-cell align-items-center font-size-18" style="height: 30px;">150m</div>
                 </div>
@@ -104,7 +104,7 @@
                     <div class="col-12 h-100 bg-white d-flex color-dark distance-cell3 align-items-center justify-content-center">(27.44)</div>
                 </div>
             </div>
-            <div class="pb-1 pl-0 pr-1  col-md-2 col-sm-2 col-3 d-flex flex-column">
+            <div class="pb-1 pl-0 pr-1  col-md-2 col-sm-3 col-3 d-flex flex-column">
                 <div class="">
                     <div class="col-12 d-flex text-white justify-content-center distance-cell align-items-center font-size-18" style="height: 30px;">200m</div>
                 </div>

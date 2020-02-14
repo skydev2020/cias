@@ -37,11 +37,11 @@
       <?php 
           $className = ($uri == "" || $uri == "search") ? "container" : "container-fluid";
       ?>
-      <header class="<?php echo $className; ?>">
+      <header class="<?php echo $className; ?> pr-0 pl-0 header">
         <nav class="navbar navbar-expand-lg navbar-light bg-white">
           <div class="navbar-brand">
             <a href="<?php echo base_url(); ?>">
-              <img src="<?php echo base_url(); ?>assets/images/logo.png" height="40" class="d-inline-block align-top" alt="Logo Image">
+              <img src="<?php echo base_url(); ?>assets/images/logo.png" height="40" class="d-inline-block align-top logo-img" alt="Logo Image">
             </a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -89,5 +89,5 @@
         $hidden_str = ($uri == "register" || $uri == "forgot_password"  || $uri == "login" || strpos($uri, "admin") !==false) ? "d-none" : "d-flex"; 
       ?>
       <div class="<?php echo $className; ?> justify-content-center <?php echo $hidden_str; ?>">
-          <img src="<?php echo base_url(); ?>assets/images/ad.jpg" height="90px" class="d-inline-block align-top" alt="Advertisement Image">
+          <img id="adimg" src="<?php echo base_url(); ?>assets/images/ad.jpg" height="90px" class="d-inline-block align-top" alt="Advertisement Image">
       </div>
